@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading, SoftCard } from "@/components/site/SitePrimitives";
-import { ProductCollage } from "@/components/site/ProductCollage";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -23,6 +22,9 @@ import {
   PRODUCT_GROUPS,
   PRODUCTS,
 } from "@/data/catalog";
+
+const HERO_IMAGE =
+  "https://images.pexels.com/photos/7789609/pexels-photo-7789609.jpeg?auto=compress&cs=tinysrgb&w=1200";
 
 const TRUST_POINTS = [
   { icon: BadgeCheck, label: "A reliable supply partner for hospitals, clinics and nursing facilities" },
@@ -104,10 +106,13 @@ export default function Landing() {
           {/* Hero image with floating accent cards */}
           <Reveal delay={0.2} y={24}>
             <div className="relative">
-              <ProductCollage
-                products={PRODUCTS}
-                className="border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]"
-              />
+              <div className="overflow-hidden rounded-3xl border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
+                <img
+                  src={HERO_IMAGE}
+                  alt="Clean, modern patient examination room with an adjustable medical bed"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+              </div>
 
               <div
                 className={`absolute -bottom-5 left-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty"}`}
