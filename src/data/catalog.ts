@@ -143,9 +143,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Air Mattresses & Bed Protection",
     emoji: "🛌",
     blurb: "Air mattresses and bed protection for long-term bed care.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Air_mattress_or_extra_bed_with_internal_air_pump_1.jpg/640px-Air_mattress_or_extra_bed_with_internal_air_pump_1.jpg",
-    attribution: "Photo: W.carter (Wikimedia Commons, CC BY-SA 4.0)",
+    image: "/air-mattresses.jpg",
+    fit: "contain",
   },
   {
     slug: "hot-water-bags-personal-care",
@@ -275,9 +274,8 @@ export const PRODUCTS: Product[] = [
     slug: "air-mattresses",
     name: "Air Mattresses",
     group: "air-mattresses-bed-protection",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Air_mattress_or_extra_bed_with_internal_air_pump_1.jpg/640px-Air_mattress_or_extra_bed_with_internal_air_pump_1.jpg",
-    attribution: "Photo: W.carter (Wikimedia Commons, CC BY-SA 4.0)",
+    image: "/air-mattresses.jpg",
+    fit: "contain",
   },
   {
     slug: "hot-water-bags",
