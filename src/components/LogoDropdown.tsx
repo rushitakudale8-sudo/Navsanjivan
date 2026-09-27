@@ -39,7 +39,6 @@ export function LogoDropdown() {
             alt="Logo"
             width={32}
             height={32}
-            className="rounded-lg"
           />
         </Button>
       </DropdownMenuTrigger>

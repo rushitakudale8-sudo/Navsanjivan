@@ -14,7 +14,7 @@ export function SiteFooter() {
             <img
               src={logo}
               alt={`${BUSINESS.name} logo`}
-              className="h-9 w-9 rounded-lg bg-primary p-1.5"
+              className="h-10 w-10"
             />
             <span className="text-base font-bold text-foreground">
               Navsanjivani

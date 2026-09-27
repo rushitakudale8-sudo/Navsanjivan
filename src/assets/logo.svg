@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 96.81 96.81"><rect width="96.81" height="96.81" rx="18"/><g fill="#fff"><rect x="24.67" y="24.67" width="47.47" height="11.87"/><rect x="24.67" y="36.54" width="11.87" height="35.61"/><rect x="40.06" y="39.98" width="23.74" height="11.87"/><rect x="40.06" y="51.85" width="11.87" height="20.3"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Navsanjivani Surgical and Nursing Beuro">
+  <defs>
+    <linearGradient id="navGrad" x1="0%" y1="40%" x2="100%" y2="60%">
+      <stop offset="0%" stop-color="#2FBDF2"/>
+      <stop offset="52%" stop-color="#1B84D8"/>
+      <stop offset="100%" stop-color="#0F5EBD"/>
+    </linearGradient>
+  </defs>
+  <!-- Circular gradient badge -->
+  <circle cx="256" cy="256" r="248" fill="url(#navGrad)"/>
+  <!-- Accent bar above the N -->
+  <rect x="118" y="86" width="150" height="15" rx="7.5" fill="#A9E1FA"/>
+  <!-- Big N with the extended left stroke -->
+  <path d="M118,120 L176,120 L300,205 L300,120 L358,120 L358,310 L300,310 L176,225 L176,434 L118,434 Z" fill="#FFFFFF"/>
+  <!-- Wordmark -->
+  <text x="186" y="348" font-family="Inter, Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="1" fill="#FFFFFF" textLength="276" lengthAdjust="spacingAndGlyphs">NAVSANJIVANI</text>
+  <text x="186" y="380" font-family="Inter, Arial, Helvetica, sans-serif" font-size="15" font-weight="600" letter-spacing="4" fill="#D6EEFB" textLength="232" lengthAdjust="spacingAndGlyphs">SURGICAL AND BEURO</text>
+  <!-- Orange swoosh -->
+  <path d="M140,404 C230,424 340,422 424,398 C444,391 458,380 466,366" fill="none" stroke="#F2A33C" stroke-width="11" stroke-linecap="round"/>
+</svg>

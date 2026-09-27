@@ -45,7 +45,7 @@ export function SiteHeader() {
           <img
             src={logo}
             alt={`${BUSINESS.name} logo`}
-            className="h-9 w-9 rounded-lg bg-primary p-1.5"
+            className="h-10 w-10"
           />
           <span className="leading-tight">
             <span className="block text-sm font-bold text-foreground sm:text-base">
