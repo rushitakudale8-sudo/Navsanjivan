@@ -78,8 +78,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Nebulizers & Respiratory Care",
     emoji: "💨",
     blurb: "Nebulizers, masks and respiratory accessories for all ages.",
-    image:
-      "https://images.pexels.com/photos/7447013/pexels-photo-7447013.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/nebulizers.jpg",
+    fit: "contain",
   },
   {
     slug: "blood-pressure-monitors",
@@ -218,8 +218,8 @@ export const PRODUCTS: Product[] = [
     slug: "nebulizers",
     name: "Nebulizers",
     group: "nebulizers-respiratory-care",
-    image:
-      "https://images.pexels.com/photos/7447013/pexels-photo-7447013.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/nebulizers.jpg",
+    fit: "contain",
   },
   {
     slug: "blood-pressure-monitors",
