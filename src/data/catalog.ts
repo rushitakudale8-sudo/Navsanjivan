@@ -324,6 +324,13 @@ export const PRODUCTS: Product[] = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Incontinence_pad_for_women_package_1.jpg/960px-Incontinence_pad_for_women_package_1.jpg",
     attribution: "Photo: Wetfinder (Wikimedia Commons, CC BY-SA 3.0)",
   },
+  {
+    slug: "suction-machines",
+    name: "Suction Machines",
+    group: "patient-care-equipment",
+    image: "/suction-machine.jpg",
+    fit: "contain",
+  },
 ];
 
 /** Nursing & patient care services. Factual descriptions only. */
