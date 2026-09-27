@@ -52,8 +52,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     emoji: "",
     blurb: "Bedside and portable commode chairs for patient dignity and comfort.",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Electric_raised_toilet_seat_for_elderly.jpg/640px-Electric_raised_toilet_seat_for_elderly.jpg",
-    attribution: "Photo: TTTNIS (Wikimedia Commons, CC0 1.0)",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg/500px-Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg",
+    attribution: "Photo: SuSanA Secretariat (Wikimedia Commons, CC BY 2.0)",
   },
   {
     slug: "hospital-beds",
@@ -133,7 +133,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     emoji: "",
     blurb: "Safety rails and toilet aids that make bathrooms safer.",
     image:
-      "https://images.pexels.com/photos/930705/pexels-photo-930705.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Electric_raised_toilet_seat_for_elderly.jpg/640px-Electric_raised_toilet_seat_for_elderly.jpg",
+    attribution: "Photo: TTTNIS (Wikimedia Commons, CC0 1.0)",
   },
   {
     slug: "air-mattresses-bed-protection",
@@ -163,7 +164,7 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
 ];
 
-/** The 16 products listed in "Our Products" — equipment names only. */
+/** The products listed in "Our Products" — equipment names only. */
 export type Product = {
   slug: string;
   name: string;
@@ -192,8 +193,8 @@ export const PRODUCTS: Product[] = [
     name: "Commode Chairs",
     group: "commode-chairs",
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Electric_raised_toilet_seat_for_elderly.jpg/640px-Electric_raised_toilet_seat_for_elderly.jpg",
-    attribution: "Photo: TTTNIS (Wikimedia Commons, CC0 1.0)",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg/500px-Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg",
+    attribution: "Photo: SuSanA Secretariat (Wikimedia Commons, CC BY 2.0)",
   },
   {
     slug: "hospital-beds",
@@ -263,7 +264,8 @@ export const PRODUCTS: Product[] = [
     name: "Toilet Safety Rails",
     group: "bathroom-toilet-aids",
     image:
-      "https://images.pexels.com/photos/930705/pexels-photo-930705.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Grab_bar.jpg/960px-Grab_bar.jpg",
+    attribution: "Photo: Gramody (Wikimedia Commons, CC BY-SA 2.0)",
   },
   {
     slug: "air-mattresses",
@@ -287,6 +289,38 @@ export const PRODUCTS: Product[] = [
     group: "masks-medical-consumables",
     image:
       "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
+  {
+    slug: "hearing-aids",
+    name: "Hearing Aids",
+    group: "patient-care-equipment",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Hearing_aid_20080620.jpg/960px-Hearing_aid_20080620.jpg",
+    attribution: "Photo: Jonas Bergsten (Wikimedia Commons, public domain)",
+  },
+  {
+    slug: "breast-pumps",
+    name: "Breast Pumps",
+    group: "patient-care-equipment",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Ameda_Purely_Yours_Double_Electric_Breast_Pump_DSCF2198.jpg/960px-Ameda_Purely_Yours_Double_Electric_Breast_Pump_DSCF2198.jpg",
+    attribution: "Photo: Mary Mark Ockerbloom (Wikimedia Commons, CC BY-SA 3.0)",
+  },
+  {
+    slug: "infrared-thermometers",
+    name: "Infrared Thermometers",
+    group: "thermometers",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Infrared_forehead_thermometer%2C_made_in_China.jpg/960px-Infrared_forehead_thermometer%2C_made_in_China.jpg",
+    attribution: "Photo: Syced (Wikimedia Commons, CC0 1.0)",
+  },
+  {
+    slug: "disposable-underpads",
+    name: "Disposable Underpads",
+    group: "diapers",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Incontinence_pad_for_women_package_1.jpg/960px-Incontinence_pad_for_women_package_1.jpg",
+    attribution: "Photo: Wetfinder (Wikimedia Commons, CC BY-SA 3.0)",
   },
 ];
 
