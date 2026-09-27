@@ -45,8 +45,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Walkers",
     emoji: "",
     blurb: "Sturdy walking frames and foldable walkers for safe, supported movement.",
-    image:
-      "https://images.pexels.com/photos/33061507/pexels-photo-33061507.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/walkers.jpg",
+    fit: "contain",
   },
   {
     slug: "commode-chairs",
@@ -189,8 +189,8 @@ export const PRODUCTS: Product[] = [
     slug: "walkers",
     name: "Walkers",
     group: "walkers",
-    image:
-      "https://images.pexels.com/photos/33061507/pexels-photo-33061507.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/walkers.jpg",
+    fit: "contain",
   },
   {
     slug: "commode-chairs",
