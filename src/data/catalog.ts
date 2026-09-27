@@ -53,9 +53,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Commode Chairs",
     emoji: "",
     blurb: "Bedside and portable commode chairs for patient dignity and comfort.",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg/500px-Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg",
-    attribution: "Photo: SuSanA Secretariat (Wikimedia Commons, CC BY 2.0)",
+    image: "/commode-chairs.jpg",
+    fit: "contain",
   },
   {
     slug: "hospital-beds",
@@ -195,9 +194,8 @@ export const PRODUCTS: Product[] = [
     slug: "commode-chairs",
     name: "Commode Chairs",
     group: "commode-chairs",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg/500px-Portable_commode_chair_%28Pakistan%29_%285601381776%29.jpg",
-    attribution: "Photo: SuSanA Secretariat (Wikimedia Commons, CC BY 2.0)",
+    image: "/commode-chairs.jpg",
+    fit: "contain",
   },
   {
     slug: "hospital-beds",
