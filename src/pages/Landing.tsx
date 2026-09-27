@@ -60,7 +60,7 @@ export default function Landing() {
 
             <Reveal delay={0.08}>
               <h1 className="mt-5 text-4xl leading-tight font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]">
-                Quality Surgical & Healthcare Solutions for{" "}
+                Quality Surgical equipments & Healthcare Solutions for{" "}
                 <span className="text-primary">Better Patient Care</span>
               </h1>
             </Reveal>
