@@ -109,8 +109,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Crutches & Walking Sticks",
     emoji: "🩼",
     blurb: "Crutches and walking sticks for recovery and steady support.",
-    image:
-      "https://images.pexels.com/photos/3846157/pexels-photo-3846157.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/crutches.jpg",
+    fit: "contain",
   },
   {
     slug: "thermometers",
@@ -243,8 +243,8 @@ export const PRODUCTS: Product[] = [
     slug: "crutches",
     name: "Crutches",
     group: "crutches-walking-sticks",
-    image:
-      "https://images.pexels.com/photos/3846157/pexels-photo-3846157.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/crutches.jpg",
+    fit: "contain",
   },
   {
     slug: "digital-thermometers",
