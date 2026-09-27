@@ -61,8 +61,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Hospital Beds",
     emoji: "🛏️",
     blurb: "Semi-Fowler and electric hospital beds for wards and home care.",
-    image:
-      "https://images.pexels.com/photos/7335565/pexels-photo-7335565.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/hospital-beds.jpg",
+    fit: "contain",
   },
   {
     slug: "patient-care-equipment",
@@ -201,8 +201,8 @@ export const PRODUCTS: Product[] = [
     slug: "hospital-beds",
     name: "Hospital Beds",
     group: "hospital-beds",
-    image:
-      "https://images.pexels.com/photos/7335565/pexels-photo-7335565.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/hospital-beds.jpg",
+    fit: "contain",
   },
   {
     slug: "patient-examination-beds",
