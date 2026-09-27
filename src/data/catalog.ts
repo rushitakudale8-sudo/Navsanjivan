@@ -85,8 +85,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Blood Pressure Monitors",
     emoji: "❤️",
     blurb: "Digital BP monitors for reliable readings at home and in clinics.",
-    image:
-      "https://images.pexels.com/photos/7446776/pexels-photo-7446776.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/blood-pressure-monitors.jpg",
+    fit: "contain",
   },
   {
     slug: "pulse-oximeters",
@@ -222,8 +222,8 @@ export const PRODUCTS: Product[] = [
     slug: "blood-pressure-monitors",
     name: "Blood Pressure Monitors",
     group: "blood-pressure-monitors",
-    image:
-      "https://images.pexels.com/photos/7446776/pexels-photo-7446776.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/blood-pressure-monitors.jpg",
+    fit: "contain",
   },
   {
     slug: "pulse-oximeters",
