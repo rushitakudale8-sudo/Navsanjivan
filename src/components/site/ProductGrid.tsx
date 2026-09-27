@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, SoftCard } from "@/components/site/SitePrimitives";
 import type { ProductGroup, Product } from "@/data/catalog";
+import { cn } from "@/lib/utils";
 
 /** Product-group card: clickable, image-led, subtle hover lift. */
 function GroupCard({ group }: { group: ProductGroup }) {
@@ -9,12 +10,20 @@ function GroupCard({ group }: { group: ProductGroup }) {
     <Reveal delay={0.03}>
       <Link to="/product-groups" className="block h-full">
         <SoftCard className="h-full overflow-hidden">
-          <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+          <div
+            className={cn(
+              "relative aspect-[4/3] overflow-hidden",
+              group.fit === "contain" ? "bg-white" : "bg-secondary",
+            )}
+          >
             <img
               src={group.image}
               alt={group.name}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className={cn(
+                "h-full w-full transition-transform duration-500 group-hover:scale-[1.04]",
+                group.fit === "contain" ? "object-contain" : "object-cover",
+              )}
             />
           </div>
           <div className="p-4">
@@ -31,12 +40,20 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Reveal delay={0.03}>
       <SoftCard className="h-full overflow-hidden">
-        <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+        <div
+          className={cn(
+            "relative aspect-[4/3] overflow-hidden",
+            product.fit === "contain" ? "bg-white" : "bg-secondary",
+          )}
+        >
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            className={cn(
+              "h-full w-full transition-transform duration-500 group-hover:scale-[1.04]",
+              product.fit === "contain" ? "object-contain" : "object-cover",
+            )}
           />
         </div>
         <div className="p-4">

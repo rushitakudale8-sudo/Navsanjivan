@@ -27,6 +27,8 @@ export type ProductGroup = {
   image: string;
   /** Set when the image source requires attribution. */
   attribution?: string;
+  /** How the image fills its card. Defaults to "cover". */
+  fit?: "cover" | "contain";
 };
 
 export const PRODUCT_GROUPS: ProductGroup[] = [
@@ -35,8 +37,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Wheelchairs",
     emoji: "🦽",
     blurb: "Manual and folding wheelchairs for hospitals, clinics and home use.",
-    image:
-      "https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/wheelchair.png",
+    fit: "contain",
   },
   {
     slug: "walkers",
@@ -171,6 +173,8 @@ export type Product = {
   group: string;
   image: string;
   attribution?: string;
+  /** How the image fills its card. Defaults to "cover". */
+  fit?: "cover" | "contain";
 };
 
 export const PRODUCTS: Product[] = [
@@ -178,8 +182,8 @@ export const PRODUCTS: Product[] = [
     slug: "wheelchairs",
     name: "Wheelchairs",
     group: "wheelchairs",
-    image:
-      "https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/wheelchair.png",
+    fit: "contain",
   },
   {
     slug: "walkers",
