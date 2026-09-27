@@ -17,10 +17,7 @@ function GroupCard({ group }: { group: ProductGroup }) {
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
           </div>
-          <div className="flex items-center gap-2 p-4">
-            <span aria-hidden className="text-lg">
-              {group.emoji}
-            </span>
+          <div className="p-4">
             <h3 className="font-semibold text-foreground">{group.name}</h3>
           </div>
         </SoftCard>
@@ -29,7 +26,7 @@ function GroupCard({ group }: { group: ProductGroup }) {
   );
 }
 
-/** Product card: image-led with name, links into the products page. */
+/** Product card: image-led with name and product group, links into the products page. */
 function ProductCard({ product }: { product: Product }) {
   return (
     <Reveal delay={0.03}>
@@ -44,8 +41,8 @@ function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-foreground">{product.name}</h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Available on enquiry
+          <p className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
+            {product.group.split("-").join(" ")}
           </p>
         </div>
       </SoftCard>

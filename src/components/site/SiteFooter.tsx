@@ -83,7 +83,7 @@ export function SiteFooter() {
                 to="/services"
                 className="text-sm text-muted-foreground hover:text-primary"
               >
-                Nursing &amp; Patient Care Services
+                Nursing and Patient Care Services
               </Link>
             </li>
             <li>

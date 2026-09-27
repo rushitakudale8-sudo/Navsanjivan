@@ -26,7 +26,7 @@ export default function Services() {
           <SectionHeading
             align="left"
             title="Care teams for facilities and homes"
-            description="We help connect you with nursing and patient-care support for hospitals, nursing facilities and home healthcare. Descriptions below are general role summaries — reach out to discuss your specific requirement."
+            description="We help arrange nursing and caretaker support for hospitals, nursing facilities and home healthcare. The summaries below describe each role in general terms — contact us to discuss your specific requirement."
           />
 
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -56,11 +56,11 @@ export default function Services() {
 
           <div className="mt-14 rounded-2xl border border-border/70 bg-gradient-to-r from-accent/60 to-secondary/60 px-6 py-8 text-center">
             <h2 className="text-lg font-semibold text-foreground">
-              Need patient-care support?
+              Need nursing or caretaker support?
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-              Tell us about the patient's needs and duration, and we'll get back
-              to you with options.
+              Tell us about the patient's needs and how long care is required,
+              and we will get back to you with suitable options.
             </p>
             <Button asChild className="mt-5 shadow-md">
               <a href="/#contact">

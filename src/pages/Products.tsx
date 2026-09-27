@@ -4,32 +4,39 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import { Button } from "@/components/ui/button";
-import { PRODUCTS } from "@/data/catalog";
+import { PRODUCT_GROUPS, PRODUCTS } from "@/data/catalog";
 
 export default function Products() {
   const [searchParams] = useSearchParams();
   const query = (searchParams.get("q") ?? "").trim().toLowerCase();
 
+  // Search matches the product name, its product group, and the group's
+  // description — e.g. "mobility" or "respiratory" return useful results.
   const filtered = query
-    ? PRODUCTS.filter((p) => p.name.toLowerCase().includes(query))
+    ? PRODUCTS.filter((p) => {
+        const group = PRODUCT_GROUPS.find((g) => g.slug === p.group);
+        return (
+          p.name.toLowerCase().includes(query) ||
+          group?.name.toLowerCase().includes(query) ||
+          group?.blurb.toLowerCase().includes(query)
+        );
+      })
     : PRODUCTS;
 
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
-      <main className="flex-1">
-        <section className="border-b border-border/60 bg-secondary/40">
+      <main className="flex-1">        <section className="border-b border-border/60 bg-secondary/40">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Our Products
             </h1>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Medical, surgical and patient-care equipment available on enquiry.
+              Surgical and patient-care equipment, available on enquiry.
               {query ? (
-                <>
-                  {" "}
-                  Showing results for{" "}
+                <>{" "}
+                  Showing catalog results for{" "}
                   <span className="font-semibold text-foreground">“{query}”</span>.
                 </>
               ) : null}

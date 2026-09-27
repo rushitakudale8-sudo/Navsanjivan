@@ -8,13 +8,13 @@
  */
 
 export const BUSINESS = {
-  name: "Navsanjivani Surgical & Nursing Beuro",
+  name: "Navsanjivani Surgical and Nursing Beuro",
   shortName: "Navsanjivani",
   address:
     "Rambag Colony, Paud Road, Kothrud, Pune – 411038, Maharashtra, India",
   email: "service.navsanjivan10@gmail.com",
   tagline:
-    "Medical, surgical and patient-care products for hospitals, clinics, nursing facilities and home healthcare.",
+    "We supply surgical and patient-care equipment and provide nursing and caretaker services for hospitals, clinics, nursing facilities and home healthcare.",
   disclaimer: "Product information only — not medical advice.",
 } as const;
 

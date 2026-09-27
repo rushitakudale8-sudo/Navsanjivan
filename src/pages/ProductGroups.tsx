@@ -18,7 +18,8 @@ export default function ProductGroups() {
             <p className="mt-3 max-w-2xl text-muted-foreground">
               {PRODUCT_GROUPS.length} product groups covering mobility, hospital
               furniture, monitoring, respiratory care, hygiene and daily patient
-              comfort.
+              comfort. Browse the groups, then enquire for availability and
+              pricing.
             </p>
           </div>
         </section>
@@ -31,8 +32,8 @@ export default function ProductGroups() {
               Can't find what you're looking for?
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-              Send us an enquiry with the product or service you need and we'll
-              get back to you with availability.
+              Send us an enquiry with the product or care service you need and we
+              will get back to you with availability.
             </p>
             <Button asChild className="mt-5 shadow-md">
               <a href="/#contact">Contact / Enquiry</a>

@@ -27,9 +27,9 @@ const HERO_IMAGE =
   "https://images.pexels.com/photos/7789609/pexels-photo-7789609.jpeg?auto=compress&cs=tinysrgb&w=1200";
 
 const TRUST_POINTS = [
-  { icon: BadgeCheck, label: "Trusted supply for hospitals, clinics & homes" },
-  { icon: Truck, label: "Delivery across Pune & nearby areas" },
-  { icon: ShieldCheck, label: "Quality surgical & patient-care products" },
+  { icon: BadgeCheck, label: "A reliable supply partner for hospitals, clinics and nursing facilities" },
+  { icon: Truck, label: "Delivery across Pune and nearby areas" },
+  { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
 ];
 
 export default function Landing() {
@@ -54,16 +54,16 @@ export default function Landing() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pt-16 pb-20 sm:px-6 lg:grid-cols-2 lg:pt-24 lg:pb-28">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3 py-1.5 text-xs font-semibold text-primary shadow-sm">
+              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-primary uppercase shadow-sm">
                 <Stethoscope className="size-3.5" />
-                Medical · Surgical · Patient Care Supplies
+                Surgical Equipment · Patient Care Services
               </span>
             </Reveal>
 
             <Reveal delay={0.08}>
               <h1 className="mt-5 text-4xl leading-tight font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]">
-                Quality Medical &amp; Surgical Products for{" "}
-                <span className="text-primary">Better Patient Care</span>
+                Quality Surgical Products and Dependable Care for{" "}
+                <span className="text-primary">Better Patient Outcomes</span>
               </h1>
             </Reveal>
 
@@ -129,11 +129,11 @@ export default function Landing() {
                 className={`absolute -top-5 right-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
                 <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <HeartHandshake className="size-3.5 text-primary" /> Nursing &amp;
+                  <HeartHandshake className="size-3.5 text-primary" /> Nursing and
                   patient care
                 </p>
                 <p className="text-sm font-semibold text-foreground">
-                  Nurses · Caregivers · Assistants
+                  Nurses · Caregivers · Attendants
                 </p>
               </div>
             </div>
@@ -145,8 +145,8 @@ export default function Landing() {
       <section id="product-groups" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <SectionHeading
           label="Product Groups"
-          title="Browse by product group"
-          description="Sixteen product groups covering mobility, respiratory care, monitoring, hygiene and everyday patient comfort."
+          title="Browse the catalog by product group"
+          description="Sixteen product groups covering mobility, hospital furniture, monitoring, respiratory care, hygiene and everyday patient comfort."
         />
         <div className="mt-12">
           <ProductGroupGrid groups={PRODUCT_GROUPS} />
@@ -185,7 +185,7 @@ export default function Landing() {
       <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <SectionHeading
           label="Services"
-          title="Nursing & Patient Care Services"
+          title="Nursing and Patient Care Services"
           description="Nurses | Caregivers | Patient Care Assistants | Ward Attendants"
         />
 
@@ -215,11 +215,11 @@ export default function Landing() {
         <Reveal className="mt-10" delay={0.05}>
           <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-border/70 bg-gradient-to-r from-accent/60 to-secondary/60 px-6 py-6 sm:flex-row">
             <p className="max-w-xl text-sm text-foreground/80">
-              Looking for patient-care staff for a facility or home? Tell us what
-              you need and we'll get in touch.
+              Looking for nursing or caretaker support for a facility or a home?
+              Tell us what you need and we will get in touch with options.
             </p>
             <Button asChild>
-              <a href="/#contact">Enquire about services</a>
+              <a href="/#contact">Enquire about care services</a>
             </Button>
           </div>
         </Reveal>
@@ -247,15 +247,16 @@ export default function Landing() {
             <Reveal delay={0.1}>
               <div className="mt-5 space-y-4 text-muted-foreground">
                 <p>
-                  {BUSINESS.name} supplies medical, surgical and patient-care
-                  products to hospitals, clinics, nursing facilities and families
-                  caring for loved ones at home.
+                  {BUSINESS.name} supplies surgical and patient-care equipment
+                  and provides nursing and caretaker services to hospitals,
+                  clinics, nursing facilities and families caring for loved ones
+                  at home.
                 </p>
                 <p>
                   From wheelchairs and hospital beds to monitors, nebulizers and
-                  daily-care essentials, we focus on dependable products and
-                  straight, helpful guidance so you can choose the right item for
-                  the patient's needs.
+                  daily-care essentials, we focus on dependable products, careful
+                  sourcing and straight guidance — so you can choose the right
+                  equipment and the right care for each patient.
                 </p>
                 <p className="text-sm">
                   Based in Kothrud, Pune, we serve customers across the city and

@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "Products", to: "/products" },
   { label: "Product Groups", to: "/product-groups" },
-  { label: "Nursing & Patient Care Services", to: "/services" },
+  { label: "Nursing and Patient Care Services", to: "/services" },
   { label: "About Us", to: "/#about" },
   { label: "Contact", to: "/#contact" },
 ] as const;
@@ -52,7 +52,7 @@ export function SiteHeader() {
               Navsanjivani
             </span>
             <span className="hidden text-xs text-muted-foreground sm:block">
-              Surgical &amp; Nursing Beuro
+              Surgical and Nursing Beuro
             </span>
           </span>
         </Link>
@@ -83,20 +83,30 @@ export function SiteHeader() {
               </Link>
             ),
           )}
-        </nav>
-
-        {/* Desktop actions */}
+        </nav>        {/* Desktop actions */}
         <div className="hidden items-center gap-2 lg:flex">
-          <form onSubmit={submitSearch} className="relative">
+          <form onSubmit={submitSearch} className="relative hidden xl:block">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search products…"
+              placeholder="Search the catalog…"
               className="w-44 pl-9"
-              aria-label="Search products"
+              aria-label="Search the catalog"
             />
           </form>
+
+          {/* Search icon toggle below xl where the inline box is hidden */}
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Search the catalog"
+            className="hidden lg:flex xl:hidden"
+            onClick={() => setSearchOpen((v) => !v)}
+          >
+            <Search className="size-5" />
+          </Button>
+
           <Button asChild className="shadow-sm">
             <a href="/#contact">Contact / Enquiry</a>
           </Button>
@@ -107,7 +117,7 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Toggle search"
+            aria-label="Search the catalog"
             onClick={() => setSearchOpen((v) => !v)}
           >
             <Search className="size-5" />
@@ -123,18 +133,18 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile search bar */}
+      {/* Collapsible search bar (below xl) */}
       {searchOpen ? (
-        <div className="border-t border-border/60 px-4 py-3 lg:hidden">
+        <div className="border-t border-border/60 px-4 py-3 xl:hidden">
           <form onSubmit={submitSearch} className="relative">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               autoFocus
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search products…"
+              placeholder="Search the catalog…"
               className="pl-9"
-              aria-label="Search products"
+              aria-label="Search the catalog"
             />
           </form>
         </div>
