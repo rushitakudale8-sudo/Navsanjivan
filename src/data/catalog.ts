@@ -117,8 +117,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Thermometers",
     emoji: "🌡️",
     blurb: "Digital thermometers for fast, accurate temperature readings.",
-    image:
-      "https://images.pexels.com/photos/7722669/pexels-photo-7722669.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/thermometers.jpg",
+    fit: "contain",
   },
   {
     slug: "diapers",
@@ -250,8 +250,8 @@ export const PRODUCTS: Product[] = [
     slug: "digital-thermometers",
     name: "Digital Thermometers",
     group: "thermometers",
-    image:
-      "https://images.pexels.com/photos/7722669/pexels-photo-7722669.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/thermometers.jpg",
+    fit: "contain",
   },
   {
     slug: "adult-diapers",
