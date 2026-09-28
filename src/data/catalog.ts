@@ -69,8 +69,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Folding Commode Chair",
     emoji: "🩺",
     blurb: "Foldable commode chairs for bedside and portable patient use.",
-    image:
-      "https://images.pexels.com/photos/40568/pexels-photo-40568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/folding-commode-chair.png",
+    fit: "contain",
   },
   {
     slug: "nebulizers-respiratory-care",
