@@ -130,9 +130,9 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "bathroom-toilet-aids",
-    name: "Bathroom & Toilet Aids",
+    name: "Urine Pot and Bed Pans",
     emoji: "",
-    blurb: "Safety rails and toilet aids that make bathrooms safer.",
+    blurb: "Urine pots and bed pans for bedside and clinical patient use.",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Electric_raised_toilet_seat_for_elderly.jpg/640px-Electric_raised_toilet_seat_for_elderly.jpg",
     attribution: "Photo: TTTNIS (Wikimedia Commons, CC0 1.0)",
