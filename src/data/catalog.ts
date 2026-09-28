@@ -159,8 +159,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Masks & Medical Consumables",
     emoji: "😷",
     blurb: "Masks, gloves and consumables for daily clinical hygiene.",
-    image:
-      "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/gloves.jpg",
+    fit: "contain",
   },
 ];
 
@@ -282,6 +282,13 @@ export const PRODUCTS: Product[] = [
     image:
       "https://live.staticflickr.com/6092/6328857535_61ddc13e17_b.jpg",
     attribution: "Photo: jenny_belly (Flickr, CC BY 2.0)",
+  },
+  {
+    slug: "gloves",
+    name: "Gloves",
+    group: "masks-medical-consumables",
+    image: "/gloves.jpg",
+    fit: "contain",
   },
   {
     slug: "medical-masks",
