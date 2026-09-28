@@ -101,8 +101,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Walking Aids",
     emoji: "",
     blurb: "Rollators and support aids that keep daily movement independent.",
-    image:
-      "https://images.pexels.com/photos/19995390/pexels-photo-19995390.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/walking-aids.png",
+    fit: "contain",
   },
   {
     slug: "crutches-walking-sticks",
@@ -236,8 +236,8 @@ export const PRODUCTS: Product[] = [
     slug: "walking-sticks",
     name: "Walking Sticks",
     group: "walking-aids",
-    image:
-      "https://images.pexels.com/photos/18465520/pexels-photo-18465520.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/walking-aids.png",
+    fit: "contain",
   },
   {
     slug: "crutches",
