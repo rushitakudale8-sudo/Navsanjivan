@@ -149,9 +149,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Sleeping Wheel Chair",
     emoji: "🧴",
     blurb: "Reclining and sleeping wheelchairs for comfort and rest at home.",
-    image:
-      "https://live.staticflickr.com/6092/6328857535_61ddc13e17_b.jpg",
-    attribution: "Photo: jenny_belly (Flickr, CC BY 2.0)",
+    image: "/sleeping-wheel-chair.jpg",
+    fit: "contain",
   },
   {
     slug: "masks-medical-consumables",
