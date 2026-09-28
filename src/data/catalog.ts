@@ -146,9 +146,9 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "hot-water-bags-personal-care",
-    name: "Hot Water Bags & Personal Care",
+    name: "Sleeping Wheel Chair",
     emoji: "🧴",
-    blurb: "Hot water bags and personal-care essentials for comfort at home.",
+    blurb: "Reclining and sleeping wheelchairs for comfort and rest at home.",
     image:
       "https://live.staticflickr.com/6092/6328857535_61ddc13e17_b.jpg",
     attribution: "Photo: jenny_belly (Flickr, CC BY 2.0)",
