@@ -142,7 +142,7 @@ export default function Landing() {
       {/* ============ PRODUCT GROUPS ============ */}
       <section id="product-groups" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <SectionHeading
-          label="Product Groups"
+          label="Products"
           title="Browse the catalog by product group"
           description="Sixteen product groups covering mobility, hospital furniture, monitoring, respiratory care, hygiene and everyday patient comfort."
         />
