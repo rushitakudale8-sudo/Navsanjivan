@@ -66,9 +66,9 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "patient-care-equipment",
-    name: "Patient Care Equipment",
+    name: "Folding Commode Chair",
     emoji: "🩺",
-    blurb: "Everyday equipment for examination, monitoring and bedside care.",
+    blurb: "Foldable commode chairs for bedside and portable patient use.",
     image:
       "https://images.pexels.com/photos/40568/pexels-photo-40568.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
