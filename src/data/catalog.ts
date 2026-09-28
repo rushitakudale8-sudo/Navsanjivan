@@ -93,8 +93,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Pulse Oximeters",
     emoji: "🫁",
     blurb: "Fingertip pulse oximeters for quick oxygen-saturation checks.",
-    image:
-      "https://images.pexels.com/photos/8089103/pexels-photo-8089103.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/pulse-oximeters.jpg",
+    fit: "contain",
   },
   {
     slug: "walking-aids",
@@ -229,8 +229,8 @@ export const PRODUCTS: Product[] = [
     slug: "pulse-oximeters",
     name: "Pulse Oximeters",
     group: "pulse-oximeters",
-    image:
-      "https://images.pexels.com/photos/7580256/pexels-photo-7580256.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/pulse-oximeters.jpg",
+    fit: "contain",
   },
   {
     slug: "walking-sticks",
