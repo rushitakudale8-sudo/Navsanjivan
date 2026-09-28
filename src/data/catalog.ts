@@ -130,7 +130,7 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "bathroom-toilet-aids",
-    name: "Urine Pot and Bed Pans",
+    name: "Urine Pots & Bedpans",
     emoji: "",
     blurb: "Urine pots and bed pans for bedside and clinical patient use.",
     image: "/urine-pot-bed-pans.jpg",
