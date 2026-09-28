@@ -125,8 +125,8 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
     name: "Diapers",
     emoji: "",
     blurb: "Adult and baby diapers in a range of sizes for daily care.",
-    image:
-      "https://images.pexels.com/photos/6849268/pexels-photo-6849268.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/diapers.png",
+    fit: "contain",
   },
   {
     slug: "bathroom-toilet-aids",
@@ -257,8 +257,8 @@ export const PRODUCTS: Product[] = [
     slug: "adult-diapers",
     name: "Adult Diapers",
     group: "diapers",
-    image:
-      "https://images.pexels.com/photos/28846860/pexels-photo-28846860.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/diapers.png",
+    fit: "contain",
   },
   {
     slug: "toilet-safety-rails",
