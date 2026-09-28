@@ -12,17 +12,12 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading, SoftCard } from "@/components/site/SitePrimitives";
-import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
+import { ProductGroupGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import {
-  BUSINESS,
-  CARE_SERVICES,
-  PRODUCT_GROUPS,
-  PRODUCTS,
-} from "@/data/catalog";
+import { BUSINESS, CARE_SERVICES, PRODUCT_GROUPS } from "@/data/catalog";
 
 const TRUST_POINTS = [
   { icon: BadgeCheck, label: "A reliable supply partner for hospitals, clinics and nursing facilities" },
@@ -156,27 +151,6 @@ export default function Landing() {
             </Link>
           </Button>
         </Reveal>
-      </section>
-
-      {/* ============ OUR PRODUCTS ============ */}
-      <section id="products" className="bg-secondary/40 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeading
-            label="Our Products"
-            title="Our Products"
-            description="A snapshot of the equipment we supply. Enquire for availability, brands and pricing."
-          />
-          <div className="mt-12">
-            <ProductGrid products={PRODUCTS} />
-          </div>
-          <Reveal className="mt-10 text-center" delay={0.05}>
-            <Button asChild className="shadow-md">
-              <Link to="/products">
-                Explore all products <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-          </Reveal>
-        </div>
       </section>
 
       {/* ============ NURSING & PATIENT CARE SERVICES ============ */}
