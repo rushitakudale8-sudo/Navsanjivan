@@ -278,7 +278,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     slug: "toilet-safety-rails",
-    name: "Toilet Safety Rails",
+    name: "Urine Pots & Bedpans",
     group: "bathroom-toilet-aids",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Grab_bar.jpg/960px-Grab_bar.jpg",
