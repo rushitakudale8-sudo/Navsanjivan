@@ -18,6 +18,9 @@ import { BUSINESS, ENQUIRY_OPTIONS } from "@/data/catalog";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+/** Dropdown option that lets visitors type their own requirement. */
+const CUSTOM_OPTION = "Other (type your requirement)";
+
 export function EnquiryForm({ className }: { className?: string }) {
   const submitEnquiry = useMutation(api.enquiries.submit);
   const [status, setStatus] = useState<Status>("idle");
@@ -27,6 +30,7 @@ export function EnquiryForm({ className }: { className?: string }) {
     phone: "",
     email: "",
     productOrService: "",
+    customProduct: "",
     message: "",
   });
 
@@ -36,19 +40,35 @@ export function EnquiryForm({ className }: { className?: string }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (form.productOrService === CUSTOM_OPTION && !form.customProduct.trim()) {
+      setStatus("idle");
+      setError("Please type the product or service you need.");
+      return;
+    }
     setStatus("submitting");
     setError(null);
     try {
+      const productOrService =
+        form.productOrService === CUSTOM_OPTION
+          ? `Other: ${form.customProduct.trim()}`
+          : form.productOrService;
       await submitEnquiry({
         name: form.name.trim(),
         phone: form.phone.trim(),
         email: form.email.trim() || undefined,
-        productOrService: form.productOrService,
+        productOrService,
         message: form.message.trim() || undefined,
       });
       setStatus("success");
       toast.success("Enquiry sent — we'll get back to you soon.");
-      setForm({ name: "", phone: "", email: "", productOrService: "", message: "" });
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        productOrService: "",
+        customProduct: "",
+        message: "",
+      });
     } catch (err) {
       setStatus("error");
       setError(
@@ -114,8 +134,19 @@ export function EnquiryForm({ className }: { className?: string }) {
                   {option}
                 </SelectItem>
               ))}
+              <SelectItem value={CUSTOM_OPTION}>{CUSTOM_OPTION}</SelectItem>
             </SelectContent>
           </Select>
+          {form.productOrService === CUSTOM_OPTION && (
+            <Input
+              required
+              value={form.customProduct}
+              onChange={(e) => set("customProduct", e.target.value)}
+              placeholder="Type the product or service you need"
+              className={inputClasses}
+              aria-label="Custom product or service"
+            />
+          )}
         </div>
         <div className="flex flex-col gap-2 sm:col-span-2">
           <Label htmlFor="message">Message</Label>
