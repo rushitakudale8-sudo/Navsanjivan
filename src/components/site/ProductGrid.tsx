@@ -1,8 +1,77 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { Badge } from "@/components/ui/badge";
+import { Mail, RotateCcw, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Reveal, SoftCard } from "@/components/site/SitePrimitives";
-import type { ProductGroup, Product } from "@/data/catalog";
+import {
+  AvailabilityBadge,
+  ProductDetailDialog,
+} from "@/components/site/ProductDetailDialog";
+import { BUSINESS, type Product, type ProductGroup } from "@/data/catalog";
 import { cn } from "@/lib/utils";
+
+function buyMailto(p: Product) {
+  const subject = encodeURIComponent(
+    `Buy enquiry: ${p.name} — ${BUSINESS.shortName}`,
+  );
+  const body = encodeURIComponent(
+    `Hello ${BUSINESS.name},\n\nI would like to buy:\n\nProduct: ${p.name}\n\nPlease share the price and availability.\n\nThank you,`,
+  );
+  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
+}
+
+function rentMailto(p: Product) {
+  const subject = encodeURIComponent(
+    `Rental enquiry: ${p.name} — ${BUSINESS.shortName}`,
+  );
+  const body = encodeURIComponent(
+    `Hello ${BUSINESS.name},\n\nI would like to rent:\n\nProduct: ${p.name}\nDuration: (daily / weekly / monthly)\nStart date: \n\nPlease share the rental price, deposit and delivery details.\n\nThank you,`,
+  );
+  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
+}
+
+function enquiryMailto(p: Product) {
+  const subject = encodeURIComponent(
+    `Price & availability enquiry: ${p.name} — ${BUSINESS.shortName}`,
+  );
+  const body = encodeURIComponent(
+    `Hello ${BUSINESS.name},\n\nI am interested in:\n\nProduct: ${p.name}\n\nPlease share the price and availability (buy or rent).\n\nThank you,`,
+  );
+  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
+}
+
+/** Card action row: Buy Now / Rent Now / Enquire Now (only when configured). */
+function ProductCardActions({ product }: { product: Product }) {
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      {product.forSale && (
+        <Button asChild size="sm" className="shadow-sm">
+          <a href={buyMailto(product)} onClick={stop}>
+            <ShoppingCart className="size-3.5" /> Buy Now
+          </a>
+        </Button>
+      )}
+      {product.forRent && (
+        <Button asChild size="sm" variant="secondary" className="shadow-sm">
+          <a href={rentMailto(product)} onClick={stop}>
+            <RotateCcw className="size-3.5" /> Rent Now
+          </a>
+        </Button>
+      )}
+      <Button
+        asChild
+        size="sm"
+        variant={product.forSale || product.forRent ? "outline" : "default"}
+        className={product.forSale || product.forRent ? "bg-white" : "shadow-sm"}
+      >
+        <a href={enquiryMailto(product)} onClick={stop}>
+          <Mail className="size-3.5" /> Enquire Now
+        </a>
+      </Button>
+    </div>
+  );
+}
 
 /** Product-group card: clickable, image-led, subtle hover lift. */
 function GroupCard({ group }: { group: ProductGroup }) {
@@ -35,11 +104,20 @@ function GroupCard({ group }: { group: ProductGroup }) {
   );
 }
 
-/** Product card: image-led with name and product group, links into the products page. */
-function ProductCard({ product }: { product: Product }) {
+/** Product card: image, name, description, availability, price and actions. */
+function ProductCard({
+  product,
+  onOpen,
+}: {
+  product: Product;
+  onOpen: (p: Product) => void;
+}) {
   return (
     <Reveal delay={0.03}>
-      <SoftCard className="h-full overflow-hidden">
+      <SoftCard
+        className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-md"
+        onClick={() => onOpen(product)}
+      >
         <div
           className={cn(
             "relative aspect-[4/3] overflow-hidden",
@@ -57,10 +135,30 @@ function ProductCard({ product }: { product: Product }) {
           />
         </div>
         <div className="p-4">
-          <h3 className="font-semibold text-foreground">{product.name}</h3>
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-semibold text-foreground">{product.name}</h3>
+          </div>
           <p className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
             {product.group.split("-").join(" ")}
           </p>
+          {product.description && (
+            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+              {product.description}
+            </p>
+          )}
+          <div className="mt-3">
+            <AvailabilityBadge product={product} />
+          </div>
+          {product.forSale && product.buyPrice ? (
+            <p className="mt-2 text-sm font-semibold text-foreground">
+              {product.buyPrice}
+            </p>
+          ) : (
+            <p className="mt-2 text-xs text-muted-foreground">
+              Price &amp; availability on request
+            </p>
+          )}
+          <ProductCardActions product={product} />
         </div>
       </SoftCard>
     </Reveal>
@@ -89,6 +187,7 @@ export function ProductGroupGrid({
   );
 }
 
+/** Grid of product cards with a shared detail dialog. */
 export function ProductGrid({
   products,
   columns = 4,
@@ -96,17 +195,34 @@ export function ProductGrid({
   products: Product[];
   columns?: 3 | 4;
 }) {
+  const [selected, setSelected] = useState<Product | null>(null);
+  const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className={
-        columns === 4
-          ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-      }
-    >
-      {products.map((p) => (
-        <ProductCard key={p.slug} product={p} />
-      ))}
-    </div>
+    <>
+      <div
+        className={
+          columns === 4
+            ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        }
+      >
+        {products.map((p) => (
+          <ProductCard
+            key={p.slug}
+            product={p}
+            onOpen={(prod) => {
+              setSelected(prod);
+              setOpen(true);
+            }}
+          />
+        ))}
+      </div>
+      <ProductDetailDialog
+        product={selected}
+        open={open}
+        onOpenChange={setOpen}
+      />
+    </>
   );
 }

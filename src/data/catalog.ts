@@ -13,6 +13,8 @@ export const BUSINESS = {
   address:
     "Rambag Colony, Paud Road, Kothrud, Pune – 411038, Maharashtra, India",
   email: "navsanjivan10@gmail.com",
+  /** Sales/rental enquiries for Buy / Rent go to the service desk. */
+  serviceEmail: "service.navsanjivan10@gmail.com",
   tagline:
     "We supply surgical and patient-care equipment and provide nursing and caretaker services for hospitals, clinics, nursing facilities and home healthcare.",
   disclaimer: "Product information only — not medical advice.",
@@ -171,6 +173,22 @@ export type Product = {
   attribution?: string;
   /** How the image fills its card. Defaults to "cover". */
   fit?: "cover" | "contain";
+  /** Short one-line description shown on cards and the detail dialog. */
+  description?: string;
+  /** Technical specifications shown on the product detail dialog. */
+  specs?: string[];
+  /** Buy availability — only set when actually confirmed. */
+  forSale?: boolean;
+  /** Rent availability — only set when actually confirmed. */
+  forRent?: boolean;
+  /** Confirmed purchase price. Omit when the price is on request. */
+  buyPrice?: string;
+  /** Rental rates per duration; only include confirmed values. */
+  rentPrices?: { daily?: string; weekly?: string; monthly?: string };
+  /** Refundable security deposit for rentals, if applicable. */
+  rentDeposit?: string;
+  /** Delivery / pickup note for rentals, if applicable. */
+  rentDelivery?: string;
 };
 
 export const PRODUCTS: Product[] = [

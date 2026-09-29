@@ -86,12 +86,15 @@ export function SectionHeading({
 export function SoftCard({
   children,
   className,
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   return (
     <div
+      onClick={onClick}
       className={cn(
         "group rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_rgba(23,74,99,0.05),0_8px_24px_-12px_rgba(23,74,99,0.18)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_2px_4px_rgba(23,74,99,0.06),0_18px_40px_-16px_rgba(23,74,99,0.28)]",
         className,
