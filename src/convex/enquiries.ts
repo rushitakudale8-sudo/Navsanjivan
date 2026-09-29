@@ -1,13 +1,13 @@
 import { v } from "convex/values";
-import { internalMutation, mutation, query } from "./_generated/server";
-import { action } from "./_generated/server";
+import { action, internalMutation, mutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
+import type { Doc, Id } from "./_generated/dataModel";
 import { Resend } from "resend";
 
 /** The ONLY destination for website enquiries (per business owner). */
 const ENQUIRY_INBOX = "Navsanjivan10@gmail.com";
 
-const SUBJECT_PREFIX = "New Website Enquiry - Navsanjivani Surgical & Nursing Beuro";
+const SUBJECT = "New Website Enquiry - Navsanjivani Surgical & Nursing Beuro";
 
 /** Collapse whitespace/newlines and hard-cap length to keep the email clean. */
 function sanitize(value: string, max = 2000): string {
@@ -37,7 +37,10 @@ export const submit = action({
     /** Client timestamp for duplicate detection (Date.now() on submit). */
     clientTime: v.number(),
   },
-  handler: async (ctx, args) => {
+  handler: async (
+    ctx,
+    args,
+  ): Promise<{ ok: true; duplicate: boolean; id: Id<"enquiries"> }> => {
     // --- Validate required fields (server-side, not just HTML) ---
     const name = sanitize(args.name, 120);
     const phone = sanitize(args.phone, 20);
@@ -56,18 +59,21 @@ export const submit = action({
     const message = args.message ? args.message.trim().slice(0, 4000) : undefined;
 
     // --- Duplicate-submission guard (same phone + product within 60s) ---
-    const recent = await ctx.runQuery(internal.enquiries.findRecent, {
-      phone,
-      productOrService,
-      now: Date.now(),
-    });
+    const recent: Doc<"enquiries"> | null = await ctx.runMutation(
+      internal.enquiries.findRecent,
+      {
+        phone,
+        productOrService,
+        now: Date.now(),
+      },
+    );
     if (recent) {
       return { ok: true as const, duplicate: true, id: recent._id };
     }
 
     // --- Persist first, so enquiries are never lost even if email fails ---
     const now = Date.now();
-    const id = await ctx.runMutation(internal.enquiries.insertEnquiry, {
+    const id: Id<"enquiries"> = await ctx.runMutation(internal.enquiries.insertEnquiry, {
       name,
       phone,
       email,
@@ -103,7 +109,7 @@ export const submit = action({
       from: "Navsanjivani Website <onboarding@resend.dev>",
       to: [ENQUIRY_INBOX],
       replyTo: email || undefined,
-      subject: SUBJECT_PREFIX,
+      subject: SUBJECT,
       text: lines.join("\n"),
     });
 

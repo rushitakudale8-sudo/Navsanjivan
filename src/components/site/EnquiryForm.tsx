@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "convex/react";
+import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 import { BUSINESS, ENQUIRY_OPTIONS } from "@/data/catalog";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -22,7 +23,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 const CUSTOM_OPTION = "Other (type your requirement)";
 
 export function EnquiryForm({ className }: { className?: string }) {
-  const submitEnquiry = useMutation(api.enquiries.submit);
+  const submitEnquiry = useAction(api.enquiries.submit);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -31,6 +32,7 @@ export function EnquiryForm({ className }: { className?: string }) {
     email: "",
     productOrService: "",
     customProduct: "",
+    buyOrRent: "",
     message: "",
   });
 
@@ -57,16 +59,21 @@ export function EnquiryForm({ className }: { className?: string }) {
         phone: form.phone.trim(),
         email: form.email.trim() || undefined,
         productOrService,
+        buyOrRent: form.buyOrRent || "Not specified",
         message: form.message.trim() || undefined,
+        clientTime: Date.now(),
       });
       setStatus("success");
-      toast.success("Enquiry sent — we'll get back to you soon.");
+      toast.success(
+        "Thank you! Your enquiry has been sent successfully. We will contact you soon.",
+      );
       setForm({
         name: "",
         phone: "",
         email: "",
         productOrService: "",
         customProduct: "",
+        buyOrRent: "",
         message: "",
       });
     } catch (err) {
@@ -74,7 +81,7 @@ export function EnquiryForm({ className }: { className?: string }) {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email us directly.",
+          : "We couldn't send your enquiry right now. Please try again.",
       );
     }
   }
@@ -147,6 +154,34 @@ export function EnquiryForm({ className }: { className?: string }) {
               aria-label="Custom product or service"
             />
           )}
+        </div>
+        <div className="flex flex-col gap-2 sm:col-span-2">
+          <Label>Requirement</Label>
+          <div className="flex gap-2">
+            {["Buy", "Rent", "Not sure"].map((opt) => {
+              const selected =
+                form.buyOrRent === opt ||
+                (opt === "Not sure" && !form.buyOrRent);
+              return (
+                <button
+                  key={opt}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() =>
+                    set("buyOrRent", opt === "Not sure" ? "" : opt)
+                  }
+                  className={cn(
+                    "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
+                    selected
+                      ? "border-primary bg-primary text-white shadow-sm"
+                      : "border-border bg-white text-muted-foreground hover:border-primary/50 hover:text-foreground",
+                  )}
+                >
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
         </div>
         <div className="flex flex-col gap-2 sm:col-span-2">
           <Label htmlFor="message">Message</Label>
