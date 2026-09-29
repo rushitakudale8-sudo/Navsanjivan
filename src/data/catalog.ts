@@ -322,28 +322,12 @@ export const PRODUCTS: Product[] = [
     attribution: "Photo: Jonas Bergsten (Wikimedia Commons, public domain)",
   },
   {
-    slug: "breast-pumps",
-    name: "Breast Pumps",
-    group: "patient-care-equipment",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Ameda_Purely_Yours_Double_Electric_Breast_Pump_DSCF2198.jpg/960px-Ameda_Purely_Yours_Double_Electric_Breast_Pump_DSCF2198.jpg",
-    attribution: "Photo: Mary Mark Ockerbloom (Wikimedia Commons, CC BY-SA 3.0)",
-  },
-  {
     slug: "infrared-thermometers",
     name: "Infrared Thermometers",
     group: "thermometers",
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Infrared_forehead_thermometer%2C_made_in_China.jpg/960px-Infrared_forehead_thermometer%2C_made_in_China.jpg",
     attribution: "Photo: Syced (Wikimedia Commons, CC0 1.0)",
-  },
-  {
-    slug: "disposable-underpads",
-    name: "Disposable Underpads",
-    group: "diapers",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Incontinence_pad_for_women_package_1.jpg/960px-Incontinence_pad_for_women_package_1.jpg",
-    attribution: "Photo: Wetfinder (Wikimedia Commons, CC BY-SA 3.0)",
   },
   {
     slug: "suction-machines",
