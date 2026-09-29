@@ -40,9 +40,16 @@ const schema = defineSchema(
       phone: v.string(),
       email: v.optional(v.string()),
       productOrService: v.string(),
+      buyOrRent: v.optional(v.string()), // "Buy" | "Rent" | "Not specified"
       message: v.optional(v.string()),
       status: v.optional(v.string()), // "new" | "contacted" | "closed"
-    }).index("by_status", ["status"]),
+      createdAt: v.optional(v.number()),
+      emailedAt: v.optional(v.number()), // when the email was accepted
+      resendId: v.optional(v.string()),
+    })
+      .index("by_status", ["status"])
+      .index("by_dedupe", ["phone", "productOrService", "createdAt"])
+      .index("by_email", ["emailedAt"]),
 
     // tableName: defineTable({
     //   ...
