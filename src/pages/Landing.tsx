@@ -126,17 +126,6 @@ export default function Landing() {
               </div>
 
               <div
-                className={`absolute -bottom-5 right-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
-              >
-                <p className="text-xs font-medium text-muted-foreground">
-                  Product groups
-                </p>
-                <p className="text-2xl font-bold text-primary">
-                  {PRODUCT_GROUPS.length}
-                </p>
-              </div>
-
-              <div
                 className={`absolute -top-5 right-6 flex items-center gap-3 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md">
