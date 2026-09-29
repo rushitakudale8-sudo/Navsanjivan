@@ -114,7 +114,19 @@ export default function Landing() {
               </div>
 
               <div
-                className={`absolute -bottom-5 left-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty"}`}
+                className={`absolute -bottom-5 left-6 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty"}`}
+              >
+                <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                  <HeartHandshake className="size-4 text-foreground/80" /> Nursing
+                  and patient care
+                </p>
+                <p className="mt-0.5 text-sm font-bold text-foreground">
+                  Nurses · Caregivers · Attendants
+                </p>
+              </div>
+
+              <div
+                className={`absolute -bottom-5 right-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
                 <p className="text-xs font-medium text-muted-foreground">
                   Product groups
