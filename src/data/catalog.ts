@@ -16,7 +16,7 @@ export const BUSINESS = {
   /** Sales/rental enquiries for Buy / Rent go to the service desk. */
   serviceEmail: "service.navsanjivan10@gmail.com",
   tagline:
-    "We supply surgical and patient-care equipment and provide nursing and caretaker services for hospitals, clinics, nursing facilities and home healthcare.",
+    "We supply surgical and patient-care equipment and provide nursing and caretaker services for hospitals, clinics, nursing facilities and home healthcare. Buy or rent the equipment you need.",
   disclaimer: "Product information only — not medical advice.",
 } as const;
 

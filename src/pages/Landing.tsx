@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
+  CircleCheck,
   HeartHandshake,
   Mail,
   MapPin,
@@ -124,15 +125,19 @@ export default function Landing() {
               </div>
 
               <div
-                className={`absolute -top-5 right-6 rounded-2xl border border-border/60 bg-white/95 px-5 py-4 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
+                className={`absolute -top-5 right-6 flex items-center gap-3 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
-                <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <HeartHandshake className="size-3.5 text-primary" /> Nursing and
-                  patient care
-                </p>
-                <p className="text-sm font-semibold text-foreground">
-                  Nurses · Caregivers · Attendants
-                </p>
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md">
+                  <CircleCheck className="size-5" />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-foreground">
+                    Buy &amp; Rent Options
+                  </span>
+                  <span className="block text-xs text-muted-foreground">
+                    On most medical equipment
+                  </span>
+                </span>
               </div>
             </div>
           </Reveal>
