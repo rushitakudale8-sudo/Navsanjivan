@@ -5,7 +5,7 @@ import type { Doc, Id } from "./_generated/dataModel";
 import { Resend } from "resend";
 
 /** The ONLY destination for website enquiries (per business owner). */
-const ENQUIRY_INBOX = "Navsanjivan10@gmail.com";
+const ENQUIRY_INBOX = "navsanjivan10@gmail.com";
 
 const SUBJECT = "New Website Enquiry - Navsanjivani Surgical & Nursing Beuro";
 
