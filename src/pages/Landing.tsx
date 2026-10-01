@@ -291,13 +291,58 @@ export default function Landing() {
       </section>
 
       {/* ============ OUR PRODUCTS ============ */}
-      <section id="products" className="scroll-mt-16 bg-secondary/40 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <SectionHeading
-            label="Our Products"
-            title="Our Products"
-            description="A snapshot of the equipment we supply. Enquire for availability, brands and pricing."
+      <section
+        id="products"
+        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
+      >
+        {/* decorative healthcare layer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-24 -top-20 size-80 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
+          <div className="absolute right-40 top-10 size-24 rounded-full bg-[#B9DFF2]/40" />
+          <Plus className="absolute left-6 top-1/2 size-9 text-[#5BAED6]/30 animate-floaty-slow" />
+          <Plus className="absolute bottom-10 right-6 size-6 text-[#5BAED6]/30 animate-floaty" />
+          <div
+            className="absolute left-16 top-12 size-20 opacity-40"
+            style={{
+              backgroundImage: "radial-gradient(#5BAED6 1.4px, transparent 1.4px)",
+              backgroundSize: "16px 16px",
+            }}
           />
+          <div
+            className="absolute right-24 top-44 size-16 opacity-30"
+            style={{
+              backgroundImage: "radial-gradient(#5BAED6 1.4px, transparent 1.4px)",
+              backgroundSize: "16px 16px",
+            }}
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col items-center text-center">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
+                Our Products
+              </span>
+            </Reveal>
+
+            <AnimatedHeading
+              as="h2"
+              align="center"
+              underlineWidth={60}
+              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+            >
+              Our Products
+            </AnimatedHeading>
+
+            <Reveal delay={0.15}>
+              <p className="mt-4 max-w-2xl text-sm text-[#4B6472] sm:text-base">
+                A snapshot of the equipment we supply. Enquire for availability,
+                brands and pricing.
+              </p>
+            </Reveal>
+          </div>
+
           <div className="mt-12">
             <ProductGrid products={PRODUCTS} />
           </div>
