@@ -219,8 +219,11 @@ export default function Landing() {
         <Reveal className="mt-10" delay={0.05}>
           <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-border/70 bg-gradient-to-r from-accent/60 to-secondary/60 px-6 py-6 sm:flex-row">
             <p className="max-w-xl text-sm text-foreground/80">
-              Looking for nursing or caretaker support for a facility or a home?
-              Tell us what you need and we will get in touch with options.
+              <span className="block text-base font-semibold text-foreground">
+                Nursing &amp; Caretaker Support — Day | Night | 24/7
+              </span>
+              Flexible care support for homes and facilities, available according
+              to your needs.
             </p>
             <Button asChild>
               <a href="/#contact">Enquire about care services</a>
