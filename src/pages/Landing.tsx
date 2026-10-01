@@ -128,9 +128,7 @@ export default function Landing() {
               <div
                 className={`absolute -top-5 right-6 flex items-center gap-3 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
-                <span
-                  className={`flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md ${reduce ? "" : "animate-pulse-soft"}`}
-                >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md">
                   <CircleCheck className="size-5" />
                 </span>
                 <span>
@@ -148,7 +146,7 @@ export default function Landing() {
       </section>
 
       {/* ============ PRODUCT GROUPS ============ */}
-      <section id="product-groups" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <section id="product-groups" className="mx-auto max-w-7xl scroll-mt-16 px-4 py-20 sm:px-6">
         <SectionHeading
           label="Products"
           title="Browse the catalog by product group"
@@ -167,7 +165,7 @@ export default function Landing() {
       </section>
 
       {/* ============ OUR PRODUCTS ============ */}
-      <section id="products" className="bg-secondary/40 py-20">
+      <section id="products" className="scroll-mt-16 bg-secondary/40 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeading
             label="Our Products"
@@ -188,7 +186,7 @@ export default function Landing() {
       </section>
 
       {/* ============ NURSING & PATIENT CARE SERVICES ============ */}
-      <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <section id="services" className="mx-auto max-w-7xl scroll-mt-16 px-4 py-20 sm:px-6">
         <SectionHeading
           label="Services"
           title="Nursing and Patient Care Services"
@@ -235,7 +233,7 @@ export default function Landing() {
       </section>
 
       {/* ============ ABOUT US ============ */}
-      <section id="about" className="bg-secondary/40 py-20">
+      <section id="about" className="scroll-mt-16 bg-secondary/40 py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
           <Reveal>
             <div className="overflow-hidden rounded-3xl border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
