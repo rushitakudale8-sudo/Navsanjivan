@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { AnimatedHeading } from "@/components/site/SitePrimitives";
 import { BUSINESS, type Product } from "@/data/catalog";
 import { cn } from "@/lib/utils";
 
@@ -155,9 +156,15 @@ export function ProductDetailDialog({
           <div className="space-y-5">
             {product.specs && product.specs.length > 0 && (
               <div>
-                <h4 className="text-sm font-semibold text-foreground">
+                <AnimatedHeading
+                  as="h4"
+                  underline={false}
+                  float={false}
+                  glow={false}
+                  className="text-sm font-semibold text-foreground"
+                >
                   Specifications
-                </h4>
+                </AnimatedHeading>
                 <ul className="mt-2 space-y-1.5">
                   {product.specs.map((s) => (
                     <li
@@ -177,7 +184,15 @@ export function ProductDetailDialog({
 
             {/* Purchase */}
             <div>
-              <h4 className="text-sm font-semibold text-foreground">Buy</h4>
+              <AnimatedHeading
+                as="h4"
+                underline={false}
+                float={false}
+                glow={false}
+                className="text-sm font-semibold text-foreground"
+              >
+                Buy
+              </AnimatedHeading>
               <p className="mt-1 text-sm text-muted-foreground">
                 {product.forSale
                   ? `Available for purchase${product.buyPrice ? ` — ${product.buyPrice}` : " — price on request"}`
@@ -200,7 +215,15 @@ export function ProductDetailDialog({
 
             {/* Rental */}
             <div>
-              <h4 className="text-sm font-semibold text-foreground">Rent</h4>
+              <AnimatedHeading
+                as="h4"
+                underline={false}
+                float={false}
+                glow={false}
+                className="text-sm font-semibold text-foreground"
+              >
+                Rent
+              </AnimatedHeading>
               {product.forRent ? (
                 <div className="mt-1 space-y-1 text-sm text-muted-foreground">
                   <p>

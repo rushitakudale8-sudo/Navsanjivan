@@ -12,7 +12,12 @@ import {
   Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal, SectionHeading, SoftCard } from "@/components/site/SitePrimitives";
+import {
+  AnimatedHeading,
+  Reveal,
+  SectionHeading,
+  SoftCard,
+} from "@/components/site/SitePrimitives";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
@@ -59,12 +64,13 @@ export default function Landing() {
               </span>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <h1 className="mt-5 text-4xl leading-tight font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]">
-                Quality Medical Equipment.{" "}
-                <span className="text-primary">Better Patient Care</span>
-              </h1>
-            </Reveal>
+            <AnimatedHeading
+              as="h1"
+              className="mt-5 text-4xl leading-tight font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]"
+            >
+              Quality Medical Equipment.{" "}
+              <span className="text-primary">Better Patient Care</span>
+            </AnimatedHeading>
 
             <Reveal delay={0.16}>
               <p className="mt-5 max-w-xl text-lg text-muted-foreground">

@@ -191,6 +191,32 @@
   animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ---------------------------------------------------------------------------
+   Heading highlight system
+   Applied to major section headings via <AnimatedHeading>.
+   Subtle healthcare-blue glow only — no flashing, bounce or rotation.
+--------------------------------------------------------------------------- */
+.heading-glow {
+  text-shadow:
+    0 0 22px rgba(91, 174, 214, 0.18),
+    0 0 44px rgba(23, 74, 99, 0.1);
+}
+
+/* Slow, gentle float applied only *after* the heading has revealed. */
+@keyframes heading-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.heading-float {
+  animation: heading-float 3.75s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -199,7 +225,8 @@
   .animate-floaty-slow,
   .animate-aurora,
   .animate-aurora-slow,
-  .animate-fade-up {
+  .animate-fade-up,
+  .heading-float {
     animation: none;
   }
 }

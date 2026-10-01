@@ -1,7 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { Reveal, SectionHeading, SoftCard } from "@/components/site/SitePrimitives";
+import {
+  AnimatedHeading,
+  Reveal,
+  SectionHeading,
+  SoftCard,
+} from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
 import { CARE_SERVICES } from "@/data/catalog";
 
@@ -13,12 +18,17 @@ export default function Services() {
       <main className="flex-1">
         <section className="border-b border-border/60 bg-secondary/40">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <AnimatedHeading
+              as="h1"
+              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            >
               Nursing &amp; Patient Care Services
-            </h1>
-            <p className="mt-3 max-w-2xl text-muted-foreground">
-              Nurses | Caregivers | Patient Care Assistants | Ward Attendants
-            </p>
+            </AnimatedHeading>
+            <Reveal delay={0.1}>
+              <p className="mt-3 max-w-2xl text-muted-foreground">
+                Nurses | Caregivers | Patient Care Assistants | Ward Attendants
+              </p>
+            </Reveal>
           </div>
         </section>
 
@@ -55,18 +65,25 @@ export default function Services() {
           </div>
 
           <div className="mt-14 rounded-2xl border border-border/70 bg-gradient-to-r from-accent/60 to-secondary/60 px-6 py-8 text-center">
-            <h2 className="text-lg font-semibold text-foreground">
+            <AnimatedHeading
+              as="h2"
+              align="center"
+              underlineWidth={56}
+              className="text-lg font-semibold text-foreground"
+            >
               Need nursing or caretaker support?
-            </h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-              Tell us about the patient's needs and how long care is required,
-              and we will get back to you with suitable options.
-            </p>
-            <Button asChild className="mt-5 shadow-md">
-              <a href="/#contact">
-                Enquire now <ArrowRight className="size-4" />
-              </a>
-            </Button>
+            </AnimatedHeading>
+            <Reveal delay={0.1}>
+              <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+                Tell us about the patient's needs and how long care is required,
+                and we will get back to you with suitable options.
+              </p>
+              <Button asChild className="mt-5 shadow-md">
+                <a href="/#contact">
+                  Enquire now <ArrowRight className="size-4" />
+                </a>
+              </Button>
+            </Reveal>
           </div>
 
           <p className="mt-8 text-center text-xs text-muted-foreground">

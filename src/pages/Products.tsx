@@ -4,7 +4,7 @@ import { Search, SearchX } from "lucide-react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ProductGrid } from "@/components/site/ProductGrid";
-import { Reveal } from "@/components/site/SitePrimitives";
+import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -61,10 +61,13 @@ export default function Products() {
       <main className="flex-1">
         <section className="border-b border-border/60 bg-secondary/40">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-            <Reveal>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <AnimatedHeading
+              as="h1"
+              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+            >
               Our Products
-            </h1>
+            </AnimatedHeading>
+            <Reveal delay={0.1}>
             <p className="mt-3 max-w-2xl text-muted-foreground">
               Surgical and patient-care equipment, available to buy or rent on
               enquiry.
