@@ -3,8 +3,6 @@ import logo from "@/assets/logo.svg";
 import { BUSINESS, PRODUCT_GROUPS } from "@/data/catalog";
 
 export function SiteFooter() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="border-t border-border/60 bg-secondary/40">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
@@ -103,7 +101,7 @@ export function SiteFooter() {
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:px-6">
           <p>
-            © {year} {BUSINESS.name}. All rights reserved.
+            © 2010 {BUSINESS.name}. All rights reserved.
           </p>
           <p className="font-medium">{BUSINESS.disclaimer}</p>
         </div>
