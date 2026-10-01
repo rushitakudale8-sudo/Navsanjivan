@@ -11,6 +11,7 @@ import {
   Mail,
   MapPin,
   Moon,
+  Plus,
   ShieldCheck,
   Stethoscope,
   Sun,
@@ -45,8 +46,12 @@ const TRUST_POINTS = [
 ];
 
 /** Subtle repeating medical-cross pattern for the services section background. */
+// Medical-cross background pattern is declared below.
+// "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect x='54' y='26' width='12' height='38' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3Crect x='41' y='39' width='38' height='12' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3C/svg%3E")";
+
+/** Subtle repeating medical-cross pattern for the services section background. */
 const CROSS_PATTERN =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect x='54' y='26' width='12' height='38' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3Crect x='41' y='39' width='38' height='12' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3C/svg%3E")";
+  "url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Crect%20x=%2754%27%20y=%2726%27%20width=%2712%27%20height=%2738%27%20rx=%273%27%20fill=%27%235BAED6%27%20fill-opacity=%270.08%27/%3E%3Crect%20x=%2741%27%20y=%2739%27%20width=%2738%27%20height=%2712%27%20rx=%273%27%20fill=%27%235BAED6%27%20fill-opacity=%270.08%27/%3E%3C/svg%3E)";
 
 /** Per-service icon + tag for the nursing & patient care cards. */
 const SERVICE_ICONS: Record<string, LucideIcon> = {
@@ -385,55 +390,147 @@ export default function Landing() {
           </Reveal>
         </div>
       </section>
-      </section>
 
       {/* ============ ABOUT US ============ */}
-      <section id="about" className="scroll-mt-16 bg-secondary/40 py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
-          <Reveal>
-            <div className="flex items-center justify-center overflow-hidden rounded-3xl border border-border/60 bg-white shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
+      <section
+        id="about"
+        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
+      >
+        {/* decorative healthcare layer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-20 top-8 size-72 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
+          <Plus className="absolute left-8 top-10 size-7 text-[#5BAED6]/25 animate-floaty-slow" />
+          <Plus className="absolute right-10 top-16 size-9 text-[#5BAED6]/30 animate-floaty" />
+          <div
+            className="absolute left-10 top-24 size-24 opacity-40"
+            style={{
+              backgroundImage: "radial-gradient(#5BAED6 1.4px, transparent 1.4px)",
+              backgroundSize: "16px 16px",
+            }}
+          />
+          <div
+            className="absolute bottom-16 right-12 size-20 opacity-30"
+            style={{
+              backgroundImage: "radial-gradient(#5BAED6 1.4px, transparent 1.4px)",
+              backgroundSize: "16px 16px",
+            }}
+          />
+          <Stethoscope
+            className="absolute -bottom-6 left-2 size-44 -rotate-12 text-[#174A63]/10 animate-floaty-slow"
+            strokeWidth={1}
+          />
+        </div>
+
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
+          {/* brand card */}
+          <Reveal className="h-full">
+            <div className="flex h-full flex-col items-center justify-center rounded-[28px] border border-[#D7EAF3] bg-white px-6 py-12 text-center shadow-[0_28px_70px_-32px_rgba(23,74,99,0.45)]">
               <img
                 src={logo}
                 alt={`${BUSINESS.name} logo`}
-                className="aspect-square w-full object-contain p-6 sm:p-10"
+                className="w-full max-w-[340px] object-contain"
               />
+              <span className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-6 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-[#174A63]">
+                Quality
+                <span aria-hidden="true" className="text-[#5BAED6]">•</span>
+                Care
+                <span aria-hidden="true" className="text-[#5BAED6]">•</span>
+                Trust
+              </span>
             </div>
           </Reveal>
 
+          {/* copy */}
           <div>
-            <SectionHeading
-              align="left"
-              label="About Us"
-              title="Your partner in patient care"
-            />
-            <Reveal delay={0.1}>
-              <div className="mt-5 space-y-4 text-muted-foreground">
-                <p>
-                  {BUSINESS.name} supplies surgical and patient-care equipment
-                  and provides nursing and caretaker services to hospitals,
-                  clinics, nursing facilities and families caring for loved ones
-                  at home.
-                </p>
-                <p>
-                  From wheelchairs and hospital beds to monitors, nebulizers and
-                  daily-care essentials, we focus on dependable products, careful
-                  sourcing and straight guidance — so you can choose the right
-                  equipment and the right care for each patient.
-                </p>
-                <p className="text-sm">
-                  Based in Kothrud, Pune, we serve customers across the city and
-                  nearby areas.
-                </p>
+            <div className="relative border-l-2 border-[#5BAED6]/40 pl-6 lg:pl-8">
+              <Reveal>
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
+                  <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
+                  About Us
+                </span>
+              </Reveal>
+
+              <AnimatedHeading
+                as="h2"
+                align="left"
+                underlineWidth={60}
+                className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+              >
+                Your partner in patient care
+              </AnimatedHeading>
+
+              <Reveal delay={0.1}>
+                <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#4B6472]">
+                  <p>
+                    {BUSINESS.name} supplies{" "}
+                    <strong className="font-semibold text-[#174A63]">
+                      surgical and patient-care equipment
+                    </strong>{" "}
+                    and provides{" "}
+                    <strong className="font-semibold text-[#174A63]">
+                      nursing and caretaker services
+                    </strong>{" "}
+                    to hospitals, clinics, nursing facilities and families caring
+                    for loved ones at home.
+                  </p>
+                  <p>
+                    From wheelchairs and hospital beds to monitors, nebulizers and
+                    daily-care essentials, we focus on{" "}
+                    <strong className="font-semibold text-[#174A63]">
+                      dependable products, careful sourcing
+                    </strong>{" "}
+                    and straight guidance — so you can choose the right equipment
+                    and the right care for each patient.
+                  </p>
+                  <p>
+                    Based in Kothrud, Pune, we serve customers across the city and
+                    nearby areas.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* trust highlights */}
+            <Reveal delay={0.15}>
+              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {[
+                  { icon: ShieldCheck, label: "Quality Equipment" },
+                  { icon: HeartHandshake, label: "Patient-Care Support" },
+                  { icon: MapPin, label: "Pune &amp; Nearby Areas" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex h-full items-center gap-3 rounded-2xl border border-[#D7EAF3] bg-white p-3.5 shadow-[0_10px_28px_-18px_rgba(23,74,99,0.35)] transition-all duration-300 hover:border-[#5BAED6]/60 hover:shadow-[0_16px_34px_-20px_rgba(23,74,99,0.45)]"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
+                      <item.icon aria-hidden="true" className="size-5" />
+                    </span>
+                    <span className="text-sm font-semibold leading-snug text-[#174A63]">
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </Reveal>
 
             <Reveal delay={0.18}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild variant="outline" className="bg-white">
-                  <Link to="/product-groups">Browse product groups</Link>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-[#5BAED6] bg-white text-[#174A63] hover:bg-[#EAF6FC] hover:text-[#174A63]"
+                >
+                  <Link to="/product-groups">
+                    Browse product groups <ArrowRight className="size-4" />
+                  </Link>
                 </Button>
-                <Button asChild>
-                  <a href="/#contact">Contact us</a>
+                <Button
+                  asChild
+                  className="bg-[#174A63] text-white shadow-md hover:bg-[#5BAED6]"
+                >
+                  <a href="/#contact">
+                    Contact us <ArrowRight className="size-4" />
+                  </a>
                 </Button>
               </div>
             </Reveal>
