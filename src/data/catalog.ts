@@ -314,8 +314,8 @@ export const PRODUCTS: Product[] = [
       "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
-    slug: "sleeping-wheel-chair-machine",
-    name: "Sleeping Wheel Chair Machine",
+    slug: "sleeping-wheelchair",
+    name: "Sleeping Wheelchair",
     group: "hot-water-bags-personal-care",
     image: "/sleeping-wheel-chair.jpg",
     fit: "contain",
