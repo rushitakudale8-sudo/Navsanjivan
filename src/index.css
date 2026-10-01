@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* DO NOT CHANGE */
 @import "tailwindcss";
@@ -47,6 +47,8 @@
 /* CHANGE VALUES FOR THEME */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Script face used for the footer's decorative health tagline. */
+  --font-script: "Dancing Script", ui-serif, Georgia, serif;
 }
 
 :root {
