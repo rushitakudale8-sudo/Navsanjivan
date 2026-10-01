@@ -20,6 +20,7 @@ import {
 } from "@/components/site/SitePrimitives";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
+import logo from "@/assets/logo.svg";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -242,11 +243,11 @@ export default function Landing() {
       <section id="about" className="scroll-mt-16 bg-secondary/40 py-20">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
           <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
+            <div className="flex items-center justify-center overflow-hidden rounded-3xl border border-border/60 bg-white shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
               <img
-                src="https://images.pexels.com/photos/4021775/pexels-photo-4021775.jpeg?auto=compress&cs=tinysrgb&w=1000"
-                alt="Medical equipment and supplies"
-                className="aspect-[4/3] w-full object-cover"
+                src={logo}
+                alt={`${BUSINESS.name} logo`}
+                className="aspect-[4/3] w-full object-contain p-12 sm:p-16"
               />
             </div>
           </Reveal>
