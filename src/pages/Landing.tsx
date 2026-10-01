@@ -4,13 +4,19 @@ import {
   ArrowRight,
   BadgeCheck,
   CircleCheck,
+  Clock,
+  HandHeart,
   HeartHandshake,
+  Hospital,
   Mail,
   MapPin,
+  Moon,
   ShieldCheck,
   Stethoscope,
+  Sun,
   Truck,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   AnimatedHeading,
@@ -29,6 +35,7 @@ import {
   CARE_SERVICES,
   PRODUCT_GROUPS,
   PRODUCTS,
+  type CareService,
 } from "@/data/catalog";
 
 const TRUST_POINTS = [
@@ -36,6 +43,99 @@ const TRUST_POINTS = [
   { icon: Truck, label: "Delivery across Pune and nearby areas" },
   { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
 ];
+
+/** Subtle repeating medical-cross pattern for the services section background. */
+const CROSS_PATTERN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect x='54' y='26' width='12' height='38' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3Crect x='41' y='39' width='38' height='12' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3C/svg%3E")";
+
+/** Per-service icon + tag for the nursing & patient care cards. */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  nurses: Stethoscope,
+  caregivers: HeartHandshake,
+  "patient-care-assistants": HandHeart,
+  "ward-attendants": Hospital,
+};
+
+const SERVICE_TAGS: Record<string, string> = {
+  nurses: "Nursing Support",
+  caregivers: "Home Care",
+  "patient-care-assistants": "Patient Support",
+  "ward-attendants": "Facility Care",
+};
+
+function AvailabilityBadge({
+  icon: Icon,
+  label,
+}: {
+  icon: LucideIcon;
+  label: string;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#B9DFF2] bg-white px-3 py-1 text-xs font-medium text-[#174A63] shadow-sm">
+      <Icon aria-hidden="true" className="size-3.5 text-[#5BAED6]" />
+      {label}
+    </span>
+  );
+}
+
+function ServiceCard({
+  service,
+  icon: Icon,
+  tag,
+  index,
+}: {
+  service: CareService;
+  icon: LucideIcon;
+  tag: string;
+  index: number;
+}) {
+  const reduce = useReducedMotion();
+
+  return (
+    <motion.article
+      initial={reduce ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{
+        duration: 0.6,
+        delay: reduce ? 0 : index * 0.1,
+        ease: "easeOut",
+      }}
+      className="group h-full overflow-hidden rounded-[18px] border border-[#D7EAF3] bg-white shadow-[0_10px_30px_-18px_rgba(23,74,99,0.28)] transition-all duration-300 hover:border-[#5BAED6] hover:shadow-[0_20px_46px_-22px_rgba(23,74,99,0.42),0_0_28px_-8px_rgba(91,174,214,0.4)] motion-safe:hover:-translate-y-[7px]"
+    >
+      <div className="relative aspect-video overflow-hidden">
+        <img
+          src={service.image}
+          alt={service.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-[400ms] ease-out motion-safe:group-hover:scale-[1.04]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#174A63]/45 via-[#174A63]/12 to-transparent"
+        />
+      </div>
+
+      <div className="relative p-5 pt-10">
+        <span
+          aria-hidden="true"
+          className="absolute -top-6 left-5 flex size-12 items-center justify-center rounded-full border-2 border-white bg-[#EAF6FC] text-[#174A63] shadow-sm transition-transform duration-200 motion-safe:group-hover:scale-110"
+        >
+          <Icon className="size-5" />
+        </span>
+
+        <span className="inline-flex rounded-full bg-[#EAF6FC] px-2.5 py-1 text-[11px] font-semibold text-[#174A63]">
+          {tag}
+        </span>
+
+        <h3 className="mt-2.5 text-lg font-bold text-[#174A63]">{service.name}</h3>
+        <p className="mt-2 text-[15px] leading-relaxed text-[#4B6472]">
+          {service.blurb}
+        </p>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function Landing() {
   const reduce = useReducedMotion();
@@ -193,50 +293,98 @@ export default function Landing() {
       </section>
 
       {/* ============ NURSING & PATIENT CARE SERVICES ============ */}
-      <section id="services" className="mx-auto max-w-7xl scroll-mt-16 px-4 py-20 sm:px-6">
-        <SectionHeading
-          label="Services"
-          title="Nursing and Patient Care Services"
-          description="Nurses | Caregivers | Patient Care Assistants | Ward Attendants"
+      <section
+        id="services"
+        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
+      >
+        {/* soft gradient glow behind the heading */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[38rem] max-w-full -translate-x-1/2 rounded-full bg-[#B9DFF2]/40 blur-3xl"
+        />
+        {/* extremely subtle medical cross pattern */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ backgroundImage: CROSS_PATTERN }}
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {CARE_SERVICES.map((service) => (
-            <Reveal key={service.slug} delay={0.05}>
-              <SoftCard className="h-full overflow-hidden">
-                <div className="aspect-[4/3] overflow-hidden bg-secondary">
-                  <img
-                    src={service.image}
-                    alt={service.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-foreground">{service.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {service.blurb}
-                  </p>
-                </div>
-              </SoftCard>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-10" delay={0.05}>
-          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-border/70 bg-gradient-to-r from-accent/60 to-secondary/60 px-6 py-6 sm:flex-row">
-            <p className="max-w-xl text-sm text-foreground/80">
-              <span className="block text-base font-semibold text-foreground">
-                Nursing &amp; Caretaker Support — Day | Night | 24/7
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col items-center text-center">
+            <Reveal>
+              <span className="inline-flex items-center rounded-full border border-[#B9DFF2] bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-wide text-[#174A63] shadow-sm">
+                Services
               </span>
-              Flexible care support for homes and facilities, available according
-              to your needs.
-            </p>
-            <Button asChild>
-              <a href="/#contact">Enquire about care services</a>
-            </Button>
+            </Reveal>
+
+            <AnimatedHeading
+              as="h2"
+              align="center"
+              underlineWidth={60}
+              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+            >
+              Nursing and Patient Care Services
+            </AnimatedHeading>
+
+            <Reveal delay={0.15}>
+              <p className="mt-4 text-sm font-medium tracking-wide text-[#5BAED6] sm:text-base">
+                Nurses | Caregivers | Patient Care Assistants | Ward Attendants
+              </p>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {CARE_SERVICES.map((service, index) => (
+              <ServiceCard
+                key={service.slug}
+                service={service}
+                icon={SERVICE_ICONS[service.slug] ?? Stethoscope}
+                tag={SERVICE_TAGS[service.slug] ?? "Care Support"}
+                index={index}
+              />
+            ))}
+          </div>
+
+          {/* ---- enquiry CTA banner ---- */}
+          <Reveal className="mt-16" delay={0.05}>
+            <div className="rounded-[18px] border border-[#B9DFF2] bg-gradient-to-br from-[#EAF6FC] to-[#D7F0FA] p-6 sm:p-8">
+              <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-start gap-4">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#174A63] text-white shadow-md">
+                    <HeartHandshake aria-hidden="true" className="size-6" />
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-bold text-[#174A63]">
+                      Nursing &amp; Caretaker Support
+                    </h3>
+                    <div className="mt-2.5 flex flex-wrap gap-2">
+                      <AvailabilityBadge icon={Sun} label="Day" />
+                      <AvailabilityBadge icon={Moon} label="Night" />
+                      <AvailabilityBadge icon={Clock} label="24/7 Available" />
+                    </div>
+                    <p className="mt-3 max-w-xl text-sm text-[#4B6472]">
+                      Day, Night &amp; 24/7 support available according to your
+                      requirements.
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="/#contact"
+                  className="inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[#174A63] px-[22px] py-3 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#5BAED6] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2 motion-safe:hover:-translate-y-0.5"
+                >
+                  Enquire About Care Services
+                </a>
+              </div>
+            </div>
+
+            <p className="mt-5 text-center text-sm text-[#5B7280]">
+              Flexible care support for homes, hospitals, nursing facilities and
+              families.
+            </p>
+          </Reveal>
+        </div>
+      </section>
       </section>
 
       {/* ============ ABOUT US ============ */}
