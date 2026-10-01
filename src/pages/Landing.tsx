@@ -20,7 +20,7 @@ import {
 } from "@/components/site/SitePrimitives";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";

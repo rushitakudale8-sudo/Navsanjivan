@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Menu, Search, X } from "lucide-react";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BUSINESS } from "@/data/catalog";
@@ -56,7 +56,7 @@ export function SiteHeader() {
           <img
             src={logo}
             alt={`${BUSINESS.name} logo`}
-            className="h-10 w-10"
+            className="h-10 w-10 object-contain"
           />
           <span className="leading-tight">
             <span className="block text-sm font-bold text-foreground sm:text-base">

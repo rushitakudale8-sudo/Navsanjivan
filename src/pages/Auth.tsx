@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/input-otp";
 
 import { useAuth } from "@/hooks/use-auth";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import { ArrowRight, Loader2, Mail, UserX } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
@@ -126,7 +126,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       alt="Navsanjivani Surgical and Nursing Beuro logo"
                       width={64}
                       height={64}
-                      className="mb-4 mt-4 cursor-pointer"
+                      className="mb-4 mt-4 cursor-pointer object-contain"
                       onClick={() => navigate("/")}
                     />
                   </div>

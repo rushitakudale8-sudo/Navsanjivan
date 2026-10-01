@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import { BUSINESS, PRODUCT_GROUPS } from "@/data/catalog";
 
 export function SiteFooter() {
@@ -12,7 +12,7 @@ export function SiteFooter() {
             <img
               src={logo}
               alt={`${BUSINESS.name} logo`}
-              className="h-10 w-10"
+              className="h-10 w-10 object-contain"
             />
             <span className="text-base font-bold text-foreground">
               Navsanjivani
