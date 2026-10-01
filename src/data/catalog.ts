@@ -314,12 +314,11 @@ export const PRODUCTS: Product[] = [
       "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
-    slug: "hearing-aids",
-    name: "Hearing Aids",
-    group: "patient-care-equipment",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Hearing_aid_20080620.jpg/960px-Hearing_aid_20080620.jpg",
-    attribution: "Photo: Jonas Bergsten (Wikimedia Commons, public domain)",
+    slug: "sleeping-wheel-chair-machine",
+    name: "Sleeping Wheel Chair Machine",
+    group: "hot-water-bags-personal-care",
+    image: "/sleeping-wheel-chair.jpg",
+    fit: "contain",
   },
   {
     slug: "infrared-thermometers",

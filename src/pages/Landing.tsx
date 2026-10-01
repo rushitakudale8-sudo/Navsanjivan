@@ -108,7 +108,7 @@ export default function Landing() {
               <div className="overflow-hidden rounded-3xl border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
                 <img
                   src={collage}
-                  alt="Navsanjivani product range: air mattresses, hospital beds, nebulizers, BP monitors, pulse oximeters, wheelchairs, walkers, crutches, thermometers, hearing aids, commode chairs, hot water bags and underpads"
+                  alt="Navsanjivani product range: air mattresses, hospital beds, nebulizers, BP monitors, pulse oximeters, wheelchairs, walkers, crutches, thermometers, sleeping wheelchairs, commode chairs, hot water bags and underpads"
                   className="w-full object-contain"
                 />
               </div>
