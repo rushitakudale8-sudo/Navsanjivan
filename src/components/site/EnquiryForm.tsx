@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Loader2, Send } from "lucide-react";
+import {
+  ArrowRight,
+  Loader2,
+  Mail,
+  MessageSquare,
+  Package,
+  Phone,
+  Send,
+  User,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -93,37 +102,55 @@ export function EnquiryForm({ className }: { className?: string }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            required
-            value={form.name}
-            onChange={(e) => set("name", e.target.value)}
-            placeholder="Your full name"
-            className={inputClasses}
-          />
+          <div className="relative">
+            <User
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#5BAED6]"
+            />
+            <Input
+              id="name"
+              required
+              value={form.name}
+              onChange={(e) => set("name", e.target.value)}
+              placeholder="Your full name"
+              className={`${inputClasses} pl-9`}
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="phone">Phone Number</Label>
-          <Input
-            id="phone"
-            required
-            type="tel"
-            value={form.phone}
-            onChange={(e) => set("phone", e.target.value)}
-            placeholder="Your phone number"
-            className={inputClasses}
-          />
+          <div className="relative">
+            <Phone
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#5BAED6]"
+            />
+            <Input
+              id="phone"
+              required
+              type="tel"
+              value={form.phone}
+              onChange={(e) => set("phone", e.target.value)}
+              placeholder="Your phone number"
+              className={`${inputClasses} pl-9`}
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            value={form.email}
-            onChange={(e) => set("email", e.target.value)}
-            placeholder="you@example.com"
-            className={inputClasses}
-          />
+          <div className="relative">
+            <Mail
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#5BAED6]"
+            />
+            <Input
+              id="email"
+              type="email"
+              value={form.email}
+              onChange={(e) => set("email", e.target.value)}
+              placeholder="you@example.com"
+              className={`${inputClasses} pl-9`}
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="product">Product/Service Required</Label>
@@ -132,7 +159,11 @@ export function EnquiryForm({ className }: { className?: string }) {
             value={form.productOrService}
             onValueChange={(v) => set("productOrService", v)}
           >
-            <SelectTrigger id="product" className={`w-full ${inputClasses}`}>
+            <SelectTrigger id="product" className={`relative w-full pl-9 ${inputClasses}`}>
+              <Package
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3 size-4 text-[#5BAED6]"
+              />
               <SelectValue placeholder="Select a product or service" />
             </SelectTrigger>
             <SelectContent>
@@ -185,14 +216,20 @@ export function EnquiryForm({ className }: { className?: string }) {
         </div>
         <div className="flex flex-col gap-2 sm:col-span-2">
           <Label htmlFor="message">Message</Label>
-          <Textarea
-            id="message"
-            rows={4}
-            value={form.message}
-            onChange={(e) => set("message", e.target.value)}
-            placeholder="Tell us what you need (quantities, delivery location, etc.)"
-            className={inputClasses}
-          />
+          <div className="relative">
+            <MessageSquare
+              aria-hidden="true"
+              className="pointer-events-none absolute left-3 top-3 size-4 text-[#5BAED6]"
+            />
+            <Textarea
+              id="message"
+              rows={4}
+              value={form.message}
+              onChange={(e) => set("message", e.target.value)}
+              placeholder="Tell us what you need (quantities, delivery location, etc.)"
+              className={`${inputClasses} pl-9`}
+            />
+          </div>
         </div>
       </div>
 
@@ -218,6 +255,7 @@ export function EnquiryForm({ className }: { className?: string }) {
         ) : (
           <>
             <Send className="size-4" /> Send Enquiry
+            <ArrowRight aria-hidden="true" className="size-4" />
           </>
         )}
       </Button>

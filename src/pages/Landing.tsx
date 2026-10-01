@@ -23,7 +23,6 @@ import {
   AnimatedHeading,
   Reveal,
   SectionHeading,
-  SoftCard,
 } from "@/components/site/SitePrimitives";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
@@ -80,6 +79,21 @@ function AvailabilityBadge({
       <Icon aria-hidden="true" className="size-3.5 text-[#5BAED6]" />
       {label}
     </span>
+  );
+}
+
+/** Short ECG trace used as a decorative healthcare accent. */
+function EcgTrace({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 32" fill="none" aria-hidden="true" className={className}>
+      <path
+        d="M0 16h28l5-8 6 16 6-22 6 14 4-4h13l4-6 5 10 3-4h40"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -496,7 +510,7 @@ export default function Landing() {
                 {[
                   { icon: ShieldCheck, label: "Quality Equipment" },
                   { icon: HeartHandshake, label: "Patient-Care Support" },
-                  { icon: MapPin, label: "Pune &amp; Nearby Areas" },
+                  { icon: MapPin, label: "Pune & Nearby Areas" },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -539,61 +553,125 @@ export default function Landing() {
       </section>
 
       {/* ============ CONTACT / ENQUIRY ============ */}
-      <section id="contact" className="mx-auto max-w-7xl scroll-mt-16 px-4 py-20 sm:px-6">
-        <SectionHeading
-          label="Contact"
-          title="Send an enquiry"
-          description="Fill in the form and we'll get back to you about availability and pricing."
-        />
+      <section
+        id="contact"
+        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
+      >
+        {/* decorative healthcare layer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-24 top-10 size-72 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
+          <div className="absolute -right-24 bottom-0 size-80 rounded-full bg-[#B9DFF2]/25 blur-3xl animate-aurora" />
+          <Plus className="absolute left-8 top-12 size-8 text-[#5BAED6]/25 animate-floaty-slow" />
+          <Plus className="absolute right-10 top-1/3 size-6 text-[#5BAED6]/25 animate-floaty" />
+          <EcgTrace className="absolute right-24 top-24 h-8 w-40 text-[#5BAED6]/50 animate-floaty-slow" />
+          <div
+            className="absolute left-14 top-44 size-20 opacity-40"
+            style={{
+              backgroundImage: "radial-gradient(#5BAED6 1.4px, transparent 1.4px)",
+              backgroundSize: "16px 16px",
+            }}
+          />
+          <Stethoscope
+            className="absolute -bottom-6 right-4 size-44 rotate-12 text-[#174A63]/10 animate-floaty-slow"
+            strokeWidth={1}
+          />
+        </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-5">
-          {/* Contact details */}
-          <Reveal className="lg:col-span-2" delay={0.05}>
-            <SoftCard className="h-full p-6">
-              <h3 className="font-semibold text-foreground">{BUSINESS.name}</h3>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col items-center text-center">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
+                Contact
+              </span>
+            </Reveal>
 
-              <div className="mt-6 space-y-5 text-sm">
-                <div className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
-                    <MapPin className="size-4" />
-                  </span>
+            <AnimatedHeading
+              as="h2"
+              align="center"
+              underlineWidth={60}
+              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+            >
+              Send an enquiry
+            </AnimatedHeading>
+
+            <Reveal delay={0.15}>
+              <p className="mt-4 text-sm text-[#4B6472] sm:text-base">
+                Fill in the form and we'll get back to you about availability and
+                pricing.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {/* brand + contact details */}
+            <Reveal className="h-full" delay={0.05}>
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#D7EAF3] bg-white p-6 shadow-[0_18px_46px_-28px_rgba(23,74,99,0.45)] sm:p-8">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={logo}
+                    alt={`${BUSINESS.name} logo`}
+                    className="size-20 shrink-0 object-contain"
+                  />
                   <div>
-                    <p className="font-medium text-foreground">Address</p>
-                    <p className="mt-1 text-muted-foreground">
-                      {BUSINESS.address}
+                    <p className="text-2xl font-extrabold tracking-tight text-[#174A63]">
+                      Navsanjivani
+                    </p>
+                    <p className="mt-0.5 text-lg font-medium text-foreground/85">
+                      Surgical and Nursing Beuro
+                    </p>
+                    <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-foreground/60">
+                      Quality | Care | Trust
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
-                    <Mail className="size-4" />
-                  </span>
-                  <div>
-                    <p className="font-medium text-foreground">Email</p>
-                    <a
-                      href={`mailto:${BUSINESS.email}`}
-                      className="mt-1 block break-all text-primary hover:underline"
-                    >
-                      {BUSINESS.email}
-                    </a>
-                  </div>
+                <ul className="mt-8 space-y-5">
+                  <li className="flex items-start gap-3.5">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
+                      <MapPin aria-hidden="true" className="size-5" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-bold text-[#174A63]">Address</p>
+                      <p className="mt-1 text-sm leading-relaxed text-[#4B6472]">
+                        {BUSINESS.address}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3.5">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
+                      <Mail aria-hidden="true" className="size-5" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-bold text-[#174A63]">Email</p>
+                      <a
+                        href={`mailto:${BUSINESS.email}`}
+                        className="mt-1 block break-all text-sm text-[#4B6472] underline-offset-2 hover:text-[#174A63] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2"
+                      >
+                        {BUSINESS.email}
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+
+                <div className="mt-8 flex items-start gap-4 rounded-2xl bg-[#EAF6FC] p-4">
+                  <ShieldCheck aria-hidden="true" className="size-7 shrink-0 text-[#174A63]" />
+                  <p className="text-sm font-medium leading-relaxed text-[#174A63]">
+                    {BUSINESS.disclaimer}
+                  </p>
                 </div>
-              </div>
 
-              <div className="mt-8 rounded-xl bg-secondary/70 p-4 text-xs text-muted-foreground">
-                <p className="font-semibold text-foreground">Please note</p>
-                <p className="mt-1">{BUSINESS.disclaimer}</p>
+                <EcgTrace className="mt-auto hidden h-8 w-40 self-end pt-6 text-[#5BAED6]/60 sm:block" />
               </div>
-            </SoftCard>
-          </Reveal>
+            </Reveal>
 
-          {/* Form */}
-          <Reveal className="lg:col-span-3" delay={0.1}>
-            <SoftCard className="p-6">
-              <EnquiryForm />
-            </SoftCard>
-          </Reveal>
+            {/* form */}
+            <Reveal className="h-full" delay={0.1}>
+              <div className="h-full rounded-[24px] border border-[#D7EAF3] bg-white p-6 shadow-[0_18px_46px_-28px_rgba(23,74,99,0.45)] sm:p-8">
+                <EnquiryForm />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
