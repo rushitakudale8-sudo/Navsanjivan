@@ -247,7 +247,7 @@ export default function Landing() {
               <img
                 src={logo}
                 alt={`${BUSINESS.name} logo`}
-                className="aspect-[4/3] w-full object-contain p-12 sm:p-16"
+                className="aspect-square w-full object-contain p-6 sm:p-10"
               />
             </div>
           </Reveal>
