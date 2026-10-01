@@ -4,6 +4,7 @@ import { Search, SearchX } from "lucide-react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { ProductGrid } from "@/components/site/ProductGrid";
+import { Reveal } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -60,6 +61,7 @@ export default function Products() {
       <main className="flex-1">
         <section className="border-b border-border/60 bg-secondary/40">
           <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+            <Reveal>
             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Our Products
             </h1>
@@ -108,6 +110,7 @@ export default function Products() {
                 ))}
               </div>
             </div>
+            </Reveal>
           </div>
         </section>
 
@@ -115,7 +118,7 @@ export default function Products() {
           {filtered.length > 0 ? (
             <ProductGrid products={filtered} />
           ) : (
-            <div className="flex flex-col items-center gap-4 py-20 text-center">
+            <Reveal className="flex flex-col items-center gap-4 py-20 text-center">
               <span className="flex size-14 items-center justify-center rounded-2xl bg-accent text-primary">
                 <SearchX className="size-6" />
               </span>
@@ -132,7 +135,7 @@ export default function Products() {
               <Button asChild variant="outline" className="mt-2 bg-white">
                 <a href="/#contact">Send an enquiry</a>
               </Button>
-            </div>
+            </Reveal>
           )}
         </section>
       </main>

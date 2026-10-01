@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Menu, Search, X } from "lucide-react";
 import logo from "@/assets/logo.svg";
@@ -17,6 +18,7 @@ const NAV_LINKS = [
 ] as const;
 
 export function SiteHeader() {
+  const reduce = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -37,8 +39,17 @@ export function SiteHeader() {
     setSearch("");
   }
 
+  const collapseTransition = reduce
+    ? { duration: 0 }
+    : { duration: 0.25, ease: "easeOut" as const };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-white/85 backdrop-blur-md">
+    <motion.header
+      initial={reduce ? false : { y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="sticky top-0 z-40 border-b border-border/60 bg-white/85 backdrop-blur-md"
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5">
@@ -134,25 +145,45 @@ export function SiteHeader() {
       </div>
 
       {/* Collapsible search bar (below xl) */}
-      {searchOpen ? (
-        <div className="border-t border-border/60 px-4 py-3 xl:hidden">
-          <form onSubmit={submitSearch} className="relative">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              autoFocus
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search the catalog…"
-              className="pl-9"
-              aria-label="Search the catalog"
-            />
-          </form>
-        </div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {searchOpen ? (
+          <motion.div
+            key="search"
+            initial={reduce ? false : { height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={collapseTransition}
+            className="overflow-hidden border-t border-border/60 xl:hidden"
+          >
+            <div className="px-4 py-3">
+              <form onSubmit={submitSearch} className="relative">
+                <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  autoFocus
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search the catalog…"
+                  className="pl-9"
+                  aria-label="Search the catalog"
+                />
+              </form>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       {/* Mobile menu */}
-      {menuOpen ? (
-        <nav className="border-t border-border/60 px-4 pt-2 pb-4 lg:hidden">
+      <AnimatePresence initial={false}>
+        {menuOpen ? (
+        <motion.nav
+          key="menu"
+          initial={reduce ? false : { height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={collapseTransition}
+          className="overflow-hidden border-t border-border/60 lg:hidden"
+        >
+          <div className="px-4 pt-2 pb-4">
           {NAV_LINKS.map((link) =>
             link.to.includes("#") ? (
               <a
@@ -175,8 +206,10 @@ export function SiteHeader() {
           <Button asChild className="mt-3 w-full">
             <a href="/#contact">Contact / Enquiry</a>
           </Button>
-        </nav>
-      ) : null}
-    </header>
+          </div>
+        </motion.nav>
+        ) : null}
+      </AnimatePresence>
+    </motion.header>
   );
 }

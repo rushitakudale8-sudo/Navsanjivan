@@ -43,7 +43,7 @@ export default function Landing() {
         {/* soft decorative blobs */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-accent/50 blur-3xl"
+          className={`pointer-events-none absolute -top-24 -right-24 size-96 rounded-full bg-accent/50 blur-3xl ${reduce ? "" : "animate-aurora-slow"}`}
         />
         <div
           aria-hidden
@@ -128,7 +128,9 @@ export default function Landing() {
               <div
                 className={`absolute -top-5 right-6 flex items-center gap-3 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
               >
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md">
+                <span
+                  className={`flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md ${reduce ? "" : "animate-pulse-soft"}`}
+                >
                   <CircleCheck className="size-5" />
                 </span>
                 <span>

@@ -74,9 +74,9 @@ function ProductCardActions({ product }: { product: Product }) {
 }
 
 /** Product-group card: clickable, image-led, subtle hover lift. */
-function GroupCard({ group }: { group: ProductGroup }) {
+function GroupCard({ group, delay = 0 }: { group: ProductGroup; delay?: number }) {
   return (
-    <Reveal delay={0.03}>
+    <Reveal delay={delay}>
       <Link to="/product-groups" className="block h-full">
         <SoftCard className="h-full overflow-hidden">
           <div
@@ -108,12 +108,14 @@ function GroupCard({ group }: { group: ProductGroup }) {
 function ProductCard({
   product,
   onOpen,
+  delay = 0,
 }: {
   product: Product;
   onOpen: (p: Product) => void;
+  delay?: number;
 }) {
   return (
-    <Reveal delay={0.03}>
+    <Reveal delay={delay}>
       <SoftCard
         className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-md"
         onClick={() => onOpen(product)}
@@ -180,8 +182,8 @@ export function ProductGroupGrid({
           : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
       }
     >
-      {groups.map((g) => (
-        <GroupCard key={g.slug} group={g} />
+      {groups.map((g, i) => (
+        <GroupCard key={g.slug} group={g} delay={(i % columns) * 0.06} />
       ))}
     </div>
   );
@@ -207,10 +209,11 @@ export function ProductGrid({
             : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         }
       >
-        {products.map((p) => (
+        {products.map((p, i) => (
           <ProductCard
             key={p.slug}
             product={p}
+            delay={(i % columns) * 0.06}
             onOpen={(prod) => {
               setSelected(prod);
               setOpen(true);
