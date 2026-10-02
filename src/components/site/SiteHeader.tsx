@@ -59,11 +59,11 @@ export function SiteHeader() {
             className="size-9 object-contain"
           />
           <span className="leading-tight">
-            <span className="block text-base font-extrabold tracking-tight text-[#174A63]">
+            <span className="block text-lg font-extrabold tracking-tight text-[#1565C0]">
               Navsanjivani
             </span>
-            <span className="block text-[11px] font-medium text-[#5BAED6]">
-              And Nursing Beuro
+            <span className="block text-[13px] font-semibold text-[#2E9BD6]">
+              Surgical &amp; Bureau
             </span>
           </span>
         </Link>
