@@ -7,6 +7,7 @@ import {
   Clock,
   HandHeart,
   HeartHandshake,
+  HeartPulse,
   Hospital,
   Mail,
   MapPin,
@@ -19,11 +20,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  AnimatedHeading,
-  Reveal,
-  SectionHeading,
-} from "@/components/site/SitePrimitives";
+import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import collage from "@/assets/product-collage.png";
 import logo from "@/assets/logo.png";
@@ -43,10 +40,6 @@ const TRUST_POINTS = [
   { icon: Truck, label: "Delivery across Pune and nearby areas" },
   { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
 ];
-
-/** Subtle repeating medical-cross pattern for the services section background. */
-// Medical-cross background pattern is declared below.
-// "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect x='54' y='26' width='12' height='38' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3Crect x='41' y='39' width='38' height='12' rx='3' fill='%235BAED6' fill-opacity='0.08'/%3E%3C/svg%3E")";
 
 /** Subtle repeating medical-cross pattern for the services section background. */
 const CROSS_PATTERN =
@@ -272,22 +265,106 @@ export default function Landing() {
       </section>
 
       {/* ============ PRODUCT GROUPS ============ */}
-      <section id="product-groups" className="mx-auto max-w-7xl scroll-mt-16 px-4 py-20 sm:px-6">
-        <SectionHeading
-          label="Products"
-          title="Browse the catalog by product group"
-          description="Sixteen product groups covering mobility, hospital furniture, monitoring, respiratory care, hygiene and everyday patient comfort."
-        />
-        <div className="mt-12">
-          <ProductGroupGrid groups={PRODUCT_GROUPS} />
+      <section
+        id="product-groups"
+        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
+      >
+        {/* decorative healthcare layer */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          {/* large soft gradient circles, as in the reference */}
+          <div className="absolute -top-28 -right-28 size-[26rem] rounded-full bg-gradient-to-br from-[#D7EDF8] to-[#EAF6FC]/80" />
+          <div className="absolute -bottom-32 -left-32 size-96 rounded-full bg-gradient-to-tr from-[#D7EDF8] to-[#EAF6FC]/80" />
+          <div className="absolute -top-24 -left-24 size-72 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
+
+          {/* outlined cross-in-circle with dotted orbit, top-left */}
+          <svg
+            viewBox="0 0 100 100"
+            fill="none"
+            aria-hidden="true"
+            className="absolute top-2 left-2 size-44 text-[#5BAED6]/40"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="46"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeDasharray="1 10"
+              strokeLinecap="round"
+            />
+          </svg>
+          <span className="absolute top-10 left-14 flex size-20 items-center justify-center rounded-full bg-[#EAF6FC]/90">
+            <span className="flex size-11 items-center justify-center rounded-full border-2 border-[#8FCBE8] text-[#5BAED6]">
+              <Plus aria-hidden="true" className="size-5" strokeWidth={2.5} />
+            </span>
+          </span>
+          <span className="absolute top-[51px] left-[161px] size-2.5 rounded-full bg-[#5BAED6]/60" />
+
+          {/* heart-pulse-in-circle with dotted orbit, bottom-right */}
+          <svg
+            viewBox="0 0 100 100"
+            fill="none"
+            aria-hidden="true"
+            className="absolute right-16 bottom-16 size-44 text-[#5BAED6]/40"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="46"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeDasharray="1 10"
+              strokeLinecap="round"
+            />
+          </svg>
+          <span className="absolute right-16 bottom-16 flex size-20 items-center justify-center rounded-full bg-[#EAF6FC]/90">
+            <span className="flex size-11 items-center justify-center rounded-full border-2 border-[#8FCBE8] text-[#5BAED6]">
+              <HeartPulse aria-hidden="true" className="size-6" strokeWidth={2} />
+            </span>
+          </span>
+          <span className="absolute right-[169px] bottom-[139px] size-2.5 rounded-full bg-[#5BAED6]/50" />
+
+          <Plus className="absolute top-24 right-24 size-6 text-[#5BAED6]/25 animate-floaty" />
         </div>
-        <Reveal className="mt-10 text-center" delay={0.05}>
-          <Button asChild variant="outline" className="bg-white">
-            <Link to="/product-groups">
-              View all product groups <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-        </Reveal>
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex flex-col items-center text-center">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
+                Products
+              </span>
+            </Reveal>
+
+            <AnimatedHeading
+              as="h2"
+              align="center"
+              underlineWidth={60}
+              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+            >
+              Browse the catalog by product group
+            </AnimatedHeading>
+
+            <Reveal delay={0.15}>
+              <p className="mt-4 max-w-2xl text-sm text-[#4B6472] sm:text-base">
+                Sixteen product groups covering mobility, hospital furniture,
+                monitoring, respiratory care, hygiene and everyday patient
+                comfort.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-12">
+            <ProductGroupGrid groups={PRODUCT_GROUPS} />
+          </div>
+          <Reveal className="mt-10 text-center" delay={0.05}>
+            <Button asChild variant="outline" className="bg-white">
+              <Link to="/product-groups">
+                View all product groups <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </Reveal>
+        </div>
       </section>
 
       {/* ============ OUR PRODUCTS ============ */}
