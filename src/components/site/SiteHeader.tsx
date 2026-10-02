@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
-import { ArrowRight, Menu, Search, X } from "lucide-react";
+import { ArrowRight, Mail, Menu, Search, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,52 +69,52 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-0.5 lg:flex">
-          {NAV_LINKS.map((link) =>
-            link.to.includes("#") ? (
+        <nav className="hidden items-center gap-1 lg:flex">
+          {NAV_LINKS.map((link) => {
+            const active = !link.to.includes("#") && location.pathname === link.to;
+            const content = (
+              <span className="relative">
+                {link.label}
+                {active ? (
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-1 left-1/2 h-[3px] w-5 -translate-x-1/2 rounded-full bg-[#2E9BD6]"
+                  />
+                ) : null}
+              </span>
+            );
+            return link.to.includes("#") ? (
               <a
                 key={link.label}
                 href={link.to}
-                className="rounded-full px-3 py-2 text-[13px] font-medium text-[#4B6472] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]"
+                className="rounded-full px-3.5 py-2 text-[13.5px] font-medium text-[#3E5A6B] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]"
               >
-                {link.label}
+                {content}
               </a>
             ) : (
               <Link
                 key={link.label}
                 to={link.to}
                 className={cn(
-                  "rounded-full px-3 py-2 text-[13px] font-medium transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
-                  location.pathname === link.to
-                    ? "text-[#174A63]"
-                    : "text-[#4B6472]",
+                  "rounded-full px-3.5 py-2 text-[13.5px] font-medium transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
+                  active
+                    ? "bg-[#EAF6FC] font-semibold text-[#174A63]"
+                    : "text-[#3E5A6B]",
                 )}
               >
-                {link.label}
+                {content}
               </Link>
-            ),
-          )}
+            );
+          })}
         </nav>
 
         {/* Desktop actions */}
-        <div className="hidden items-center gap-2 lg:flex">
-          <form onSubmit={submitSearch} className="relative hidden xl:block">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search the catalog…"
-              className="w-44 pl-9"
-              aria-label="Search the catalog"
-            />
-          </form>
-
-          {/* Search icon toggle below xl where the inline box is hidden */}
+        <div className="hidden items-center gap-2.5 lg:flex">
           <Button
             variant="ghost"
             size="icon"
             aria-label="Search the catalog"
-            className="hidden size-9 rounded-full lg:flex xl:hidden"
+            className="size-9 rounded-full border border-[#D7EAF3] text-[#174A63] hover:bg-[#EAF6FC] hover:text-[#174A63]"
             onClick={() => setSearchOpen((v) => !v)}
           >
             <Search className="size-4" />
@@ -122,9 +122,10 @@ export function SiteHeader() {
 
           <Button
             asChild
-            className="h-9 rounded-full bg-gradient-to-r from-[#2E9BD6] to-[#174A63] px-4 text-[13px] font-semibold shadow-md shadow-[#5BAED6]/30 transition-shadow hover:shadow-lg hover:shadow-[#5BAED6]/40"
+            className="h-10 rounded-full bg-[#1B84D8] px-5 text-[13.5px] font-semibold text-white shadow-md shadow-[#1B84D8]/30 transition-colors hover:bg-[#174A63]"
           >
             <a href="/#contact">
+              <Mail className="size-4" />
               Contact / Enquiry <ArrowRight className="size-3.5" />
             </a>
           </Button>
@@ -160,7 +161,7 @@ export function SiteHeader() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={collapseTransition}
-            className="overflow-hidden border-t border-border/60 xl:hidden"
+            className="overflow-hidden border-t border-border/60"
           >
             <div className="px-4 py-3">
               <form onSubmit={submitSearch} className="relative">
