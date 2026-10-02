@@ -222,8 +222,7 @@ export default function Landing() {
                   className="rounded-full border-[#B9DFF2] bg-white px-6 text-[#174A63] hover:bg-[#EAF6FC] hover:text-[#174A63]"
                 >
                   <a href="/#contact">Contact Us</a>
-                </Button>
-              </div>
+                </Button>              </div>
             </Reveal>
 
             <Reveal delay={0.32}>
