@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
-  CircleCheck,
   Clock,
   HandHeart,
   HeartHandshake,
@@ -21,8 +20,8 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
+import { cn } from "@/lib/utils";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
-import collage from "@/assets/product-collage.png";
 import logo from "@/assets/logo.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -39,6 +38,20 @@ const TRUST_POINTS = [
   { icon: BadgeCheck, label: "A reliable supply partner for hospitals, clinics and nursing facilities" },
   { icon: Truck, label: "Delivery across Pune and nearby areas" },
   { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
+];
+
+/** Product tiles shown in the hero mosaic (image, label, wide spans 2 cols). */
+const HERO_TILES: { name: string; image: string; wide?: boolean }[] = [
+  { name: "Hospital Bed", image: "/hospital-beds.jpg" },
+  { name: "Wheelchair", image: "/wheelchair.png" },
+  { name: "Walker", image: "/walkers.jpg" },
+  { name: "Crutches", image: "/crutches.jpg" },
+  { name: "Pulse Oximeter", image: "/pulse-oximeters.jpg" },
+  { name: "Thermometer", image: "/thermometers.jpg" },
+  { name: "Sleeping Wheelchair", image: "/sleeping-wheel-chair.jpg" },
+  { name: "Nebulizer", image: "/nebulizers.jpg" },
+  { name: "Blood Pressure Monitor", image: "/blood-pressure-monitors.jpg" },
+  { name: "Patient-Care Supplies", image: "/gloves.jpg", wide: true },
 ];
 
 /** Subtle repeating medical-cross pattern for the services section background. */
@@ -171,47 +184,56 @@ export default function Landing() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pt-16 pb-20 sm:px-6 lg:grid-cols-2 lg:pt-24 lg:pb-28">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-xs font-semibold tracking-wide text-primary uppercase shadow-sm">
-                <Stethoscope className="size-3.5" />
-                Surgical Equipment · Patient Care Services
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.2em] text-[#2E9BD6] uppercase">
+                <Plus aria-hidden="true" className="size-3.5" />
+                Healthcare Solutions
               </span>
             </Reveal>
 
             <AnimatedHeading
               as="h1"
-              className="mt-5 text-4xl leading-tight font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]"
+              className="mt-4 text-4xl leading-tight font-extrabold tracking-tight text-[#174A63] sm:text-5xl lg:text-[3.4rem]"
             >
               Quality Medical Equipment.{" "}
-              <span className="text-primary">Better Patient Care</span>
+              <span className="text-[#2E9BD6]">Better Patient Care</span>
             </AnimatedHeading>
 
             <Reveal delay={0.16}>
-              <p className="mt-5 max-w-xl text-lg text-muted-foreground">
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-[#4B6472] sm:text-base">
                 {BUSINESS.tagline}
               </p>
             </Reveal>
 
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button asChild size="lg" className="shadow-md">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full bg-[#2E9BD6] px-6 shadow-md shadow-[#5BAED6]/30 transition-colors hover:bg-[#174A63]"
+                >
                   <Link to="/products">
                     Explore Products <ArrowRight className="size-4" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="bg-white">
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full border-[#B9DFF2] bg-white px-6 text-[#174A63] hover:bg-[#EAF6FC] hover:text-[#174A63]"
+                >
                   <a href="/#contact">Contact Us</a>
                 </Button>
               </div>
             </Reveal>
 
             <Reveal delay={0.32}>
-              <ul className="mt-10 grid gap-3 sm:grid-cols-1">
+              <ul className="mt-10 grid gap-3.5 sm:grid-cols-1">
                 {TRUST_POINTS.map((point) => (
                   <li
                     key={point.label}
-                    className="flex items-center gap-3 text-sm text-foreground/80"
+                    className="flex items-center gap-3 text-sm leading-snug text-[#4B6472]"
                   >
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
                       <point.icon className="size-4" />
                     </span>
                     {point.label}
@@ -221,44 +243,33 @@ export default function Landing() {
             </Reveal>
           </div>
 
-          {/* Hero image with floating accent cards */}
+          {/* Product mosaic grid */}
           <Reveal delay={0.2} y={24}>
-            <div className="relative">
-              <div className="overflow-hidden rounded-3xl border border-border/60 shadow-[0_24px_60px_-24px_rgba(23,74,99,0.35)]">
-                <img
-                  src={collage}
-                  alt="Navsanjivani product range: air mattresses, hospital beds, nebulizers, BP monitors, pulse oximeters, wheelchairs, walkers, crutches, thermometers, sleeping wheelchairs, commode chairs, hot water bags and underpads"
-                  className="w-full object-contain"
-                />
-              </div>
-
-              <div
-                className={`absolute -bottom-5 left-6 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty"}`}
-              >
-                <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <HeartHandshake className="size-4 text-foreground/80" /> Nursing
-                  and patient care
-                </p>
-                <p className="mt-0.5 text-sm font-bold text-foreground">
-                  Nurses · Caregivers · Attendants
-                </p>
-              </div>
-
-              <div
-                className={`absolute -top-5 right-6 flex items-center gap-3 rounded-2xl border border-border/60 bg-white/95 px-4 py-3 shadow-lg backdrop-blur ${reduce ? "" : "animate-floaty-slow"}`}
-              >
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-sky-400 text-white shadow-md">
-                  <CircleCheck className="size-5" />
-                </span>
-                <span>
-                  <span className="block text-sm font-semibold text-foreground">
-                    Buy &amp; Rent Options
-                  </span>
-                  <span className="block text-xs text-muted-foreground">
-                    On most medical equipment
-                  </span>
-                </span>
-              </div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {HERO_TILES.map((tile) => (
+                <div
+                  key={tile.name}
+                  className={cn(
+                    "group rounded-2xl border border-[#D7EAF3] bg-white p-2.5 shadow-[0_10px_26px_-18px_rgba(23,74,99,0.35)] transition-all duration-300 hover:border-[#5BAED6] hover:shadow-[0_16px_34px_-20px_rgba(23,74,99,0.45)] motion-safe:hover:-translate-y-1",
+                    tile.wide && "col-span-2",
+                  )}
+                >
+                  <img
+                    src={tile.image}
+                    alt={tile.name}
+                    loading="lazy"
+                    className={cn(
+                      "mx-auto h-20 w-full sm:h-24",
+                      tile.wide
+                        ? "rounded-xl object-cover"
+                        : "object-contain transition-transform duration-300 motion-safe:group-hover:scale-105",
+                    )}
+                  />
+                  <p className="mt-2 text-center text-[11px] font-semibold text-[#174A63] sm:text-xs">
+                    {tile.name}
+                  </p>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>

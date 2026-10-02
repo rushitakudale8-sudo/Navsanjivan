@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
-import { Menu, Search, X } from "lucide-react";
+import { ArrowRight, Menu, Search, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -52,30 +52,30 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* Brand */}
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src={logo}
             alt={`${BUSINESS.name} logo`}
-            className="h-10 w-10 object-contain"
+            className="size-9 object-contain"
           />
           <span className="leading-tight">
-            <span className="block text-sm font-bold text-foreground sm:text-base">
+            <span className="block text-base font-extrabold tracking-tight text-[#174A63]">
               Navsanjivani
             </span>
-            <span className="hidden text-xs text-muted-foreground sm:block">
-              Surgical and Nursing Beuro
+            <span className="block text-[11px] font-medium text-[#5BAED6]">
+              And Nursing Beuro
             </span>
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {NAV_LINKS.map((link) =>
             link.to.includes("#") ? (
               <a
                 key={link.label}
                 href={link.to}
-                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-primary"
+                className="rounded-full px-3 py-2 text-[13px] font-medium text-[#4B6472] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]"
               >
                 {link.label}
               </a>
@@ -84,17 +84,19 @@ export function SiteHeader() {
                 key={link.label}
                 to={link.to}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-primary",
+                  "rounded-full px-3 py-2 text-[13px] font-medium transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
                   location.pathname === link.to
-                    ? "text-primary"
-                    : "text-foreground/80",
+                    ? "text-[#174A63]"
+                    : "text-[#4B6472]",
                 )}
               >
                 {link.label}
               </Link>
             ),
           )}
-        </nav>        {/* Desktop actions */}
+        </nav>
+
+        {/* Desktop actions */}
         <div className="hidden items-center gap-2 lg:flex">
           <form onSubmit={submitSearch} className="relative hidden xl:block">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -112,14 +114,19 @@ export function SiteHeader() {
             variant="ghost"
             size="icon"
             aria-label="Search the catalog"
-            className="hidden lg:flex xl:hidden"
+            className="hidden size-9 rounded-full lg:flex xl:hidden"
             onClick={() => setSearchOpen((v) => !v)}
           >
-            <Search className="size-5" />
+            <Search className="size-4" />
           </Button>
 
-          <Button asChild className="shadow-sm">
-            <a href="/#contact">Contact / Enquiry</a>
+          <Button
+            asChild
+            className="h-9 rounded-full bg-gradient-to-r from-[#2E9BD6] to-[#174A63] px-4 text-[13px] font-semibold shadow-md shadow-[#5BAED6]/30 transition-shadow hover:shadow-lg hover:shadow-[#5BAED6]/40"
+          >
+            <a href="/#contact">
+              Contact / Enquiry <ArrowRight className="size-3.5" />
+            </a>
           </Button>
         </div>
 
