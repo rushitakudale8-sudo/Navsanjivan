@@ -185,7 +185,6 @@ export default function Landing() {
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.2em] text-[#2E9BD6] uppercase">
-                <Plus aria-hidden="true" className="size-3.5" />
                 Healthcare Solutions
               </span>
             </Reveal>
