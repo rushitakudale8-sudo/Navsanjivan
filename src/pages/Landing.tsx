@@ -20,7 +20,6 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
-import { cn } from "@/lib/utils";
 import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
 import logo from "@/assets/logo.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
@@ -40,8 +39,8 @@ const TRUST_POINTS = [
   { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
 ];
 
-/** Product tiles shown in the hero mosaic (image, label, wide spans 2 cols). */
-const HERO_TILES: { name: string; image: string; wide?: boolean }[] = [
+/** Product tiles shown in the hero image grid (uniform cards: image + label). */
+const HERO_TILES: { name: string; image: string }[] = [
   { name: "Hospital Bed", image: "/hospital-beds.jpg" },
   { name: "Wheelchair", image: "/wheelchair.png" },
   { name: "Walker", image: "/walkers.jpg" },
@@ -51,7 +50,9 @@ const HERO_TILES: { name: string; image: string; wide?: boolean }[] = [
   { name: "Sleeping Wheelchair", image: "/sleeping-wheel-chair.jpg" },
   { name: "Nebulizer", image: "/nebulizers.jpg" },
   { name: "Blood Pressure Monitor", image: "/blood-pressure-monitors.jpg" },
-  { name: "Patient-Care Supplies", image: "/gloves.jpg", wide: true },
+  { name: "Patient-Care Supplies", image: "/gloves.jpg" },
+  { name: "Mobility Aids", image: "/walking-aids.png" },
+  { name: "Disposable Medical Products", image: "/diapers.png" },
 ];
 
 /** Subtle repeating medical-cross pattern for the services section background. */
@@ -241,29 +242,21 @@ export default function Landing() {
             </Reveal>
           </div>
 
-          {/* Product mosaic grid */}
+          {/* Product image grid — uniform cards with blue labels, as in the reference */}
           <Reveal delay={0.2} y={24}>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {HERO_TILES.map((tile) => (
                 <div
                   key={tile.name}
-                  className={cn(
-                    "group rounded-2xl border border-[#D7EAF3] bg-white p-2.5 shadow-[0_10px_26px_-18px_rgba(23,74,99,0.35)] transition-all duration-300 hover:border-[#5BAED6] hover:shadow-[0_16px_34px_-20px_rgba(23,74,99,0.45)] motion-safe:hover:-translate-y-1",
-                    tile.wide && "col-span-2",
-                  )}
+                  className="group rounded-2xl border border-[#D7EAF3] bg-white p-2.5 shadow-[0_10px_26px_-18px_rgba(23,74,99,0.35)] transition-all duration-300 hover:border-[#5BAED6] hover:shadow-[0_16px_34px_-20px_rgba(23,74,99,0.45)] motion-safe:hover:-translate-y-1"
                 >
                   <img
                     src={tile.image}
                     alt={tile.name}
                     loading="lazy"
-                    className={cn(
-                      "mx-auto h-20 w-full sm:h-24",
-                      tile.wide
-                        ? "rounded-xl object-cover"
-                        : "object-contain transition-transform duration-300 motion-safe:group-hover:scale-105",
-                    )}
+                    className="mx-auto h-16 w-full object-contain transition-transform duration-300 motion-safe:group-hover:scale-105 sm:h-20"
                   />
-                  <p className="mt-2 text-center text-[11px] font-semibold text-[#174A63] sm:text-xs">
+                  <p className="mt-2 text-center text-[11px] leading-snug font-bold text-[#1B84D8] sm:text-xs">
                     {tile.name}
                   </p>
                 </div>
