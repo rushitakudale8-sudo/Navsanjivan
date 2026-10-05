@@ -119,7 +119,7 @@ export function SiteHeader() {
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search the catalog…"
               aria-label="Search the catalog"
-              className="h-9 w-40 rounded-full border-[#D7EAF3] bg-[#F7FCFF] pr-3 pl-9 text-[13px] placeholder:text-[#7C93A3] focus-visible:border-[#2E9BD6]/50 focus-visible:ring-[#2E9BD6]/30"
+              className="h-9 w-36 rounded-full border-[#D7EAF3] bg-[#F7FCFF] pr-3 pl-9 text-[13px] placeholder:text-[#7C93A3] focus-visible:border-[#2E9BD6]/50 focus-visible:ring-[#2E9BD6]/30"
             />
           </form>
 
