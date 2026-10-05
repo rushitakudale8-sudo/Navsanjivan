@@ -121,8 +121,8 @@ export function SiteHeader() {
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search the catalog…"
-              aria-label="Search the catalog"
+              placeholder="Search"
+              aria-label="Search"
               className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] text-[#174A63] shadow-none placeholder:text-[#7C93A3] focus-visible:border-0 focus-visible:ring-0"
             />
           </form>
@@ -173,8 +173,8 @@ export function SiteHeader() {
                   autoFocus
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search the catalog…"
-                  aria-label="Search the catalog"
+                  placeholder="Search"
+                  aria-label="Search"
                   className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:border-0 focus-visible:ring-0"
                 />
               </form>
