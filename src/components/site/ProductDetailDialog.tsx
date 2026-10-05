@@ -8,7 +8,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AnimatedHeading } from "@/components/site/SitePrimitives";
-import { BUSINESS, type Product } from "@/data/catalog";
+import { type Product } from "@/data/catalog";
+import { buyMailto, enquiryMailto, rentMailto } from "@/lib/productEnquiry";
 import { cn } from "@/lib/utils";
 
 export type Availability =
@@ -70,36 +71,6 @@ export function AvailabilityBadge({ product }: { product: Product }) {
       {l.text}
     </span>
   );
-}
-
-function buyMailto(p: Product) {
-  const subject = encodeURIComponent(
-    `Buy enquiry: ${p.name} — ${BUSINESS.shortName}`,
-  );
-  const body = encodeURIComponent(
-    `Hello ${BUSINESS.name},\n\nI would like to buy:\n\nProduct: ${p.name}\n\nPlease share the price and availability.\n\nThank you,`,
-  );
-  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
-}
-
-function rentMailto(p: Product) {
-  const subject = encodeURIComponent(
-    `Rental enquiry: ${p.name} — ${BUSINESS.shortName}`,
-  );
-  const body = encodeURIComponent(
-    `Hello ${BUSINESS.name},\n\nI would like to rent:\n\nProduct: ${p.name}\nDuration: (daily / weekly / monthly)\nStart date: \n\nPlease share the rental price, deposit and delivery details.\n\nThank you,`,
-  );
-  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
-}
-
-function enquiryMailto(p: Product) {
-  const subject = encodeURIComponent(
-    `Price & availability enquiry: ${p.name} — ${BUSINESS.shortName}`,
-  );
-  const body = encodeURIComponent(
-    `Hello ${BUSINESS.name},\n\nI am interested in:\n\nProduct: ${p.name}\n\nPlease share the price and availability (buy or rent).\n\nThank you,`,
-  );
-  return `mailto:${BUSINESS.serviceEmail}?subject=${subject}&body=${body}`;
 }
 
 /** Detailed product dialog: description, specs, availability, pricing, actions. */

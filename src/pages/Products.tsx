@@ -8,7 +8,8 @@ import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { PRODUCT_GROUPS, PRODUCTS, type Product } from "@/data/catalog";
+import { PRODUCTS, type Product } from "@/data/catalog";
+import { searchProducts } from "@/lib/productSearch";
 
 type Filter = "all" | "buy" | "rent" | "buy-rent";
 
@@ -39,19 +40,13 @@ export default function Products() {
   const urlQuery = (searchParams.get("q") ?? "").trim().toLowerCase();
   const query = (urlQuery || search).trim().toLowerCase();
 
-  // Search matches the product name, its product group, and the group's
-  // description; the availability filter applies strictly to configured data.
+  // Uses the shared catalogue search (name, category and keywords) so the
+  // results page matches the navbar suggestions. Relevance order is kept.
   const filtered = useMemo(() => {
-    return PRODUCTS.filter((p) => {
-      if (!matchesFilter(p, filter)) return false;
-      if (!query) return true;
-      const group = PRODUCT_GROUPS.find((g) => g.slug === p.group);
-      return (
-        p.name.toLowerCase().includes(query) ||
-        group?.name.toLowerCase().includes(query) ||
-        group?.blurb.toLowerCase().includes(query)
-      );
-    });
+    if (!query) return PRODUCTS.filter((p) => matchesFilter(p, filter));
+    return searchProducts(query)
+      .map((r) => r.product)
+      .filter((p) => matchesFilter(p, filter));
   }, [filter, query]);
 
   return (

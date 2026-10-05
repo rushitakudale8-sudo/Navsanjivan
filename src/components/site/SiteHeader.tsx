@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Link, useLocation, useNavigate } from "react-router";
-import { ArrowRight, Menu, Search, X } from "lucide-react";
+import { Link, useLocation } from "react-router";
+import { ArrowRight, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { ProductSearch } from "@/components/site/ProductSearch";
 import { BUSINESS } from "@/data/catalog";
 import { cn } from "@/lib/utils";
 
@@ -20,22 +20,12 @@ const NAV_LINKS = [
 export function SiteHeader() {
   const reduce = useReducedMotion();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const navigate = useNavigate();
   const location = useLocation();
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname, location.hash]);
-
-  function submitSearch(e: React.FormEvent) {
-    e.preventDefault();
-    const q = search.trim();
-    navigate(q ? `/products?q=${encodeURIComponent(q)}` : "/products");
-    setMenuOpen(false);
-    setSearch("");
-  }
 
   const collapseTransition = reduce
     ? { duration: 0 }
@@ -112,20 +102,7 @@ export function SiteHeader() {
 
         {/* Desktop actions — inline search + CTA on the same row */}
         <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
-          <form
-            onSubmit={submitSearch}
-            role="search"
-            className="flex h-9 w-36 items-center gap-1.5 rounded-full border border-[#D7EAF3] bg-[#F7FCFF] pr-2 pl-3 transition-colors focus-within:border-[#2E9BD6]/50"
-          >
-            <Search className="size-3.5 shrink-0 text-[#7C93A3]" />
-            <Input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search"
-              aria-label="Search"
-              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] text-[#174A63] shadow-none placeholder:text-[#7C93A3] focus-visible:border-0 focus-visible:ring-0"
-            />
-          </form>
+          <ProductSearch variant="inline" />
 
           <Button
             asChild
@@ -163,21 +140,13 @@ export function SiteHeader() {
             className="overflow-hidden border-t border-border/60 xl:hidden"
           >
             <div className="px-4 pt-3 pb-4">
-              <form
-                onSubmit={submitSearch}
-                role="search"
-                className="mb-2 flex h-9 items-center gap-2 rounded-md border border-input bg-transparent px-3 shadow-xs focus-within:border-ring"
-              >
-                <Search className="size-4 shrink-0 text-muted-foreground" />
-                <Input
+              <div className="mb-2">
+                <ProductSearch
+                  variant="menu"
                   autoFocus
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search"
-                  aria-label="Search"
-                  className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:border-0 focus-visible:ring-0"
+                  onNavigate={() => setMenuOpen(false)}
                 />
-              </form>
+              </div>
               {NAV_LINKS.map((link) =>
                 link.to.includes("#") ? (
                   <a

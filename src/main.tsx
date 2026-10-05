@@ -17,6 +17,7 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const ProductsPage = lazy(() => import("./pages/Products.tsx"));
 const ProductGroupsPage = lazy(() => import("./pages/ProductGroups.tsx"));
 const ServicesPage = lazy(() => import("./pages/Services.tsx"));
+const ProductDetailPage = lazy(() => import("./pages/ProductDetail.tsx"));
 
 /** Shared chrome (header + footer) for the public site pages. */
 function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -144,6 +145,14 @@ createRoot(document.getElementById("root")!).render(
                 element={
                   <SiteLayout>
                     <ProductsPage />
+                  </SiteLayout>
+                }
+              />
+              <Route
+                path="/products/:slug"
+                element={
+                  <SiteLayout>
+                    <ProductDetailPage />
                   </SiteLayout>
                 }
               />
