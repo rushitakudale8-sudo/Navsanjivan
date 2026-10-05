@@ -285,30 +285,6 @@ export default function Landing() {
           <div className="absolute -bottom-32 -left-32 size-96 rounded-full bg-gradient-to-tr from-[#D7EDF8] to-[#EAF6FC]/80" />
           <div className="absolute -top-24 -left-24 size-72 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
 
-          {/* outlined cross-in-circle with dotted orbit, top-left */}
-          <svg
-            viewBox="0 0 100 100"
-            fill="none"
-            aria-hidden="true"
-            className="absolute top-2 left-2 size-44 text-[#5BAED6]/40"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="46"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeDasharray="1 10"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="absolute top-10 left-14 flex size-20 items-center justify-center rounded-full bg-[#EAF6FC]/90">
-            <span className="flex size-11 items-center justify-center rounded-full border-2 border-[#8FCBE8] text-[#5BAED6]">
-              <Plus aria-hidden="true" className="size-5" strokeWidth={2.5} />
-            </span>
-          </span>
-          <span className="absolute top-[51px] left-[161px] size-2.5 rounded-full bg-[#5BAED6]/60" />
-
           {/* heart-pulse-in-circle with dotted orbit, bottom-right */}
           <svg
             viewBox="0 0 100 100"
