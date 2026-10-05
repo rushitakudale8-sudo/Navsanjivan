@@ -70,7 +70,7 @@ export function SiteHeader() {
         {/* Desktop nav — same row, compact pills */}
         <nav
           aria-label="Primary"
-          className="hidden min-w-0 items-center gap-0.5 xl:flex"
+          className="hidden min-w-0 flex-nowrap items-center gap-0.5 xl:flex"
         >
           {NAV_LINKS.map((link) => {
             const active = !link.to.includes("#") && location.pathname === link.to;
