@@ -112,14 +112,18 @@ export function SiteHeader() {
 
         {/* Desktop actions — inline search + CTA on the same row */}
         <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
-          <form onSubmit={submitSearch} className="relative" role="search">
-            <Search className="pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#7C93A3]" />
+          <form
+            onSubmit={submitSearch}
+            role="search"
+            className="flex h-9 w-36 items-center gap-1.5 rounded-full border border-[#D7EAF3] bg-[#F7FCFF] pr-2 pl-3 transition-colors focus-within:border-[#2E9BD6]/50"
+          >
+            <Search className="size-3.5 shrink-0 text-[#7C93A3]" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search the catalog…"
               aria-label="Search the catalog"
-              className="h-9 w-36 rounded-full border-[#D7EAF3] bg-[#F7FCFF] pr-3 pl-9 text-[13px] placeholder:text-[#7C93A3] focus-visible:border-[#2E9BD6]/50 focus-visible:ring-[#2E9BD6]/30"
+              className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] text-[#174A63] shadow-none placeholder:text-[#7C93A3] focus-visible:border-0 focus-visible:ring-0"
             />
           </form>
 
@@ -159,15 +163,19 @@ export function SiteHeader() {
             className="overflow-hidden border-t border-border/60 xl:hidden"
           >
             <div className="px-4 pt-3 pb-4">
-              <form onSubmit={submitSearch} className="relative mb-2" role="search">
-                <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+              <form
+                onSubmit={submitSearch}
+                role="search"
+                className="mb-2 flex h-9 items-center gap-2 rounded-md border border-input bg-transparent px-3 shadow-xs focus-within:border-ring"
+              >
+                <Search className="size-4 shrink-0 text-muted-foreground" />
                 <Input
                   autoFocus
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search the catalog…"
                   aria-label="Search the catalog"
-                  className="pl-9"
+                  className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:border-0 focus-visible:ring-0"
                 />
               </form>
               {NAV_LINKS.map((link) =>
