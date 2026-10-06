@@ -38,7 +38,7 @@ export function SiteHeader() {
       className="sticky top-0 z-40 border-b border-border/60 bg-white/85 backdrop-blur-md"
     >
       {/* Single horizontal row: brand → nav → search → CTA */}
-      <div className="mx-auto flex h-16 max-w-7xl flex-nowrap items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl flex-nowrap items-center justify-between gap-4 px-4 sm:gap-6 sm:px-6">
         {/* Brand — always returns to the top of the home page */}
         <Link
           to="/"
@@ -67,7 +67,7 @@ export function SiteHeader() {
         {/* Desktop nav — same row, compact pills */}
         <nav
           aria-label="Primary"
-          className="hidden min-w-0 flex-nowrap items-center gap-0.5 xl:flex"
+          className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex"
         >
           {NAV_LINKS.map((link) => {
             const active = !link.to.includes("#") && location.pathname === link.to;
@@ -86,7 +86,7 @@ export function SiteHeader() {
               <a
                 key={link.label}
                 href={link.to}
-                className="whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium text-[#3E5A6B] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]"
+                className="whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-medium text-[#3E5A6B] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]"
               >
                 {content}
               </a>
@@ -95,7 +95,7 @@ export function SiteHeader() {
                 key={link.label}
                 to={link.to}
                 className={cn(
-                  "whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
+                  "whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-medium transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
                   active
                     ? "bg-[#EAF6FC] font-semibold text-[#174A63]"
                     : "text-[#3E5A6B]",
@@ -108,7 +108,7 @@ export function SiteHeader() {
         </nav>
 
         {/* Desktop actions — inline search + CTA on the same row */}
-        <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <ProductSearch variant="inline" />
 
           <Button
