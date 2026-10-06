@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "Products", to: "/products" },
-  { label: "Product Groups", to: "/product-groups" },
   { label: "Nursing & Patient Care Services", to: "/services" },
   { label: "About Us", to: "/#about" },
   { label: "Contact", to: "/#contact" },
