@@ -198,6 +198,8 @@ export const PRODUCTS: Product[] = [
     group: "wheelchairs",
     image: "/wheelchair.png",
     fit: "contain",
+    description:
+      "Comfortable and durable mobility solution for patients with limited movement. Designed for easy transportation and everyday use.",
   },
   {
     slug: "walkers",
