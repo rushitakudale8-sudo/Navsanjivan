@@ -36,7 +36,7 @@ import {
 const TRUST_POINTS = [
   { icon: BadgeCheck, label: "A reliable supply partner for hospitals, clinics and nursing facilities" },
   { icon: Truck, label: "Delivery across Pune and nearby areas" },
-  { icon: ShieldCheck, label: "Carefully sourced surgical and patient-care equipment" },
+  { icon: ShieldCheck, label: "Carefully sourced surgical and patient care equipment" },
 ];
 
 /** Product tiles shown in the hero image grid (uniform cards: image + label). */
@@ -578,7 +578,7 @@ export default function Landing() {
                   <p>
                     {BUSINESS.name} supplies{" "}
                     <strong className="font-semibold text-[#174A63]">
-                      surgical and patient-care equipment
+                      surgical and patient care equipment
                     </strong>{" "}
                     and provides{" "}
                     <strong className="font-semibold text-[#174A63]">

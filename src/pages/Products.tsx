@@ -64,7 +64,7 @@ export default function Products() {
             </AnimatedHeading>
             <Reveal delay={0.1}>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Surgical and patient-care equipment, available to buy or rent on
+              Surgical and patient care equipment, available to buy or rent on
               enquiry.
               {urlQuery ? (
                 <>
