@@ -6,7 +6,6 @@ import {
   Clock,
   HandHeart,
   HeartHandshake,
-  HeartPulse,
   Hospital,
   Mail,
   MapPin,
@@ -20,7 +19,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
-import { ProductGroupGrid, ProductGrid } from "@/components/site/ProductGrid";
+import { ProductGrid } from "@/components/site/ProductGrid";
 import logo from "@/assets/logo.png";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -28,7 +27,6 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import {
   BUSINESS,
   CARE_SERVICES,
-  PRODUCT_GROUPS,
   PRODUCTS,
   type CareService,
 } from "@/data/catalog";
@@ -262,85 +260,6 @@ export default function Landing() {
                 </div>
               ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ============ PRODUCT GROUPS ============ */}
-      <section
-        id="product-groups"
-        className="relative scroll-mt-16 overflow-hidden bg-[#F7FCFF] py-24"
-      >
-        {/* decorative healthcare layer */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          {/* large soft gradient circles, as in the reference */}
-          <div className="absolute -top-28 -right-28 size-[26rem] rounded-full bg-gradient-to-br from-[#D7EDF8] to-[#EAF6FC]/80" />
-          <div className="absolute -bottom-32 -left-32 size-96 rounded-full bg-gradient-to-tr from-[#D7EDF8] to-[#EAF6FC]/80" />
-          <div className="absolute -top-24 -left-24 size-72 rounded-full bg-[#B9DFF2]/30 blur-3xl animate-aurora-slow" />
-
-          {/* heart-pulse-in-circle with dotted orbit, bottom-right */}
-          <svg
-            viewBox="0 0 100 100"
-            fill="none"
-            aria-hidden="true"
-            className="absolute right-16 bottom-16 size-44 text-[#5BAED6]/40"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="46"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeDasharray="1 10"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="absolute right-16 bottom-16 flex size-20 items-center justify-center rounded-full bg-[#EAF6FC]/90">
-            <span className="flex size-11 items-center justify-center rounded-full border-2 border-[#8FCBE8] text-[#5BAED6]">
-              <HeartPulse aria-hidden="true" className="size-6" strokeWidth={2} />
-            </span>
-          </span>
-          <span className="absolute right-[169px] bottom-[139px] size-2.5 rounded-full bg-[#5BAED6]/50" />
-
-          <Plus className="absolute top-24 right-24 size-6 text-[#5BAED6]/25 animate-floaty" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col items-center text-center">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
-                <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
-                Products
-              </span>
-            </Reveal>
-
-            <AnimatedHeading
-              as="h2"
-              align="center"
-              underlineWidth={60}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
-            >
-              Browse the catalog by product group
-            </AnimatedHeading>
-
-            <Reveal delay={0.15}>
-              <p className="mt-4 max-w-2xl text-sm text-[#4B6472] sm:text-base">
-                Sixteen product groups covering mobility, hospital furniture,
-                monitoring, respiratory care, hygiene and everyday patient
-                comfort.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="mt-12">
-            <ProductGroupGrid groups={PRODUCT_GROUPS} />
-          </div>
-          <Reveal className="mt-10 text-center" delay={0.05}>
-            <Button asChild variant="outline" className="bg-white">
-              <Link to="/product-groups">
-                View all product groups <ArrowRight className="size-4" />
-              </Link>
-            </Button>
           </Reveal>
         </div>
       </section>
