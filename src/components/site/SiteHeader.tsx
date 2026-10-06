@@ -113,7 +113,7 @@ export function SiteHeader() {
 
           <Button
             asChild
-            className="h-9 rounded-full bg-[#1B84D8] px-4 text-[13px] font-semibold text-white shadow-md shadow-[#1B84D8]/30 transition-colors hover:bg-[#174A63]"
+            className="h-10 rounded-full bg-[#1B84D8] px-5 text-sm font-semibold text-white shadow-md shadow-[#1B84D8]/30 transition-colors hover:bg-[#174A63]"
           >
             <a href="/#contact">
               Contact <ArrowRight className="size-3.5" />

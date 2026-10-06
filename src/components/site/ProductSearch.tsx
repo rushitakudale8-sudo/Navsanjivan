@@ -21,12 +21,12 @@ const STYLES: Record<
   }
 > = {
   inline: {
-    form: "flex h-9 w-36 items-center gap-1.5 rounded-full border border-[#D7EAF3] bg-[#F7FCFF] pr-2 pl-3 transition-colors focus-within:border-[#2E9BD6]/50",
-    icon: "size-3.5 shrink-0 text-[#7C93A3]",
+    form: "flex h-10 w-56 items-center gap-2 rounded-full border border-[#D7EAF3] bg-[#F7FCFF] pr-2.5 pl-3.5 transition-colors focus-within:border-[#2E9BD6]/50",
+    icon: "size-4 shrink-0 text-[#7C93A3]",
     input:
-      "h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] text-[#174A63] shadow-none placeholder:text-[#7C93A3] focus-visible:border-0 focus-visible:ring-0",
+      "h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-[#174A63] shadow-none placeholder:text-[#7C93A3] focus-visible:border-0 focus-visible:ring-0",
     clear:
-      "grid size-5 shrink-0 place-items-center rounded-full text-[#7C93A3] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
+      "grid size-6 shrink-0 place-items-center rounded-full text-[#7C93A3] transition-colors hover:bg-[#EAF6FC] hover:text-[#174A63]",
     dropdown:
       "absolute right-0 top-full mt-2 w-72 overflow-hidden rounded-xl border border-[#D7EAF3] bg-white shadow-xl",
   },
