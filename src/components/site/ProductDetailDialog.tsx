@@ -1,4 +1,4 @@
-import { Mail, RotateCcw, ShoppingCart } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,10 +7,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { AnimatedHeading } from "@/components/site/SitePrimitives";
 import { type Product } from "@/data/catalog";
-import { buyMailto, enquiryMailto, rentMailto } from "@/lib/productEnquiry";
 import { cn } from "@/lib/utils";
+import {
+  ENQUIRY_NAME_INPUT_ID,
+  ProductEnquiryForm,
+  productPriceLabel,
+} from "@/components/site/ProductEnquiryForm";
 
 export type Availability =
   | "buy-rent"
@@ -48,6 +51,14 @@ export const AVAILABILITY_LABELS: Record<
   },
 };
 
+/** Short availability wording used on the popup's left column. */
+const AVAILABILITY_SHORT: Record<Availability, string> = {
+  "buy-rent": "Available (Buy & Rent)",
+  buy: "Available",
+  rent: "Available",
+  enquiry: "On Request",
+};
+
 export function AvailabilityBadge({ product }: { product: Product }) {
   const a = getAvailability(product);
   const l = AVAILABILITY_LABELS[a];
@@ -73,7 +84,19 @@ export function AvailabilityBadge({ product }: { product: Product }) {
   );
 }
 
-/** Detailed product dialog: description, specs, availability, pricing, actions. */
+/** Move focus into the enquiry form next to the product summary. */
+function focusEnquiryForm() {
+  const input = document.getElementById(
+    ENQUIRY_NAME_INPUT_ID,
+  ) as HTMLInputElement | null;
+  input?.scrollIntoView({ block: "center", behavior: "smooth" });
+  input?.focus({ preventScroll: true });
+}
+
+/**
+ * The single product popup used for every product. The layout is fixed; only
+ * the image, name, description, price and availability come from the data.
+ */
 export function ProductDetailDialog({
   product,
   open,
@@ -85,30 +108,27 @@ export function ProductDetailDialog({
 }) {
   if (!product) return null;
 
-  const a = getAvailability(product);
-  const hasRentPrice =
-    product.rentPrices?.daily ||
-    product.rentPrices?.weekly ||
-    product.rentPrices?.monthly;
+  const availability = getAvailability(product);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
-        <DialogHeader>
-          <DialogTitle className="text-left text-xl font-bold text-foreground">
-            {product.name}
-          </DialogTitle>
-          <DialogDescription className="text-left">
-            {product.description ??
-              `Part of our product range. Contact us for details about ${product.name}.`}
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-4xl">
+        <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+          {/* ---------------- LEFT: product summary ---------------- */}
+          <div className="min-w-0">
+            <DialogHeader className="text-left">
+              <DialogTitle className="text-xl font-bold text-foreground">
+                {product.name}
+              </DialogTitle>
+              <DialogDescription className="text-left text-sm text-muted-foreground">
+                {product.description ??
+                  `Part of our product range. Contact us for details about ${product.name}.`}
+              </DialogDescription>
+            </DialogHeader>
 
-        <div className="grid gap-6 sm:grid-cols-[220px_1fr]">
-          <div className="space-y-3">
             <div
               className={cn(
-                "overflow-hidden rounded-xl border border-border/60",
+                "mt-4 overflow-hidden rounded-xl border border-border/60",
                 product.fit === "contain" ? "bg-white" : "bg-secondary",
               )}
             >
@@ -121,124 +141,47 @@ export function ProductDetailDialog({
                 )}
               />
             </div>
-            <AvailabilityBadge product={product} />
-          </div>
 
-          <div className="space-y-5">
-            {product.specs && product.specs.length > 0 && (
-              <div>
-                <AnimatedHeading
-                  as="h4"
-                  underline={false}
-                  float={false}
-                  glow={false}
-                  className="text-sm font-semibold text-foreground"
-                >
-                  Specifications
-                </AnimatedHeading>
-                <ul className="mt-2 space-y-1.5">
-                  {product.specs.map((s) => (
-                    <li
-                      key={s}
-                      className="flex gap-2 text-sm text-muted-foreground"
-                    >
-                      <span
-                        className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary/60"
-                        aria-hidden
-                      />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
+            <dl className="mt-4 space-y-2 text-sm">
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-muted-foreground">Price</dt>
+                <dd className="font-semibold text-foreground">
+                  {productPriceLabel(product)}
+                </dd>
               </div>
-            )}
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-muted-foreground">Availability</dt>
+                <dd className="font-semibold text-foreground">
+                  {AVAILABILITY_SHORT[availability]}
+                </dd>
+              </div>
+            </dl>
 
-            {/* Purchase */}
-            <div>
-              <AnimatedHeading
-                as="h4"
-                underline={false}
-                float={false}
-                glow={false}
-                className="text-sm font-semibold text-foreground"
-              >
-                Buy
-              </AnimatedHeading>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {product.forSale
-                  ? `Available for purchase${product.buyPrice ? ` — ${product.buyPrice}` : " — price on request"}`
-                  : "Purchase on request"}
-              </p>
-              {product.forSale ? (
-                <Button asChild size="sm" className="mt-2 shadow-sm">
-                  <a href={buyMailto(product)}>
-                    <ShoppingCart className="size-4" /> Buy Now
-                  </a>
-                </Button>
-              ) : (
-                <Button asChild size="sm" variant="outline" className="mt-2 bg-white">
-                  <a href={enquiryMailto(product)}>
-                    <Mail className="size-4" /> Request Purchase
-                  </a>
-                </Button>
-              )}
-            </div>
+            <Button
+              type="button"
+              onClick={focusEnquiryForm}
+              className="mt-4 w-full bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
+            >
+              <Send className="size-4" /> Request Enquiry
+            </Button>
 
-            {/* Rental */}
-            <div>
-              <AnimatedHeading
-                as="h4"
-                underline={false}
-                float={false}
-                glow={false}
-                className="text-sm font-semibold text-foreground"
-              >
-                Rent
-              </AnimatedHeading>
-              {product.forRent ? (
-                <div className="mt-1 space-y-1 text-sm text-muted-foreground">
-                  <p>
-                    Rental duration: Daily / Weekly / Monthly
-                    {hasRentPrice ? " — see rates below" : ""}
-                  </p>
-                  {product.rentPrices?.daily && (
-                    <p>Daily: {product.rentPrices.daily}</p>
-                  )}
-                  {product.rentPrices?.weekly && (
-                    <p>Weekly: {product.rentPrices.weekly}</p>
-                  )}
-                  {product.rentPrices?.monthly && (
-                    <p>Monthly: {product.rentPrices.monthly}</p>
-                  )}
-                  {product.rentDeposit && (
-                    <p>Security deposit: {product.rentDeposit} (refundable)</p>
-                  )}
-                  {product.rentDelivery && <p>{product.rentDelivery}</p>}
-                  <Button asChild size="sm" className="mt-2 shadow-sm">
-                    <a href={rentMailto(product)}>
-                      <RotateCcw className="size-4" /> Request Rental
-                    </a>
-                  </Button>
-                </div>
-              ) : (
-                <div className="mt-1 space-y-2">
-                  <p className="text-sm text-muted-foreground">
-                    Rental on request — availability and rates depend on the
-                    item. Ask us and we will confirm.
-                  </p>
-                  <Button asChild size="sm" variant="outline" className="bg-white">
-                    <a href={enquiryMailto(product)}>
-                      <Mail className="size-4" /> Request Rental
-                    </a>
-                  </Button>
-                </div>
-              )}
-            </div>
-
-            <p className="rounded-lg border border-border/60 bg-secondary/40 px-3 py-2 text-xs text-muted-foreground">
+            <p className="mt-3 rounded-lg border border-border/60 bg-secondary/40 px-3 py-2 text-xs text-muted-foreground">
               Price &amp; availability on request — we confirm the current price,
               stock and rental terms when you enquire.
             </p>
+          </div>
+
+          {/* ---------------- RIGHT: enquiry form ---------------- */}
+          <div className="min-w-0">
+            <div className="rounded-xl border border-border/60 bg-[#F7FCFF] p-4 sm:p-5">
+              <h3 className="text-base font-bold text-[#174A63]">
+                Request Enquiry
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Fill in your details and we'll get back to you soon.
+              </p>
+              <ProductEnquiryForm product={product} className="mt-4" />
+            </div>
           </div>
         </div>
       </DialogContent>

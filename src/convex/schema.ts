@@ -42,6 +42,12 @@ const schema = defineSchema(
       productOrService: v.string(),
       buyOrRent: v.optional(v.string()), // "Buy" | "Rent" | "Not specified"
       message: v.optional(v.string()),
+      /** Product price at the time of enquiry (from catalog), if known. */
+      productPrice: v.optional(v.string()),
+      /** Stable product slug — used as the product ID. */
+      productId: v.optional(v.string()),
+      /** Existing product image URL, passed through unchanged. */
+      productImage: v.optional(v.string()),
       status: v.optional(v.string()), // "new" | "contacted" | "closed"
       createdAt: v.optional(v.number()),
       emailedAt: v.optional(v.number()), // when the email was accepted

@@ -34,6 +34,9 @@ export const submit = action({
     productOrService: v.string(),
     buyOrRent: v.optional(v.string()),
     message: v.optional(v.string()),
+    productPrice: v.optional(v.string()),
+    productId: v.optional(v.string()),
+    productImage: v.optional(v.string()),
     /** Client timestamp for duplicate detection (Date.now() on submit). */
     clientTime: v.number(),
   },
@@ -57,6 +60,13 @@ export const submit = action({
     }
     const buyOrRent = sanitize(args.buyOrRent ?? "Not specified", 20);
     const message = args.message ? args.message.trim().slice(0, 4000) : undefined;
+    const productPrice = args.productPrice
+      ? sanitize(args.productPrice, 80)
+      : undefined;
+    const productId = args.productId ? sanitize(args.productId, 120) : undefined;
+    const productImage = args.productImage
+      ? sanitize(args.productImage, 500)
+      : undefined;
 
     // --- Duplicate-submission guard (same phone + product within 60s) ---
     const recent: Doc<"enquiries"> | null = await ctx.runMutation(
@@ -73,15 +83,18 @@ export const submit = action({
 
     // --- Persist first, so enquiries are never lost even if email fails ---
     const now = Date.now();
-    const id: Id<"enquiries"> = await ctx.runMutation(internal.enquiries.insertEnquiry, {
-      name,
-      phone,
-      email,
-      productOrService,
-      buyOrRent,
-      message,
-      createdAt: now,
-    });
+  const id: Id<"enquiries"> = await ctx.runMutation(internal.enquiries.insertEnquiry, {
+    name,
+    phone,
+    email,
+    productOrService,
+    buyOrRent,
+    message,
+    productPrice,
+    productId,
+    productImage,
+    createdAt: now,
+  });
 
     // --- Send the email through Resend (server-side; key stays in env) ---
     const apiKey = process.env.RESEND_API_KEY;
@@ -94,11 +107,13 @@ export const submit = action({
 
     const lines = [
       `Customer Name: ${name}`,
-      `Phone: ${phone}`,
-      `Customer Email: ${email ?? "—"}`,
-      `Product / Service: ${productOrService}`,
+      `Mobile Number: ${phone}`,
+      `Email Address: ${email ?? "—"}`,
+      `Product Name: ${productOrService}`,
+      `Product Price: ${productPrice ?? "On Request"}`,
+      `Product Image / ID: ${productImage ?? "—"}${productId ? ` (ID: ${productId})` : ""}`,
       `Requirement: ${buyOrRent}`,
-      `Message: ${message ?? "—"}`,
+      `Customer Message: ${message ?? "—"}`,
       `Date & Time of Enquiry: ${formatDateTime(now)} (IST)`,
     ];
 
@@ -167,6 +182,9 @@ export const insertEnquiry = internalMutation({
     productOrService: v.string(),
     buyOrRent: v.string(),
     message: v.optional(v.string()),
+    productPrice: v.optional(v.string()),
+    productId: v.optional(v.string()),
+    productImage: v.optional(v.string()),
     createdAt: v.number(),
   },
   handler: async (ctx, args) => {
