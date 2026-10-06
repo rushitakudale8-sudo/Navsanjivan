@@ -106,6 +106,14 @@ function RouteSyncer() {
     );
   }, [location.pathname]);
 
+  // Reset the scroll position on route changes so a new page always opens at
+  // the top instead of inheriting the previous page's scroll offset. Hash
+  // links (e.g. "/#about") keep their native in-page jump behaviour.
+  useEffect(() => {
+    if (location.hash) return;
+    window.scrollTo(0, 0);
+  }, [location.pathname, location.hash]);
+
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
       if (event.data?.type === "navigate") {

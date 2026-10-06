@@ -40,8 +40,16 @@ export function SiteHeader() {
     >
       {/* Single horizontal row: brand → nav → search → CTA */}
       <div className="mx-auto flex h-16 max-w-7xl flex-nowrap items-center justify-between gap-3 px-4 sm:px-6">
-        {/* Brand */}
-        <Link to="/" className="-ml-1 flex shrink-0 items-center gap-2 sm:-ml-2">
+        {/* Brand — always returns to the top of the home page */}
+        <Link
+          to="/"
+          aria-label={`${BUSINESS.name} — go to home page`}
+          onClick={() => {
+            setMenuOpen(false);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
+          className="-ml-1 flex shrink-0 items-center gap-2 sm:-ml-2"
+        >
           <img
             src={logo}
             alt={`${BUSINESS.name} logo`}
