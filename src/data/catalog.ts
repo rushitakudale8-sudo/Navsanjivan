@@ -207,6 +207,8 @@ export const PRODUCTS: Product[] = [
     group: "walkers",
     image: "/walkers.jpg",
     fit: "contain",
+    description:
+      "Sturdy walking frames that give steady support and confidence to patients who need help keeping their balance. Lightweight and easy to fold for storage and travel.",
   },
   {
     slug: "commode-chairs",
@@ -214,6 +216,8 @@ export const PRODUCTS: Product[] = [
     group: "commode-chairs",
     image: "/commode-chairs.jpg",
     fit: "contain",
+    description:
+      "Bedside commode chairs that make toilet care easier while protecting patient dignity and comfort. Durable frame with a removable, easy-to-clean pot.",
   },
   {
     slug: "hospital-beds",
@@ -221,6 +225,8 @@ export const PRODUCTS: Product[] = [
     group: "hospital-beds",
     image: "/hospital-beds.jpg",
     fit: "contain",
+    description:
+      "Adjustable hospital beds designed for comfortable positioning during rest, recovery and daily care. Suitable for wards, clinics and home nursing setups.",
   },
   {
     slug: "patient-examination-beds",
@@ -228,6 +234,8 @@ export const PRODUCTS: Product[] = [
     group: "patient-care-equipment",
     image:
       "https://images.pexels.com/photos/7789609/pexels-photo-7789609.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description:
+      "Firm, easy-to-clean examination beds for checkups, procedures and routine patient assessment. Simple to adjust and maintain in a busy clinic.",
   },
   {
     slug: "nebulizers",
@@ -235,6 +243,8 @@ export const PRODUCTS: Product[] = [
     group: "nebulizers-respiratory-care",
     image: "/nebulizers.jpg",
     fit: "contain",
+    description:
+      "Compact nebulizers that turn liquid medicine into a fine mist for easy inhalation. A practical choice for respiratory care at home and in clinics.",
   },
   {
     slug: "blood-pressure-monitors",
@@ -242,6 +252,8 @@ export const PRODUCTS: Product[] = [
     group: "blood-pressure-monitors",
     image: "/blood-pressure-monitors.jpg",
     fit: "contain",
+    description:
+      "Digital blood pressure monitors for quick, reliable readings at home or in the clinic. Clear display and simple one-touch operation.",
   },
   {
     slug: "pulse-oximeters",
@@ -249,6 +261,8 @@ export const PRODUCTS: Product[] = [
     group: "pulse-oximeters",
     image: "/pulse-oximeters.jpg",
     fit: "contain",
+    description:
+      "Fingertip pulse oximeters that give fast oxygen-saturation and pulse readings. Portable and easy to use for regular monitoring at home.",
   },
   {
     slug: "walking-sticks",
@@ -256,6 +270,8 @@ export const PRODUCTS: Product[] = [
     group: "walking-aids",
     image: "/walking-aids.png",
     fit: "contain",
+    description:
+      "Adjustable walking sticks that add balance and stability to everyday movement. Lightweight, with a comfortable grip and a firm non-slip base.",
   },
   {
     slug: "crutches",
@@ -263,6 +279,8 @@ export const PRODUCTS: Product[] = [
     group: "crutches-walking-sticks",
     image: "/crutches.jpg",
     fit: "contain",
+    description:
+      "Adjustable crutches that support recovery and take weight off an injured leg. Lightweight and built to feel secure with every step.",
   },
   {
     slug: "digital-thermometers",
@@ -270,6 +288,8 @@ export const PRODUCTS: Product[] = [
     group: "thermometers",
     image: "/thermometers.jpg",
     fit: "contain",
+    description:
+      "Digital thermometers that read body temperature quickly and accurately. Easy to read, easy to clean and dependable for daily use.",
   },
   {
     slug: "adult-diapers",
@@ -277,6 +297,8 @@ export const PRODUCTS: Product[] = [
     group: "diapers",
     image: "/diapers.png",
     fit: "contain",
+    description:
+      "Absorbent adult diapers designed for comfort, dryness and skin care through the day and night. Available in a range of sizes for a secure fit.",
   },
   {
     slug: "toilet-safety-rails",
@@ -285,6 +307,8 @@ export const PRODUCTS: Product[] = [
     image: "/urine-pot-bed-pans.jpg",
     fit: "contain",
     attribution: "Photo: Gramody (Wikimedia Commons, CC BY-SA 2.0)",
+    description:
+      "Urine pots and bedpans for hygienic bedside care when mobility is limited. Easy to clean and suitable for hospitals, nursing care and home use.",
   },
   {
     slug: "air-mattresses",
@@ -292,6 +316,8 @@ export const PRODUCTS: Product[] = [
     group: "air-mattresses-bed-protection",
     image: "/air-mattresses.jpg",
     fit: "contain",
+    description:
+      "Air mattresses that help relieve pressure and protect skin during long periods in bed. A comfortable, supportive base for bed-bound patients.",
   },
   {
     slug: "hot-water-bags",
@@ -300,6 +326,8 @@ export const PRODUCTS: Product[] = [
     image:
       "https://live.staticflickr.com/6092/6328857535_61ddc13e17_b.jpg",
     attribution: "Photo: jenny_belly (Flickr, CC BY 2.0)",
+    description:
+      "Hot water bags for comforting, localised warmth that eases aches and cramps. Sturdy, leak-resistant and simple to fill and use.",
   },
   {
     slug: "gloves",
@@ -307,6 +335,8 @@ export const PRODUCTS: Product[] = [
     group: "masks-medical-consumables",
     image: "/gloves.jpg",
     fit: "contain",
+    description:
+      "Disposable gloves that keep hands protected during patient care and cleaning. Comfortable to wear and available in a range of sizes.",
   },
   {
     slug: "medical-masks",
@@ -314,6 +344,8 @@ export const PRODUCTS: Product[] = [
     group: "masks-medical-consumables",
     image:
       "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description:
+      "Disposable medical masks that help protect patients, staff and visitors during care. Comfortable to wear for extended periods.",
   },
   {
     slug: "sleeping-wheelchair",
@@ -321,6 +353,8 @@ export const PRODUCTS: Product[] = [
     group: "hot-water-bags-personal-care",
     image: "/sleeping-wheel-chair.jpg",
     fit: "contain",
+    description:
+      "Reclining wheelchairs that let patients rest and sleep without being moved to another seat. Comfortable support for long hours of care at home.",
   },
   {
     slug: "infrared-thermometers",
@@ -329,6 +363,8 @@ export const PRODUCTS: Product[] = [
     image:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Infrared_forehead_thermometer%2C_made_in_China.jpg/960px-Infrared_forehead_thermometer%2C_made_in_China.jpg",
     attribution: "Photo: Syced (Wikimedia Commons, CC0 1.0)",
+    description:
+      "Non-contact infrared thermometers that read temperature in seconds without touching the patient. Ideal for quick screening in clinics and hospitals.",
   },
   {
     slug: "suction-machines",
@@ -336,6 +372,8 @@ export const PRODUCTS: Product[] = [
     group: "patient-care-equipment",
     image: "/suction-machine.jpg",
     fit: "contain",
+    description:
+      "Portable suction machines for clearing airways and secretions during patient care. Simple to operate and dependable when quick suction is needed.",
   },
 ];
 
