@@ -117,7 +117,7 @@ export function SiteHeader() {
             className="h-9 rounded-full bg-[#1B84D8] px-4 text-[13px] font-semibold text-white shadow-md shadow-[#1B84D8]/30 transition-colors hover:bg-[#174A63]"
           >
             <a href="/#contact">
-              Contact / Enquiry <ArrowRight className="size-3.5" />
+              Contact <ArrowRight className="size-3.5" />
             </a>
           </Button>
         </div>
@@ -175,7 +175,7 @@ export function SiteHeader() {
                 ),
               )}
               <Button asChild className="mt-3 w-full">
-                <a href="/#contact">Contact / Enquiry</a>
+                <a href="/#contact">Contact</a>
               </Button>
             </div>
           </motion.nav>
