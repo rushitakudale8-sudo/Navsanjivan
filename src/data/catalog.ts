@@ -68,9 +68,10 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "patient-care-equipment",
-    name: "Folding Commode Chair",
+    name: "Patient Care Equipment",
     emoji: "🩺",
-    blurb: "Foldable commode chairs for bedside and portable patient use.",
+    blurb:
+      "Examination beds, suction machines and daily patient-care equipment.",
     image: "/folding-commode-chair.png",
     fit: "contain",
   },
@@ -148,9 +149,10 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
   },
   {
     slug: "hot-water-bags-personal-care",
-    name: "Sleeping Wheel Chair",
+    name: "Hot Water Bags & Personal Care",
     emoji: "🧴",
-    blurb: "Reclining and sleeping wheelchairs for comfort and rest at home.",
+    blurb:
+      "Hot water bags and personal comfort items for everyday home care.",
     image: "/sleeping-wheel-chair.jpg",
     fit: "contain",
   },

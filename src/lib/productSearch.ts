@@ -91,12 +91,17 @@ export function searchProducts(query: string): ProductSearchResult[] {
 
   const tokens = Array.from(new Set(q.split(" ").filter(Boolean)));
 
-  // Each token matches itself plus any synonyms.
-  const termsPerToken = tokens.map((token) => {
+  // Each token matches itself, any single-word synonym, or a multi-word
+  // synonym as one full phrase. Splitting a multi-word synonym into loose
+  // words made "bp" (→ "blood pressure") match any product that merely
+  // mentions "pressure", so those now have to appear contiguously instead.
+  const expansions = tokens.map((token) => {
     const extra = SYNONYMS[token] ?? [];
-    return Array.from(
-      new Set([token, ...extra.flatMap((s) => normalize(s).split(" "))]),
+    const words = Array.from(
+      new Set([token, ...extra.filter((s) => !s.includes(" ")).map(normalize)]),
     ).filter(Boolean);
+    const phrases = extra.map(normalize).filter((s) => s.includes(" "));
+    return { words, phrases };
   });
 
   const results: ProductSearchResult[] = [];
@@ -106,9 +111,9 @@ export function searchProducts(query: string): ProductSearchResult[] {
     let total = 0;
     let matchedEveryToken = true;
 
-    for (const terms of termsPerToken) {
+    for (const { words, phrases } of expansions) {
       let tokenScore = 0;
-      for (const term of terms) {
+      for (const term of words) {
         if (item.name === term) tokenScore = Math.max(tokenScore, 12);
         else if (item.name.startsWith(term)) tokenScore = Math.max(tokenScore, 10);
         else if (nameWords.some((w) => w.startsWith(term)))
@@ -116,6 +121,15 @@ export function searchProducts(query: string): ProductSearchResult[] {
         else if (item.name.includes(term)) tokenScore = Math.max(tokenScore, 7);
         else if (item.groupName.includes(term)) tokenScore = Math.max(tokenScore, 5);
         else if (item.haystack.includes(term)) tokenScore = Math.max(tokenScore, 2);
+      }
+      // A multi-word synonym only counts when its full phrase is present, so
+      // "bp" cannot satisfy itself with a stray "pressure" in unrelated copy.
+      for (const phrase of phrases) {
+        if (item.name === phrase) tokenScore = Math.max(tokenScore, 12);
+        else if (item.name.startsWith(phrase)) tokenScore = Math.max(tokenScore, 10);
+        else if (item.name.includes(phrase)) tokenScore = Math.max(tokenScore, 7);
+        else if (item.groupName.includes(phrase)) tokenScore = Math.max(tokenScore, 5);
+        else if (item.haystack.includes(phrase)) tokenScore = Math.max(tokenScore, 2);
       }
       if (tokenScore === 0) {
         matchedEveryToken = false;
