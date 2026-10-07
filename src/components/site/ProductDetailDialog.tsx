@@ -1,5 +1,3 @@
-import { Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,11 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { type Product } from "@/data/catalog";
 import { cn } from "@/lib/utils";
-import {
-  ENQUIRY_NAME_INPUT_ID,
-  ProductEnquiryForm,
-  productPriceLabel,
-} from "@/components/site/ProductEnquiryForm";
+import { ProductEnquiryForm } from "@/components/site/ProductEnquiryForm";
 
 export type Availability =
   | "buy-rent"
@@ -51,14 +45,6 @@ export const AVAILABILITY_LABELS: Record<
   },
 };
 
-/** Short availability wording used on the popup's left column. */
-const AVAILABILITY_SHORT: Record<Availability, string> = {
-  "buy-rent": "Available (Buy & Rent)",
-  buy: "Available",
-  rent: "Available",
-  enquiry: "On Request",
-};
-
 export function AvailabilityBadge({ product }: { product: Product }) {
   const a = getAvailability(product);
   const l = AVAILABILITY_LABELS[a];
@@ -84,18 +70,9 @@ export function AvailabilityBadge({ product }: { product: Product }) {
   );
 }
 
-/** Move focus into the enquiry form next to the product summary. */
-function focusEnquiryForm() {
-  const input = document.getElementById(
-    ENQUIRY_NAME_INPUT_ID,
-  ) as HTMLInputElement | null;
-  input?.scrollIntoView({ block: "center", behavior: "smooth" });
-  input?.focus({ preventScroll: true });
-}
-
 /**
  * The single product popup used for every product. The layout is fixed; only
- * the image, name, description, price and availability come from the data.
+ * the image, name and description come from the data.
  */
 export function ProductDetailDialog({
   product,
@@ -107,8 +84,6 @@ export function ProductDetailDialog({
   onOpenChange: (open: boolean) => void;
 }) {
   if (!product) return null;
-
-  const availability = getAvailability(product);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -141,29 +116,6 @@ export function ProductDetailDialog({
                 )}
               />
             </div>
-
-            <dl className="mt-4 space-y-2 text-sm">
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Price</dt>
-                <dd className="font-semibold text-foreground">
-                  {productPriceLabel(product)}
-                </dd>
-              </div>
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Availability</dt>
-                <dd className="font-semibold text-foreground">
-                  {AVAILABILITY_SHORT[availability]}
-                </dd>
-              </div>
-            </dl>
-
-            <Button
-              type="button"
-              onClick={focusEnquiryForm}
-              className="mt-4 w-full bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
-            >
-              <Send className="size-4" /> Request Enquiry
-            </Button>
 
             <p className="mt-3 rounded-lg border border-border/60 bg-secondary/40 px-3 py-2 text-xs text-muted-foreground">
               Price &amp; availability on request — we confirm the current price,
