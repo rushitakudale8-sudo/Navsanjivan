@@ -12,9 +12,9 @@ export const BUSINESS = {
   shortName: "Navsanjivani",
   address:
     "Rambag Colony, Paud Road, Kothrud, Pune – 411038, Maharashtra, India",
-  email: "navsanjivan10@gmail.com",
-  /** Sales/rental enquiries for Buy / Rent go to the service desk. */
-  serviceEmail: "service.navsanjivan10@gmail.com",
+  email: "support.navsanjivani@gmail.com",
+  /** Sales/rental enquiries for Buy / Rent go to the support inbox. */
+  serviceEmail: "support.navsanjivani@gmail.com",
   tagline:
     "We supply surgical and patient care equipment and provide nursing and caretaker services for hospitals, clinics, nursing facilities and home healthcare. Buy or rent the equipment you need.",
   disclaimer: "Product information only — not medical advice.",
