@@ -4,8 +4,17 @@ import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import { Resend } from "resend";
 
-/** The ONLY destination for website enquiries (per business owner). */
-const ENQUIRY_INBOX = "support.navsanjivani@gmail.com";
+/**
+ * Recipient for website-enquiry notifications (per business owner).
+ *
+ * The configured RESEND_API_KEY belongs to a Resend account in testing mode,
+ * which only accepts sends to the account owner's own address —
+ * navsanjivan10@gmail.com — and returns a 403 validation_error for anything
+ * else. Once a domain is verified at resend.com/domains, point `from` below
+ * at that domain and change this constant to deliver elsewhere (e.g.
+ * support.navsanjivani@gmail.com).
+ */
+const ENQUIRY_INBOX = "navsanjivan10@gmail.com";
 
 const SUBJECT = "New Website Enquiry - Navsanjivani Surgical & Nursing Beuro";
 
@@ -58,7 +67,20 @@ export const submit = action({
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       throw new Error("Please enter a valid email address.");
     }
-    const buyOrRent = sanitize(args.buyOrRent ?? "Not specified", 20);
+    // Requirement type: only "Buy" or "Rent" are accepted. Anything else
+    // (or a missing value) stores as "Not specified" so the optional field
+    // never fails the submission (contact-page "Not sure" default).
+    const buyOrRent =
+      args.buyOrRent === "Buy" || args.buyOrRent === "Rent"
+        ? args.buyOrRent
+        : "Not specified";
+    // Product-popup submissions always carry a product id and must state a
+    // requirement type; other forms may omit it.
+    if (args.productId && buyOrRent === "Not specified") {
+      throw new Error(
+        "Requirement type (Buy or Rent) is required for product enquiries.",
+      );
+    }
     const message = args.message ? args.message.trim().slice(0, 4000) : undefined;
     const productPrice = args.productPrice
       ? sanitize(args.productPrice, 80)
