@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { type Product } from "@/data/catalog";
 
@@ -38,6 +39,14 @@ function isEmail(value: string): boolean {
 }
 
 /**
+ * Requirement options shown in the product popup — same Buy / Rent choice for
+ * every product, defaulting to Buy (matches the contact-page form).
+ */
+export function requirementOptions(_product: Product): string[] {
+  return ["Buy", "Rent"];
+}
+
+/**
  * Request Enquiry form used in the product popup. The product name, price and
  * image come from the selected product, so every product gets the same form.
  */
@@ -55,6 +64,7 @@ export function ProductEnquiryForm({
     name: "",
     phone: "",
     email: "",
+    requirement: requirementOptions(product)[0],
     message: "",
   });
 
@@ -89,7 +99,7 @@ export function ProductEnquiryForm({
         phone: mobile,
         email: email || undefined,
         productOrService: product.name,
-        buyOrRent: "Not specified",
+        buyOrRent: form.requirement,
         message: form.message.trim() || undefined,
         productPrice: productPriceLabel(product),
         productId: product.slug,
@@ -100,7 +110,13 @@ export function ProductEnquiryForm({
       toast.success(
         "Thank you! Your enquiry has been sent successfully. We will contact you soon.",
       );
-      setForm({ name: "", phone: "", email: "", message: "" });
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        requirement: requirementOptions(product)[0],
+        message: "",
+      });
     } catch (err) {
       setStatus("error");
       setError(
@@ -173,7 +189,7 @@ export function ProductEnquiryForm({
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="enq-product">Product Name</Label>
         <div className="relative">
           <Package aria-hidden="true" className={iconClass} />
@@ -182,9 +198,28 @@ export function ProductEnquiryForm({
             value={product.name}
             readOnly
             tabIndex={-1}
-            className={`${inputClasses} pr-3`}
+            className={`${inputClasses} pr-3 text-muted-foreground`}
           />
         </div>
+      </div>
+
+      <div className="mt-4 flex flex-col gap-2">
+        <Label>Requirement Type</Label>
+        <RadioGroup
+          value={form.requirement}
+          onValueChange={(v) => set("requirement", v)}
+          className="mt-1 flex flex-row items-center gap-6"
+        >
+          {requirementOptions(product).map((opt) => (
+            <label
+              key={opt}
+              className="flex cursor-pointer items-center gap-2 text-sm text-foreground"
+            >
+              <RadioGroupItem value={opt} />
+              {opt}
+            </label>
+          ))}
+        </RadioGroup>
       </div>
 
       <div className="mt-4 flex flex-col gap-2">

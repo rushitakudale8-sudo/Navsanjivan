@@ -180,7 +180,11 @@ export function ProductDetailDialog({
               <p className="mt-1 text-sm text-muted-foreground">
                 Fill in your details and we'll get back to you soon.
               </p>
-              <ProductEnquiryForm product={product} className="mt-4" />
+              <ProductEnquiryForm
+                key={product.slug}
+                product={product}
+                className="mt-4"
+              />
             </div>
           </div>
         </div>
