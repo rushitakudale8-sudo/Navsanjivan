@@ -6,13 +6,21 @@ import { Reveal, SoftCard } from "@/components/site/SitePrimitives";
 import {
   AvailabilityBadge,
   ProductDetailDialog,
+  ProductEnquiryDialog,
 } from "@/components/site/ProductDetailDialog";
 import { type Product, type ProductGroup } from "@/data/catalog";
-import { buyMailto, enquiryMailto, rentMailto } from "@/lib/productEnquiry";
+import { buyMailto, rentMailto } from "@/lib/productEnquiry";
 import { cn } from "@/lib/utils";
 
 /** Card action row: Buy Now / Rent Now / Enquire Now (only when configured). */
-function ProductCardActions({ product }: { product: Product }) {
+function ProductCardActions({
+  product,
+  onEnquire,
+}: {
+  product: Product;
+  /** Opens the enquiry-form popup (step 2) directly from the card. */
+  onEnquire: (p: Product) => void;
+}) {
   const stop = (e: React.MouseEvent) => e.stopPropagation();
   return (
     <div className="mt-3 flex flex-wrap gap-2">
@@ -31,14 +39,15 @@ function ProductCardActions({ product }: { product: Product }) {
         </Button>
       )}
       <Button
-        asChild
         size="sm"
         variant={product.forSale || product.forRent ? "outline" : "default"}
         className={product.forSale || product.forRent ? "bg-white" : "shadow-sm"}
+        onClick={(e) => {
+          stop(e);
+          onEnquire(product);
+        }}
       >
-        <a href={enquiryMailto(product)} onClick={stop}>
-          <Mail className="size-3.5" /> Enquire Now
-        </a>
+        <Mail className="size-3.5" /> Enquire Now
       </Button>
     </div>
   );
@@ -79,10 +88,12 @@ function GroupCard({ group, delay = 0 }: { group: ProductGroup; delay?: number }
 function ProductCard({
   product,
   onOpen,
+  onEnquire,
   delay = 0,
 }: {
   product: Product;
   onOpen: (p: Product) => void;
+  onEnquire: (p: Product) => void;
   delay?: number;
 }) {
   return (
@@ -131,7 +142,7 @@ function ProductCard({
               Price &amp; availability on request
             </p>
           )}
-          <ProductCardActions product={product} />
+          <ProductCardActions product={product} onEnquire={onEnquire} />
         </div>
       </SoftCard>
     </Reveal>
@@ -170,6 +181,9 @@ export function ProductGrid({
 }) {
   const [selected, setSelected] = useState<Product | null>(null);
   const [open, setOpen] = useState(false);
+  // The "Enquire Now" card button opens the enquiry form as its own popup.
+  const [enquiryProduct, setEnquiryProduct] = useState<Product | null>(null);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   return (
     <>
@@ -189,6 +203,10 @@ export function ProductGrid({
               setSelected(prod);
               setOpen(true);
             }}
+            onEnquire={(prod) => {
+              setEnquiryProduct(prod);
+              setEnquiryOpen(true);
+            }}
           />
         ))}
       </div>
@@ -197,6 +215,13 @@ export function ProductGrid({
         open={open}
         onOpenChange={setOpen}
       />
+      {enquiryProduct && (
+        <ProductEnquiryDialog
+          product={enquiryProduct}
+          open={enquiryOpen}
+          onOpenChange={setEnquiryOpen}
+        />
+      )}
     </>
   );
 }
