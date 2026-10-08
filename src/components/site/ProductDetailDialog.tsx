@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +10,10 @@ import {
 } from "@/components/ui/dialog";
 import { type Product } from "@/data/catalog";
 import { cn } from "@/lib/utils";
-import { ProductEnquiryForm } from "@/components/site/ProductEnquiryForm";
+import {
+  ProductEnquiryForm,
+  productPriceLabel,
+} from "@/components/site/ProductEnquiryForm";
 
 export type Availability =
   | "buy-rent"
@@ -70,9 +76,17 @@ export function AvailabilityBadge({ product }: { product: Product }) {
   );
 }
 
+/** Short availability wording shown in the product popup. */
+const AVAILABILITY_SHORT: Record<Availability, string> = {
+  "buy-rent": "Available (Buy & Rent)",
+  buy: "Available",
+  rent: "Available",
+  enquiry: "On Request",
+};
+
 /**
  * The single product popup used for every product. The layout is fixed; only
- * the image, name and description come from the data.
+ * the image, name, description, price and availability come from the data.
  */
 export function ProductDetailDialog({
   product,
@@ -83,13 +97,18 @@ export function ProductDetailDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  // Step 2: the enquiry form opens as its own separate popup.
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+
   if (!product) return null;
 
+  const availability = getAvailability(product);
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-4xl">
-        <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-          {/* ---------------- LEFT: product summary ---------------- */}
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
+          {/* ---------------- Popup 1: product summary ---------------- */}
           <div className="min-w-0">
             <DialogHeader className="text-left">
               <DialogTitle className="text-xl font-bold text-foreground">
@@ -117,28 +136,65 @@ export function ProductDetailDialog({
               />
             </div>
 
-            <p className="mt-3 rounded-lg border border-border/60 bg-secondary/40 px-3 py-2 text-xs text-muted-foreground">
-              Price &amp; availability on request — we confirm the current price,
-              stock and rental terms when you enquire.
-            </p>
-          </div>
+            <dl className="mt-4 space-y-2 text-sm">
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-muted-foreground">Price</dt>
+                <dd className="font-semibold text-foreground">
+                  {productPriceLabel(product)}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="text-muted-foreground">Availability</dt>
+                <dd className="font-semibold text-foreground">
+                  {AVAILABILITY_SHORT[availability]}
+                </dd>
+              </div>
+            </dl>
 
-          {/* ---------------- RIGHT: enquiry form ---------------- */}
-          <div className="min-w-0">
-            <div className="rounded-xl border border-border/60 bg-[#F7FCFF] p-4 sm:p-5">
-              <h3 className="text-base font-bold text-[#174A63]">
-                Request Enquiry
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Fill in your details and we'll get back to you soon.
-              </p>
-              <ProductEnquiryForm
-                key={product.slug}
-                product={product}
-                className="mt-4"
-              />
-            </div>
+            <Button
+              type="button"
+              onClick={() => setEnquiryOpen(true)}
+              className="mt-4 w-full bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
+            >
+              <Send className="size-4" /> Request Enquiry
+            </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* ---------------- Popup 2: the enquiry form ---------------- */}
+      <ProductEnquiryDialog
+        product={product}
+        open={enquiryOpen}
+        onOpenChange={setEnquiryOpen}
+      />
+    </>
+  );
+}
+
+/** Separate enquiry-form popup, opened from the product popup. */
+export function ProductEnquiryDialog({
+  product,
+  open,
+  onOpenChange,
+}: {
+  product: Product;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
+        <div className="rounded-lg bg-[#F7FCFF] p-4 sm:p-5">
+          <h3 className="text-base font-bold text-[#174A63]">Request Enquiry</h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Fill in your details and we'll get back to you soon.
+          </p>
+          <ProductEnquiryForm
+            key={product.slug}
+            product={product}
+            className="mt-4"
+          />
         </div>
       </DialogContent>
     </Dialog>
