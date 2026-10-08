@@ -76,6 +76,21 @@ export function AvailabilityBadge({ product }: { product: Product }) {
   );
 }
 
+/**
+ * Static "Enquiry Required" pill shown on every equipment card — the same
+ * grey badge with a dot, regardless of Buy/Rent availability.
+ */
+export function EnquiryRequiredBadge() {
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground"
+    >
+      <span className="size-1.5 rounded-full bg-muted-foreground/50" />
+      Enquiry Required
+    </span>
+  );
+}
+
 /** Short availability wording shown in the product popup. */
 const AVAILABILITY_SHORT: Record<Availability, string> = {
   "buy-rent": "Available (Buy & Rent)",
