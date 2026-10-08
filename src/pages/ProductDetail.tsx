@@ -4,7 +4,10 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
-import { AvailabilityBadge } from "@/components/site/ProductDetailDialog";
+import {
+  AvailabilityBadge,
+  EnquiryRequiredBadge,
+} from "@/components/site/ProductDetailDialog";
 import { buyMailto, enquiryMailto, rentMailto } from "@/lib/productEnquiry";
 import { PRODUCT_GROUPS, PRODUCTS } from "@/data/catalog";
 import { cn } from "@/lib/utils";
@@ -122,7 +125,8 @@ export default function ProductDetail() {
                   {product.description ??
                     `Part of our product range. Contact us for details about ${product.name}.`}
                 </p>
-                <div className="mt-4">
+                <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <EnquiryRequiredBadge />
                   <AvailabilityBadge product={product} />
                 </div>
               </div>
