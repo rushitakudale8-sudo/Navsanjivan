@@ -135,6 +135,11 @@ export function ProductDetailDialog({
               </DialogDescription>
             </DialogHeader>
 
+            {/* Same grey pill as the cards, shown when the popup opens. */}
+            <div className="mt-3">
+              <EnquiryRequiredBadge />
+            </div>
+
             <div
               className={cn(
                 "mt-4 overflow-hidden rounded-xl border border-border/60",
