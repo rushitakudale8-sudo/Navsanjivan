@@ -207,6 +207,7 @@ export function ProductEnquiryDialog({
             key={product.slug}
             product={product}
             className="mt-4"
+            onClose={() => onOpenChange(false)}
           />
         </div>
       </DialogContent>

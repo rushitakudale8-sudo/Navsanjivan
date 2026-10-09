@@ -9,6 +9,10 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { type Product } from "@/data/catalog";
+import {
+  ENQUIRY_SUCCESS_MESSAGE,
+  EnquirySuccess,
+} from "@/components/site/SitePrimitives";
 import { isEmail, normalizeMobile } from "@/lib/enquiryValidation";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -39,9 +43,12 @@ export function requirementOptions(): string[] {
 export function ProductEnquiryForm({
   product,
   className,
+  onClose,
 }: {
   product: Product;
   className?: string;
+  /** Closes the popup after a successful submit (shows the Close button). */
+  onClose?: () => void;
 }) {
   const submitEnquiry = useAction(api.enquiries.submit);
   const [status, setStatus] = useState<Status>("idle");
@@ -93,9 +100,7 @@ export function ProductEnquiryForm({
         clientTime: Date.now(),
       });
       setStatus("success");
-      toast.success(
-        "Thank you! Your enquiry has been sent successfully. We will contact you soon.",
-      );
+      toast.success(ENQUIRY_SUCCESS_MESSAGE);
       setForm({
         name: "",
         phone: "",
@@ -111,6 +116,12 @@ export function ProductEnquiryForm({
           : "We couldn't send your enquiry right now. Please try again.",
       );
     }
+  }
+
+  // After a successful submit the form is replaced by the confirmation panel,
+  // matching the nursing & caretaker enquiry popup.
+  if (status === "success") {
+    return <EnquirySuccess onClose={onClose} className={className} />;
   }
 
   const iconClass = "pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#5BAED6]";

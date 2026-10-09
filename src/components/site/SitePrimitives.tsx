@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { CircleCheck } from "lucide-react";
 import type { ElementType, ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const HEADING_TAGS = {
@@ -43,6 +45,51 @@ export function Reveal({
     >
       {children}
     </motion.div>
+  );
+}
+
+/** Confirmation wording shared by every enquiry popup. */
+export const ENQUIRY_SUCCESS_MESSAGE =
+  "Thank you! Your enquiry has been received. Our team will contact you soon.";
+
+/**
+ * Post-submit confirmation shown in place of an enquiry form: a green tick,
+ * the thank-you message and a Close action. Shared by the equipment and the
+ * nursing & caretaker enquiry popups so both confirmations look identical.
+ */
+export function EnquirySuccess({
+  message = ENQUIRY_SUCCESS_MESSAGE,
+  onClose,
+  className,
+}: {
+  message?: string;
+  /** Closes the popup; the Close button is shown when provided. */
+  onClose?: () => void;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-center gap-4 py-8 text-center",
+        className,
+      )}
+    >
+      <span className="flex size-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+        <CircleCheck aria-hidden className="size-9" strokeWidth={1.75} />
+      </span>
+      <p className="max-w-sm text-lg font-bold text-[#174A63] sm:text-xl">
+        {message}
+      </p>
+      {onClose ? (
+        <Button
+          type="button"
+          onClick={onClose}
+          className="mt-1 bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
+        >
+          Close
+        </Button>
+      ) : null}
+    </div>
   );
 }
 

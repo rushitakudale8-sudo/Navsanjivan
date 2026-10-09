@@ -3,7 +3,6 @@ import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import {
   ArrowRight,
-  CircleCheck,
   Loader2,
   Mail,
   MapPin,
@@ -31,6 +30,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  ENQUIRY_SUCCESS_MESSAGE,
+  EnquirySuccess,
+} from "@/components/site/SitePrimitives";
 import { isEmail, normalizeMobile } from "@/lib/enquiryValidation";
 import { cn } from "@/lib/utils";
 
@@ -49,9 +52,6 @@ const CARE_FOR = [
   "Post-Surgery Care",
   "Other",
 ] as const;
-
-const SUCCESS_MESSAGE =
-  "Thank you! Your enquiry has been received. Our team will contact you soon.";
 
 /** Stored as the enquiry's product/service so care enquiries are grouped. */
 const ENQUIRY_TYPE = "Nursing & Caretaker Support";
@@ -162,7 +162,7 @@ export function CareEnquiryDialog({
         clientTime: Date.now(),
       });
       setStatus("success");
-      toast.success(SUCCESS_MESSAGE);
+      toast.success(ENQUIRY_SUCCESS_MESSAGE);
     } catch (err) {
       // Keep every value so the visitor can simply retry.
       setStatus("error");
@@ -199,21 +199,7 @@ export function CareEnquiryDialog({
         </DialogHeader>
 
         {status === "success" ? (
-          <div className="flex flex-col items-center gap-3 py-6 text-center">
-            <span className="flex size-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-              <CircleCheck aria-hidden className="size-7" />
-            </span>
-            <p className="max-w-sm text-base font-semibold text-[#174A63]">
-              {SUCCESS_MESSAGE}
-            </p>
-            <Button
-              type="button"
-              onClick={() => handleOpenChange(false)}
-              className="mt-2 bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
-            >
-              Close
-            </Button>
-          </div>
+          <EnquirySuccess onClose={() => handleOpenChange(false)} />
         ) : (
           <form onSubmit={handleSubmit} noValidate className="mt-1">
             {/* Patient / contact person name */}
