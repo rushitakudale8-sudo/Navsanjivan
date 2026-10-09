@@ -547,15 +547,6 @@ export default function Landing() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button
                   asChild
-                  variant="outline"
-                  className="border-[#5BAED6] bg-white text-[#174A63] hover:bg-[#EAF6FC] hover:text-[#174A63]"
-                >
-                  <Link to="/product-groups">
-                    Browse product groups <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
                   className="bg-[#174A63] text-white shadow-md hover:bg-[#5BAED6]"
                 >
                   <a href="/#contact">
