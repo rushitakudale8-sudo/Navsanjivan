@@ -633,40 +633,33 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <ul className="mt-8 space-y-5">
-                  <li className="flex items-start gap-3.5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
-                      <MapPin aria-hidden="true" className="size-5" />
+                <ul className="mt-8 space-y-6">
+                  <li className="flex items-start gap-4">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
+                      <MapPin aria-hidden="true" className="size-6" />
                     </span>
                     <div>
-                      <p className="text-sm font-bold text-[#174A63]">Address</p>
-                      <p className="mt-1 text-sm leading-relaxed text-[#4B6472]">
+                      <p className="text-base font-bold text-[#174A63]">Address</p>
+                      <p className="mt-1 text-base leading-relaxed text-[#4B6472]">
                         {BUSINESS.address}
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3.5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
-                      <Mail aria-hidden="true" className="size-5" />
+                  <li className="flex items-start gap-4">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
+                      <Mail aria-hidden="true" className="size-6" />
                     </span>
                     <div>
-                      <p className="text-sm font-bold text-[#174A63]">Email</p>
+                      <p className="text-base font-bold text-[#174A63]">Email</p>
                       <a
                         href={`mailto:${BUSINESS.email}`}
-                        className="mt-1 block break-all text-sm text-[#4B6472] underline-offset-2 hover:text-[#174A63] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2"
+                        className="mt-1 block break-all text-base text-[#4B6472] underline-offset-2 hover:text-[#174A63] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2"
                       >
                         {BUSINESS.email}
                       </a>
                     </div>
                   </li>
                 </ul>
-
-                <div className="mt-8 flex items-start gap-4 rounded-2xl bg-[#EAF6FC] p-4">
-                  <ShieldCheck aria-hidden="true" className="size-7 shrink-0 text-[#174A63]" />
-                  <p className="text-sm font-medium leading-relaxed text-[#174A63]">
-                    {BUSINESS.disclaimer}
-                  </p>
-                </div>
 
                 <EcgTrace className="mt-auto hidden h-8 w-40 self-end pt-6 text-[#5BAED6]/60 sm:block" />
               </div>
