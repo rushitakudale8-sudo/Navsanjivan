@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import {
   BriefcaseMedical,
   ChevronRight,
-  FileText,
   Heart,
   Mail,
   MapPin,
@@ -14,20 +13,6 @@ import logo from "@/assets/logo.png";
 import { Reveal } from "@/components/site/SitePrimitives";
 import { BUSINESS, PRODUCT_GROUPS } from "@/data/catalog";
 import { cn } from "@/lib/utils";
-
-/**
- * Footer navigation — mirrors the header links exactly.
- * Routes are preserved; hash links stay plain anchors so in-page scrolling
- * behaviour is unchanged.
- */
-const PAGES: { label: string; to: string }[] = [
-  { label: "Home", to: "/" },
-  { label: "Products", to: "/products" },
-  { label: "Product Groups", to: "/product-groups" },
-  { label: "Nursing and Patient Care Services", to: "/services" },
-  { label: "About Us", to: "/#about" },
-  { label: "Contact", to: "/#contact" },
-];
 
 const linkClass =
   "group inline-flex items-start gap-2 rounded-md text-sm text-foreground/80 transition-all duration-200 hover:text-[#174A63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2 motion-safe:group-hover:translate-x-1";
@@ -100,10 +85,9 @@ function EcgTrace({ className }: { className?: string }) {
 }
 
 export function SiteFooter() {
-  // First ten real product groups, split into the two published columns.
-  const topTen = PRODUCT_GROUPS.slice(0, 10);
-  const groupsColA = topTen.filter((_, i) => i % 2 === 0);
-  const groupsColB = topTen.filter((_, i) => i % 2 === 1);
+  // Every product group, split into the two published columns.
+  const groupsColA = PRODUCT_GROUPS.filter((_, i) => i % 2 === 0);
+  const groupsColB = PRODUCT_GROUPS.filter((_, i) => i % 2 === 1);
 
   return (
     <footer className="relative overflow-hidden bg-[#EAF6FC]">
@@ -143,7 +127,7 @@ export function SiteFooter() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-14 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_1.35fr_0.95fr] lg:gap-10">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-10">
           {/* ---- brand ---- */}
           <Reveal className="h-full">
             <div className="flex items-center gap-4">
@@ -203,11 +187,11 @@ export function SiteFooter() {
             </div>
           </Reveal>
 
-          {/* ---- product groups ---- */}
+          {/* ---- product list ---- */}
           <Reveal delay={0.08} className="h-full">
-            <nav aria-label="Product groups" className="h-full">
+            <nav aria-label="Product list" className="h-full">
               <div className="h-full rounded-2xl border border-[#B9DFF2]/50 bg-white p-5 shadow-[0_16px_40px_-28px_rgba(23,74,99,0.5)] sm:p-6">
-                <CardHeader icon={BriefcaseMedical} title="Product Groups" />
+                <CardHeader icon={BriefcaseMedical} title="Product List" />
                 <div className="mt-6 grid grid-cols-1 gap-x-8 sm:grid-cols-2">
                   {[groupsColA, groupsColB].map((column, idx) => (
                     <ul
@@ -226,21 +210,6 @@ export function SiteFooter() {
             </nav>
           </Reveal>
 
-          {/* ---- pages ---- */}
-          <Reveal delay={0.16} className="h-full">
-            <nav aria-label="Footer pages" className="h-full">
-              <div className="h-full rounded-2xl border border-[#B9DFF2]/50 bg-white p-5 shadow-[0_16px_40px_-28px_rgba(23,74,99,0.5)] sm:p-6">
-                <CardHeader icon={FileText} title="Pages" />
-                <ul className="mt-6 space-y-3.5">
-                  {PAGES.map((page) => (
-                    <li key={page.label}>
-                      <FooterLink to={page.to}>{page.label}</FooterLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </nav>
-          </Reveal>
         </div>
 
         {/* ---- bottom area: ECG heartbeat + healthcare tagline ---- */}
