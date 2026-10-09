@@ -10,13 +10,12 @@ import { Input } from "@/components/ui/input";
 import { PRODUCTS, type Product } from "@/data/catalog";
 import { searchProducts } from "@/lib/productSearch";
 
-type Filter = "all" | "buy" | "rent" | "buy-rent";
+type Filter = "all" | "buy" | "rent";
 
 const FILTERS: { value: Filter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "buy", label: "Buy" },
   { value: "rent", label: "Rent" },
-  { value: "buy-rent", label: "Buy & Rent" },
 ];
 
 /**
@@ -35,8 +34,6 @@ function matchesFilter(p: Product, f: Filter): boolean {
       return forSale;
     case "rent":
       return forRent;
-    case "buy-rent":
-      return forSale && forRent;
     default:
       return true;
   }

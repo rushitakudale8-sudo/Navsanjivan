@@ -186,8 +186,8 @@ export type Product = {
   forSale?: boolean;
   /**
    * Rent availability. Unset means "available on rent on enquiry"; set to
-   * `false` for buy-only items, which hides them from the Rent and Buy & Rent
-   * filters (consumables/disposables such as diapers or masks).
+   * `false` for buy-only items, which hides them from the Rent filter on the
+   * products page (consumables/disposables such as diapers or masks).
    */
   forRent?: boolean;
   /** Confirmed purchase price. Omit when the price is on request. */
