@@ -53,6 +53,9 @@ export const AVAILABILITY_LABELS: Record<
 
 export function AvailabilityBadge({ product }: { product: Product }) {
   const a = getAvailability(product);
+  // The "Enquiry Required" pill was removed on request — nothing to show for
+  // enquiry-only products. Buy/Rent availability badges are unchanged.
+  if (a === "enquiry") return null;
   const l = AVAILABILITY_LABELS[a];
   return (
     <span
@@ -64,29 +67,10 @@ export function AvailabilityBadge({ product }: { product: Product }) {
       <span
         className={cn(
           "size-1.5 rounded-full",
-          a === "rent"
-            ? "bg-blue-500"
-            : a === "enquiry"
-              ? "bg-muted-foreground/50"
-              : "bg-emerald-500",
+          a === "rent" ? "bg-blue-500" : "bg-emerald-500",
         )}
       />
       {l.text}
-    </span>
-  );
-}
-
-/**
- * Static "Enquiry Required" pill shown on every equipment card — the same
- * grey badge with a dot, regardless of Buy/Rent availability.
- */
-export function EnquiryRequiredBadge() {
-  return (
-    <span
-      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground"
-    >
-      <span className="size-1.5 rounded-full bg-muted-foreground/50" />
-      Enquiry Required
     </span>
   );
 }
@@ -134,11 +118,6 @@ export function ProductDetailDialog({
                   `Part of our product range. Contact us for details about ${product.name}.`}
               </DialogDescription>
             </DialogHeader>
-
-            {/* Same grey pill as the cards, shown when the popup opens. */}
-            <div className="mt-3">
-              <EnquiryRequiredBadge />
-            </div>
 
             {/* Two-column layout: image on the left, details on the right. */}
             <div className="mt-4 grid gap-5 sm:grid-cols-2">

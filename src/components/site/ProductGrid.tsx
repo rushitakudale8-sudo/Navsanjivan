@@ -4,7 +4,6 @@ import { Mail, RotateCcw, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, SoftCard } from "@/components/site/SitePrimitives";
 import {
-  EnquiryRequiredBadge,
   ProductDetailDialog,
   ProductEnquiryDialog,
 } from "@/components/site/ProductDetailDialog";
@@ -136,9 +135,6 @@ function ProductCard({
                 {product.description}
               </p>
             )}
-            <div className="mt-3">
-              <EnquiryRequiredBadge />
-            </div>
             {product.forSale && product.buyPrice ? (
               <p className="mt-2 text-sm font-semibold text-foreground">
                 {product.buyPrice}
