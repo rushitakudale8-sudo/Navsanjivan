@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -21,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { ProductGrid } from "@/components/site/ProductGrid";
 import logo from "@/assets/logo.png";
+import { CareEnquiryDialog } from "@/components/site/CareEnquiryDialog";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -163,6 +165,7 @@ function ServiceCard({
 
 export default function Landing() {
   const reduce = useReducedMotion();
+  const [careEnquiryOpen, setCareEnquiryOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -400,12 +403,13 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <a
-                  href="/#contact"
+                <button
+                  type="button"
+                  onClick={() => setCareEnquiryOpen(true)}
                   className="inline-flex shrink-0 items-center justify-center rounded-[10px] bg-[#174A63] px-[22px] py-3 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#5BAED6] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2 motion-safe:hover:-translate-y-0.5"
                 >
                   Enquire About Care Services
-                </a>
+                </button>
               </div>
             </div>
 
@@ -701,6 +705,11 @@ export default function Landing() {
       </motion.section>
       </main>
       <SiteFooter />
+
+      <CareEnquiryDialog
+        open={careEnquiryOpen}
+        onOpenChange={setCareEnquiryOpen}
+      />
     </div>
   );
 }
