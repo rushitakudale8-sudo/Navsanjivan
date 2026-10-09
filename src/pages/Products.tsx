@@ -7,7 +7,6 @@ import { ProductGrid } from "@/components/site/ProductGrid";
 import { AnimatedHeading, Reveal } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { PRODUCTS, type Product } from "@/data/catalog";
 import { searchProducts } from "@/lib/productSearch";
 

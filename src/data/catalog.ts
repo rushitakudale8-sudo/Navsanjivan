@@ -179,9 +179,16 @@ export type Product = {
   description?: string;
   /** Technical specifications shown on the product detail dialog. */
   specs?: string[];
-  /** Buy availability — only set when actually confirmed. */
+  /**
+   * Buy availability. Unset means "available to buy on enquiry"; set to
+   * `false` only to hide the product from the Buy filter.
+   */
   forSale?: boolean;
-  /** Rent availability — only set when actually confirmed. */
+  /**
+   * Rent availability. Unset means "available on rent on enquiry"; set to
+   * `false` for buy-only items, which hides them from the Rent and Buy & Rent
+   * filters (consumables/disposables such as diapers or masks).
+   */
   forRent?: boolean;
   /** Confirmed purchase price. Omit when the price is on request. */
   buyPrice?: string;
@@ -299,6 +306,8 @@ export const PRODUCTS: Product[] = [
     group: "diapers",
     image: "/diapers.png",
     fit: "contain",
+    // Disposable — sold only, not available on rent.
+    forRent: false,
     description:
       "Absorbent adult diapers designed for comfort, dryness and skin care through the day and night. Available in a range of sizes for a secure fit.",
   },
@@ -308,6 +317,8 @@ export const PRODUCTS: Product[] = [
     group: "bathroom-toilet-aids",
     image: "/urine-pot-bed-pans.jpg",
     fit: "contain",
+    // Sold only, not available on rent.
+    forRent: false,
     attribution: "Photo: Gramody (Wikimedia Commons, CC BY-SA 2.0)",
     description:
       "Urine pots and bedpans for hygienic bedside care when mobility is limited. Easy to clean and suitable for hospitals, nursing care and home use.",
@@ -328,6 +339,8 @@ export const PRODUCTS: Product[] = [
     image:
       "https://live.staticflickr.com/6092/6328857535_61ddc13e17_b.jpg",
     attribution: "Photo: jenny_belly (Flickr, CC BY 2.0)",
+    // Sold only, not available on rent.
+    forRent: false,
     description:
       "Hot water bags for comforting, localised warmth that eases aches and cramps. Sturdy, leak-resistant and simple to fill and use.",
   },
@@ -337,6 +350,8 @@ export const PRODUCTS: Product[] = [
     group: "masks-medical-consumables",
     image: "/gloves.jpg",
     fit: "contain",
+    // Disposable — sold only, not available on rent.
+    forRent: false,
     description:
       "Disposable gloves that keep hands protected during patient care and cleaning. Comfortable to wear and available in a range of sizes.",
   },
@@ -346,6 +361,8 @@ export const PRODUCTS: Product[] = [
     group: "masks-medical-consumables",
     image:
       "https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Disposable — sold only, not available on rent.
+    forRent: false,
     description:
       "Disposable medical masks that help protect patients, staff and visitors during care. Comfortable to wear for extended periods.",
   },

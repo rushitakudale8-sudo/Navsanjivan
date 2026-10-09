@@ -205,6 +205,11 @@ export default function ProductDetail() {
                       </a>
                     </Button>
                   </div>
+                ) : product.forRent === false ? (
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Not available on rent — this item is sold only. Send us an
+                    enquiry if you would like to purchase it.
+                  </p>
                 ) : (
                   <div className="mt-1 space-y-2">
                     <p className="text-sm text-muted-foreground">
