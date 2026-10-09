@@ -20,14 +20,24 @@ const FILTERS: { value: Filter; label: string }[] = [
   { value: "buy-rent", label: "Buy & Rent" },
 ];
 
+/**
+ * Availability filter.
+ *
+ * The whole catalogue is offered to buy or rent on enquiry, so a product only
+ * drops out of a filter when its data explicitly says that option is not
+ * available (`forSale: false` / `forRent: false`). Products without a flag stay
+ * listed under every filter, so selecting "Buy" still shows all products.
+ */
 function matchesFilter(p: Product, f: Filter): boolean {
+  const forSale = p.forSale !== false;
+  const forRent = p.forRent !== false;
   switch (f) {
     case "buy":
-      return p.forSale === true;
+      return forSale;
     case "rent":
-      return p.forRent === true;
+      return forRent;
     case "buy-rent":
-      return p.forSale === true && p.forRent === true;
+      return forSale && forRent;
     default:
       return true;
   }
@@ -126,9 +136,9 @@ export default function Products() {
                   : "No products match this filter"}
               </p>
               <p className="max-w-md text-sm text-muted-foreground">
-                {filter === "all"
+                {query
                   ? "Try a different name, or send us an enquiry — we may still be able to source it for you."
-                  : "This availability is not configured for any product yet — send us an enquiry and we will confirm what's possible."}
+                  : "Try another availability option, or send us an enquiry and we will confirm what's possible."}
               </p>
               <Button asChild variant="outline" className="mt-2 bg-white">
                 <a href="/#contact">Send an enquiry</a>
