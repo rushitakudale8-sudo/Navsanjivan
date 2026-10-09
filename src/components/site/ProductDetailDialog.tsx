@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Info, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -122,7 +122,7 @@ export function ProductDetailDialog({
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
           {/* ---------------- Popup 1: product summary ---------------- */}
           <div className="min-w-0">
             <DialogHeader className="text-left">
@@ -140,44 +140,58 @@ export function ProductDetailDialog({
               <EnquiryRequiredBadge />
             </div>
 
-            <div
-              className={cn(
-                "mt-4 overflow-hidden rounded-xl border border-border/60",
-                product.fit === "contain" ? "bg-white" : "bg-secondary",
-              )}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
+            {/* Two-column layout: image on the left, details on the right. */}
+            <div className="mt-4 grid gap-5 sm:grid-cols-2">
+              <div
                 className={cn(
-                  "aspect-square w-full",
-                  product.fit === "contain" ? "object-contain" : "object-cover",
+                  "overflow-hidden rounded-xl border border-border/60",
+                  product.fit === "contain" ? "bg-white" : "bg-secondary",
                 )}
-              />
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className={cn(
+                    "aspect-square w-full",
+                    product.fit === "contain" ? "object-contain" : "object-cover",
+                  )}
+                />
+              </div>
+
+              <div className="flex min-w-0 flex-col">
+                <dl className="space-y-3 text-sm">
+                  <div>
+                    <dt className="text-muted-foreground">Price</dt>
+                    <dd className="mt-1 text-2xl font-bold text-foreground">
+                      {productPriceLabel(product)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">Availability</dt>
+                    <dd className="mt-1 text-lg font-bold text-emerald-600">
+                      {AVAILABILITY_SHORT[availability]}
+                    </dd>
+                  </div>
+                </dl>
+
+                <Button
+                  type="button"
+                  onClick={() => setEnquiryOpen(true)}
+                  className="mt-5 w-full bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
+                >
+                  <Mail className="size-4" /> Request Enquiry
+                </Button>
+              </div>
             </div>
 
-            <dl className="mt-4 space-y-2 text-sm">
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Price</dt>
-                <dd className="font-semibold text-foreground">
-                  {productPriceLabel(product)}
-                </dd>
-              </div>
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Availability</dt>
-                <dd className="font-semibold text-foreground">
-                  {AVAILABILITY_SHORT[availability]}
-                </dd>
-              </div>
-            </dl>
-
-            <Button
-              type="button"
-              onClick={() => setEnquiryOpen(true)}
-              className="mt-4 w-full bg-[#1B84D8] shadow-md hover:bg-[#174A63]"
-            >
-              <Send className="size-4" /> Request Enquiry
-            </Button>
+            {/* Blue info note under the columns. */}
+            <div className="mt-4 flex gap-2 rounded-lg border border-[#CFE7FB] bg-[#EFF6FF] px-3 py-2.5 text-xs leading-relaxed text-[#174A63]">
+              <Info className="mt-0.5 size-4 shrink-0 text-[#1B84D8]" />
+              <span>
+                Price &amp; availability on request — we confirm the current
+                price, stock and rental terms when you enquire.
+              </span>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
