@@ -23,7 +23,8 @@ function ProductCardActions({
 }) {
   const stop = (e: React.MouseEvent) => e.stopPropagation();
   return (
-    <div className="mt-3 flex flex-wrap gap-2">
+    // Hidden on phones (the card itself opens the popup); shown from tablet up.
+    <div className="mt-3 hidden flex-wrap gap-2 sm:flex">
       {product.forSale && (
         <Button asChild size="sm" className="shadow-sm">
           <a href={buyMailto(product)} onClick={stop}>
@@ -99,13 +100,14 @@ function ProductCard({
   return (
     <Reveal delay={delay}>
       <SoftCard
-        className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-md"
+        className="h-full cursor-pointer overflow-hidden rounded-2xl border border-[#D6EBFA] bg-white shadow-sm transition-shadow hover:shadow-md sm:rounded-xl sm:border-border/70 sm:bg-card sm:shadow-[0_1px_2px_rgba(23,74,99,0.04),0_4px_14px_-8px_rgba(23,74,99,0.14)]"
         onClick={() => onOpen(product)}
       >
+        {/* Image: centred and never cropped on mobile. */}
         <div
           className={cn(
-            "relative aspect-[4/3] overflow-hidden",
-            product.fit === "contain" ? "bg-white" : "bg-secondary",
+            "relative flex aspect-square items-center justify-center overflow-hidden bg-white p-2 sm:aspect-[4/3] sm:block sm:p-0",
+            product.fit === "contain" ? "sm:bg-white" : "bg-secondary sm:bg-secondary",
           )}
         >
           <img
@@ -113,35 +115,40 @@ function ProductCard({
             alt={product.name}
             loading="lazy"
             className={cn(
-              "h-full w-full transition-transform duration-500 group-hover:scale-[1.04]",
-              product.fit === "contain" ? "object-contain" : "object-cover",
+              "h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]",
+              product.fit === "contain" ? "sm:object-contain" : "sm:object-cover",
             )}
           />
         </div>
-        <div className="p-4">
+        <div className="p-2.5 pt-2 sm:p-4">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="font-semibold text-foreground">{product.name}</h3>
+            <h3 className="flex min-h-9 flex-1 items-center justify-center text-center text-sm leading-snug font-bold break-words text-[#1B84D8] sm:block sm:min-h-0 sm:text-left sm:text-base sm:font-semibold sm:text-foreground">
+              {product.name}
+            </h3>
           </div>
-          <p className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
-            {product.group.split("-").join(" ")}
-          </p>
-          {product.description && (
-            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-              {product.description}
+          {/* Extra details stay hidden on phones to match the compact card. */}
+          <div className="hidden sm:block">
+            <p className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">
+              {product.group.split("-").join(" ")}
             </p>
-          )}
-          <div className="mt-3">
-            <EnquiryRequiredBadge />
+            {product.description && (
+              <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                {product.description}
+              </p>
+            )}
+            <div className="mt-3">
+              <EnquiryRequiredBadge />
+            </div>
+            {product.forSale && product.buyPrice ? (
+              <p className="mt-2 text-sm font-semibold text-foreground">
+                {product.buyPrice}
+              </p>
+            ) : (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Price &amp; availability on request
+              </p>
+            )}
           </div>
-          {product.forSale && product.buyPrice ? (
-            <p className="mt-2 text-sm font-semibold text-foreground">
-              {product.buyPrice}
-            </p>
-          ) : (
-            <p className="mt-2 text-xs text-muted-foreground">
-              Price &amp; availability on request
-            </p>
-          )}
           <ProductCardActions product={product} onEnquire={onEnquire} />
         </div>
       </SoftCard>
@@ -189,9 +196,10 @@ export function ProductGrid({
     <>
       <div
         className={
+          // Mobile: 2 cards per row; tablet keeps 2; desktop unchanged.
           columns === 4
-            ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            ? "grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3"
         }
       >
         {products.map((p, i) => (
