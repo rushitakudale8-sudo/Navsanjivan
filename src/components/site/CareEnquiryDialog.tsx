@@ -3,7 +3,6 @@ import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import {
   ArrowRight,
-  CalendarDays,
   CircleCheck,
   Loader2,
   Mail,
@@ -51,15 +50,6 @@ const CARE_FOR = [
   "Other",
 ] as const;
 
-/** "Care duration" dropdown options. */
-const DURATIONS = [
-  "24 Hours",
-  "12 Hours",
-  "8 Hours",
-  "Temporary / Short-Term",
-  "To Be Discussed",
-] as const;
-
 const SUCCESS_MESSAGE =
   "Thank you! Your enquiry has been received. Our team will contact you soon.";
 
@@ -74,8 +64,6 @@ type Fields = {
   email: string;
   service: string;
   careFor: string;
-  duration: string;
-  startDate: string;
   location: string;
   notes: string;
 };
@@ -86,8 +74,6 @@ const EMPTY: Fields = {
   email: "",
   service: "",
   careFor: "",
-  duration: "",
-  startDate: "",
   location: "",
   notes: "",
 };
@@ -146,7 +132,6 @@ export function CareEnquiryDialog({
     }
     if (!form.service) next.service = "Please select the service required.";
     if (!form.careFor) next.careFor = "Please select who the care is for.";
-    if (!form.duration) next.duration = "Please select the care duration.";
     if (!form.location.trim()) next.location = "Please enter the location / area.";
     return next;
   }
@@ -173,8 +158,6 @@ export function CareEnquiryDialog({
         message: form.notes.trim() || undefined,
         careService: form.service,
         careFor: form.careFor,
-        careDuration: form.duration,
-        careStartDate: form.startDate || undefined,
         careLocation: form.location.trim(),
         clientTime: Date.now(),
       });
@@ -325,7 +308,7 @@ export function CareEnquiryDialog({
               <FieldError id="care-service-error" message={errors.service} />
             </div>
 
-            {/* Care required for + duration */}
+            {/* Care required for + location */}
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="care-for">Care Required For *</Label>
@@ -349,47 +332,6 @@ export function CareEnquiryDialog({
                   </SelectContent>
                 </Select>
                 <FieldError id="care-for-error" message={errors.careFor} />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="care-duration">Care Duration *</Label>
-                <Select
-                  value={form.duration}
-                  onValueChange={(v) => set("duration", v)}
-                >
-                  <SelectTrigger
-                    id="care-duration"
-                    aria-invalid={Boolean(errors.duration)}
-                    className="w-full bg-white shadow-sm"
-                  >
-                    <SelectValue placeholder="Select duration" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {DURATIONS.map((option) => (
-                      <SelectItem key={option} value={option}>
-                        {option}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FieldError id="care-duration-error" message={errors.duration} />
-              </div>
-            </div>
-
-            {/* Preferred start date + location */}
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="care-start-date">Preferred Start Date</Label>
-                <div className="relative">
-                  <CalendarDays aria-hidden className={ICON} />
-                  <Input
-                    id="care-start-date"
-                    type="date"
-                    value={form.startDate}
-                    onChange={(e) => set("startDate", e.target.value)}
-                    className={FIELD}
-                  />
-                </div>
               </div>
 
               <div className="flex flex-col gap-2">

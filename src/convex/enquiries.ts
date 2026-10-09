@@ -55,10 +55,6 @@ export const submit = action({
     careService: v.optional(v.string()),
     /** Care required for: Patient | Senior Citizen | Post-Surgery Care | Other. */
     careFor: v.optional(v.string()),
-    /** Care duration: 24 Hours | 12 Hours | 8 Hours | … */
-    careDuration: v.optional(v.string()),
-    /** Preferred start date as entered (YYYY-MM-DD). */
-    careStartDate: v.optional(v.string()),
     /** Location / area the care is needed in. */
     careLocation: v.optional(v.string()),
     /** Client timestamp for duplicate detection (Date.now() on submit). */
@@ -110,19 +106,13 @@ export const submit = action({
       ? sanitize(args.careService, 80)
       : undefined;
     const careFor = args.careFor ? sanitize(args.careFor, 80) : undefined;
-    const careDuration = args.careDuration
-      ? sanitize(args.careDuration, 80)
-      : undefined;
-    const careStartDate = args.careStartDate
-      ? sanitize(args.careStartDate, 40)
-      : undefined;
     const careLocation = args.careLocation
       ? sanitize(args.careLocation, 160)
       : undefined;
-    // A care enquiry must state who the care is for, the duration and the area.
-    if (careService && (!careFor || !careDuration || !careLocation)) {
+    // A care enquiry must state who the care is for and the area.
+    if (careService && (!careFor || !careLocation)) {
       throw new Error(
-        "Service, care type, duration and location are required for care enquiries.",
+        "Service, care type and location are required for care enquiries.",
       );
     }
 
@@ -154,8 +144,6 @@ export const submit = action({
     createdAt: now,
     careService,
     careFor,
-    careDuration,
-    careStartDate,
     careLocation,
   });
 
@@ -178,8 +166,6 @@ export const submit = action({
             `Enquiry Type: ${productOrService}`,
             `Service Required: ${careService}`,
             `Care Required For: ${careFor ?? "—"}`,
-            `Care Duration: ${careDuration ?? "—"}`,
-            `Preferred Start Date: ${careStartDate ?? "To be discussed"}`,
             `Location / Area: ${careLocation ?? "—"}`,
             `Additional Requirements: ${message ?? "—"}`,
           ]
@@ -263,8 +249,6 @@ export const insertEnquiry = internalMutation({
     productImage: v.optional(v.string()),
     careService: v.optional(v.string()),
     careFor: v.optional(v.string()),
-    careDuration: v.optional(v.string()),
-    careStartDate: v.optional(v.string()),
     careLocation: v.optional(v.string()),
     createdAt: v.number(),
   },
