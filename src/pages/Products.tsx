@@ -87,12 +87,16 @@ export default function Products() {
             {/* Search + availability filters — search field styled on the screenshot. */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <div className="relative w-full max-w-sm">
-                <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#6b7280]" />
+                <Search
+                  aria-hidden
+                  className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#6b7280]"
+                />
                 <Input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search products…"
-                  className="bg-white shadow-sm placeholder:text-[#6b7280]"
+                  /* pl-10 keeps the text clear of the icon (icon: left-3 + 16px). */
+                  className="h-10 rounded-lg bg-white pl-10 shadow-sm placeholder:text-[#6b7280]"
                   aria-label="Search products"
                 />
               </div>
