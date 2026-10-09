@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { type Product } from "@/data/catalog";
+import { isEmail, normalizeMobile } from "@/lib/enquiryValidation";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -24,25 +25,10 @@ export function productPriceLabel(product: Product): string {
 }
 
 /**
- * Ten-digit Indian mobile entry. Accepts an optional +91 / 91 prefix and any
- * formatting characters, but the submitted value is always the ten digits.
- */
-function normalizeMobile(value: string): string | null {
-  const digits = value.replace(/\D/g, "");
-  if (digits.length === 10) return digits;
-  if (digits.length === 12 && digits.startsWith("91")) return digits.slice(2);
-  return null;
-}
-
-function isEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-/**
  * Requirement options shown in the product popup — same Buy / Rent choice for
  * every product, defaulting to Buy (matches the contact-page form).
  */
-export function requirementOptions(_product: Product): string[] {
+export function requirementOptions(): string[] {
   return ["Buy", "Rent"];
 }
 
@@ -64,7 +50,7 @@ export function ProductEnquiryForm({
     name: "",
     phone: "",
     email: "",
-    requirement: requirementOptions(product)[0],
+    requirement: requirementOptions()[0],
     message: "",
   });
 
@@ -114,7 +100,7 @@ export function ProductEnquiryForm({
         name: "",
         phone: "",
         email: "",
-        requirement: requirementOptions(product)[0],
+        requirement: requirementOptions()[0],
         message: "",
       });
     } catch (err) {
@@ -210,7 +196,7 @@ export function ProductEnquiryForm({
           onValueChange={(v) => set("requirement", v)}
           className="mt-1 flex flex-row items-center gap-6"
         >
-          {requirementOptions(product).map((opt) => (
+          {requirementOptions().map((opt) => (
             <label
               key={opt}
               className="flex cursor-pointer items-center gap-2 text-sm text-foreground"

@@ -48,6 +48,17 @@ const schema = defineSchema(
       productId: v.optional(v.string()),
       /** Existing product image URL, passed through unchanged. */
       productImage: v.optional(v.string()),
+      // --- Nursing & caretaker support enquiries ---
+      /** Service required, e.g. "Nursing Care" | "Patient Caretaker". */
+      careService: v.optional(v.string()),
+      /** Who the care is for, e.g. "Patient" | "Senior Citizen". */
+      careFor: v.optional(v.string()),
+      /** Care duration, e.g. "24 Hours" | "12 Hours" | "8 Hours". */
+      careDuration: v.optional(v.string()),
+      /** Preferred start date as entered (YYYY-MM-DD). */
+      careStartDate: v.optional(v.string()),
+      /** Location / area the care is required in. */
+      careLocation: v.optional(v.string()),
       status: v.optional(v.string()), // "new" | "contacted" | "closed"
       createdAt: v.optional(v.number()),
       emailedAt: v.optional(v.number()), // when the email was accepted

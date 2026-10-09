@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -8,9 +9,12 @@ import {
   SoftCard,
 } from "@/components/site/SitePrimitives";
 import { Button } from "@/components/ui/button";
+import { CareEnquiryDialog } from "@/components/site/CareEnquiryDialog";
 import { CARE_SERVICES } from "@/data/catalog";
 
 export default function Services() {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
@@ -78,10 +82,11 @@ export default function Services() {
                 Tell us about the patient's needs and how long care is required,
                 and we will get back to you with suitable options.
               </p>
-              <Button asChild className="mt-5 shadow-md">
-                <a href="/#contact">
-                  Enquire now <ArrowRight className="size-4" />
-                </a>
+              <Button
+                onClick={() => setEnquiryOpen(true)}
+                className="mt-5 shadow-md"
+              >
+                Enquire now <ArrowRight className="size-4" />
               </Button>
             </Reveal>
           </div>
@@ -94,6 +99,8 @@ export default function Services() {
       </main>
 
       <SiteFooter />
+
+      <CareEnquiryDialog open={enquiryOpen} onOpenChange={setEnquiryOpen} />
     </div>
   );
 }

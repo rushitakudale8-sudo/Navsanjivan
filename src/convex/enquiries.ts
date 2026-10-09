@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { action, internalMutation, mutation, query } from "./_generated/server";
+import { action, internalMutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
 import type { Doc, Id } from "./_generated/dataModel";
 import { Resend } from "resend";
@@ -17,6 +17,10 @@ import { Resend } from "resend";
 const ENQUIRY_INBOX = "navsanjivan10@gmail.com";
 
 const SUBJECT = "New Website Enquiry - Navsanjivani Surgical & Nursing Beuro";
+
+/** Subject used for nursing / caretaker support enquiries. */
+const CARE_SUBJECT =
+  "New Nursing & Caretaker Enquiry - Navsanjivani Surgical & Nursing Beuro";
 
 /** Collapse whitespace/newlines and hard-cap length to keep the email clean. */
 function sanitize(value: string, max = 2000): string {
@@ -46,6 +50,17 @@ export const submit = action({
     productPrice: v.optional(v.string()),
     productId: v.optional(v.string()),
     productImage: v.optional(v.string()),
+    // --- Nursing & caretaker support enquiries (all optional) ---
+    /** Service required: Nursing Care | Patient Caretaker | … */
+    careService: v.optional(v.string()),
+    /** Care required for: Patient | Senior Citizen | Post-Surgery Care | Other. */
+    careFor: v.optional(v.string()),
+    /** Care duration: 24 Hours | 12 Hours | 8 Hours | … */
+    careDuration: v.optional(v.string()),
+    /** Preferred start date as entered (YYYY-MM-DD). */
+    careStartDate: v.optional(v.string()),
+    /** Location / area the care is needed in. */
+    careLocation: v.optional(v.string()),
     /** Client timestamp for duplicate detection (Date.now() on submit). */
     clientTime: v.number(),
   },
@@ -90,6 +105,27 @@ export const submit = action({
       ? sanitize(args.productImage, 500)
       : undefined;
 
+    // --- Nursing / caretaker enquiry fields ---
+    const careService = args.careService
+      ? sanitize(args.careService, 80)
+      : undefined;
+    const careFor = args.careFor ? sanitize(args.careFor, 80) : undefined;
+    const careDuration = args.careDuration
+      ? sanitize(args.careDuration, 80)
+      : undefined;
+    const careStartDate = args.careStartDate
+      ? sanitize(args.careStartDate, 40)
+      : undefined;
+    const careLocation = args.careLocation
+      ? sanitize(args.careLocation, 160)
+      : undefined;
+    // A care enquiry must state who the care is for, the duration and the area.
+    if (careService && (!careFor || !careDuration || !careLocation)) {
+      throw new Error(
+        "Service, care type, duration and location are required for care enquiries.",
+      );
+    }
+
     // --- Duplicate-submission guard (same phone + product within 60s) ---
     const recent: Doc<"enquiries"> | null = await ctx.runMutation(
       internal.enquiries.findRecent,
@@ -116,6 +152,11 @@ export const submit = action({
     productId,
     productImage,
     createdAt: now,
+    careService,
+    careFor,
+    careDuration,
+    careStartDate,
+    careLocation,
   });
 
     // --- Send the email through Resend (server-side; key stays in env) ---
@@ -127,15 +168,28 @@ export const submit = action({
       );
     }
 
+    const isCareEnquiry = Boolean(careService);
     const lines = [
       `Customer Name: ${name}`,
       `Mobile Number: ${phone}`,
       `Email Address: ${email ?? "—"}`,
-      `Product Name: ${productOrService}`,
-      `Product Price: ${productPrice ?? "On Request"}`,
-      `Product Image / ID: ${productImage ?? "—"}${productId ? ` (ID: ${productId})` : ""}`,
-      `Requirement: ${buyOrRent}`,
-      `Customer Message: ${message ?? "—"}`,
+      ...(isCareEnquiry
+        ? [
+            `Enquiry Type: ${productOrService}`,
+            `Service Required: ${careService}`,
+            `Care Required For: ${careFor ?? "—"}`,
+            `Care Duration: ${careDuration ?? "—"}`,
+            `Preferred Start Date: ${careStartDate ?? "To be discussed"}`,
+            `Location / Area: ${careLocation ?? "—"}`,
+            `Additional Requirements: ${message ?? "—"}`,
+          ]
+        : [
+            `Product Name: ${productOrService}`,
+            `Product Price: ${productPrice ?? "On Request"}`,
+            `Product Image / ID: ${productImage ?? "—"}${productId ? ` (ID: ${productId})` : ""}`,
+            `Requirement: ${buyOrRent}`,
+            `Customer Message: ${message ?? "—"}`,
+          ]),
       `Date & Time of Enquiry: ${formatDateTime(now)} (IST)`,
     ];
 
@@ -146,7 +200,7 @@ export const submit = action({
       from: "Navsanjivani Website <onboarding@resend.dev>",
       to: [ENQUIRY_INBOX],
       replyTo: email || undefined,
-      subject: SUBJECT,
+      subject: isCareEnquiry ? CARE_SUBJECT : SUBJECT,
       text: lines.join("\n"),
     });
 
@@ -207,6 +261,11 @@ export const insertEnquiry = internalMutation({
     productPrice: v.optional(v.string()),
     productId: v.optional(v.string()),
     productImage: v.optional(v.string()),
+    careService: v.optional(v.string()),
+    careFor: v.optional(v.string()),
+    careDuration: v.optional(v.string()),
+    careStartDate: v.optional(v.string()),
+    careLocation: v.optional(v.string()),
     createdAt: v.number(),
   },
   handler: async (ctx, args) => {
