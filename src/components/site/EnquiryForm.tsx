@@ -23,7 +23,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { BUSINESS, ENQUIRY_OPTIONS } from "@/data/catalog";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -41,7 +40,6 @@ export function EnquiryForm({ className }: { className?: string }) {
     email: "",
     productOrService: "",
     customProduct: "",
-    buyOrRent: "",
     message: "",
   });
 
@@ -66,9 +64,9 @@ export function EnquiryForm({ className }: { className?: string }) {
       await submitEnquiry({
         name: form.name.trim(),
         phone: form.phone.trim(),
+        // Email is optional — only sent when the visitor provides one.
         email: form.email.trim() || undefined,
         productOrService,
-        buyOrRent: form.buyOrRent || "Not specified",
         message: form.message.trim() || undefined,
         clientTime: Date.now(),
       });
@@ -82,7 +80,6 @@ export function EnquiryForm({ className }: { className?: string }) {
         email: "",
         productOrService: "",
         customProduct: "",
-        buyOrRent: "",
         message: "",
       });
     } catch (err) {
@@ -136,7 +133,7 @@ export function EnquiryForm({ className }: { className?: string }) {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Email (Optional)</Label>
           <div className="relative">
             <Mail
               aria-hidden="true"
@@ -185,34 +182,6 @@ export function EnquiryForm({ className }: { className?: string }) {
               aria-label="Custom product or service"
             />
           )}
-        </div>
-        <div className="flex flex-col gap-2 sm:col-span-2">
-          <Label>Requirement</Label>
-          <div className="flex gap-2">
-            {["Buy", "Rent", "Not sure"].map((opt) => {
-              const selected =
-                form.buyOrRent === opt ||
-                (opt === "Not sure" && !form.buyOrRent);
-              return (
-                <button
-                  key={opt}
-                  type="button"
-                  aria-pressed={selected}
-                  onClick={() =>
-                    set("buyOrRent", opt === "Not sure" ? "" : opt)
-                  }
-                  className={cn(
-                    "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
-                    selected
-                      ? "border-primary bg-primary text-white shadow-sm"
-                      : "border-border bg-white text-muted-foreground hover:border-primary/50 hover:text-foreground",
-                  )}
-                >
-                  {opt}
-                </button>
-              );
-            })}
-          </div>
         </div>
         <div className="flex flex-col gap-2 sm:col-span-2">
           <Label htmlFor="message">Message</Label>
