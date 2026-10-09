@@ -129,7 +129,8 @@ function ServiceCard({
       }}
       className="group h-full overflow-hidden rounded-[18px] border border-[#D7EAF3] bg-white shadow-[0_10px_30px_-18px_rgba(23,74,99,0.28)] transition-all duration-300 hover:border-[#5BAED6] hover:shadow-[0_20px_46px_-22px_rgba(23,74,99,0.42),0_0_28px_-8px_rgba(91,174,214,0.4)] motion-safe:hover:-translate-y-[7px]"
     >
-      <div className="relative aspect-video overflow-hidden">
+      {/* Shorter image frame on phones keeps the 2-up cards compact. */}
+      <div className="relative aspect-[2/1] overflow-hidden sm:aspect-video">
         <img
           src={service.image}
           alt={service.name}
@@ -142,20 +143,22 @@ function ServiceCard({
         />
       </div>
 
-      <div className="relative p-5 pt-10">
+      <div className="relative p-3.5 pt-8 sm:p-5 sm:pt-10">
         <span
           aria-hidden="true"
-          className="absolute -top-6 left-5 flex size-12 items-center justify-center rounded-full border-2 border-white bg-[#EAF6FC] text-[#174A63] shadow-sm transition-transform duration-200 motion-safe:group-hover:scale-110"
+          className="absolute -top-5 left-3.5 flex size-9 items-center justify-center rounded-full border-2 border-white bg-[#EAF6FC] text-[#174A63] shadow-sm transition-transform duration-200 motion-safe:group-hover:scale-110 sm:-top-6 sm:left-5 sm:size-12"
         >
-          <Icon className="size-5" />
+          <Icon className="size-4 sm:size-5" />
         </span>
 
-        <span className="inline-flex rounded-full bg-[#EAF6FC] px-2.5 py-1 text-[11px] font-semibold text-[#174A63]">
+        <span className="inline-flex rounded-full bg-[#EAF6FC] px-2 py-0.5 text-[10px] font-semibold text-[#174A63] sm:px-2.5 sm:py-1 sm:text-[11px]">
           {tag}
         </span>
 
-        <h3 className="mt-2.5 text-lg font-bold text-[#174A63]">{service.name}</h3>
-        <p className="mt-2 text-[15px] leading-relaxed text-[#4B6472]">
+        <h3 className="mt-2 text-sm leading-snug font-bold break-words text-[#174A63] sm:mt-2.5 sm:text-lg">
+          {service.name}
+        </h3>
+        <p className="mt-1.5 text-[13px] leading-relaxed break-words text-[#4B6472] sm:mt-2 sm:text-[15px]">
           {service.blurb}
         </p>
       </div>
@@ -367,7 +370,8 @@ export default function Landing() {
             </Reveal>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Two compact columns on phones (2 × 2), two on tablet, four on desktop. */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {CARE_SERVICES.map((service, index) => (
               <ServiceCard
                 key={service.slug}
