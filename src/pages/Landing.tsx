@@ -570,18 +570,11 @@ export default function Landing() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center text-center">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#EAF6FC] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#174A63]">
-                <span aria-hidden="true" className="size-1.5 rounded-full bg-[#5BAED6]" />
-                Contact
-              </span>
-            </Reveal>
-
             <AnimatedHeading
               as="h2"
               align="center"
               underlineWidth={60}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+              className="text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
             >
               Send an enquiry
             </AnimatedHeading>
