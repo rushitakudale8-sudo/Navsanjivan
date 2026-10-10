@@ -347,17 +347,11 @@ export default function Landing() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center text-center">
-            <Reveal>
-              <span className="inline-flex items-center rounded-full border border-[#B9DFF2] bg-white px-3.5 py-1 text-xs font-semibold uppercase tracking-wide text-[#174A63] shadow-sm">
-                Services
-              </span>
-            </Reveal>
-
             <AnimatedHeading
               as="h2"
               align="center"
               underlineWidth={60}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
+              className="text-3xl font-extrabold tracking-tight text-[#174A63] sm:text-4xl lg:text-[2.75rem]"
             >
               Nursing and Patient Care Services
             </AnimatedHeading>
