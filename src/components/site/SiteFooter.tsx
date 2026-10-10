@@ -225,11 +225,10 @@ export function SiteFooter() {
         </Reveal>
       </div>
 
-      {/* ---- legal bar: copyright + disclaimer preserved ---- */}
+      {/* ---- legal bar: copyright ---- */}
       <div className="relative border-t border-[#B9DFF2]/40">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-foreground/70 sm:flex-row sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-foreground/70 sm:px-6">
           <p>© 2010 {BUSINESS.name}. All rights reserved.</p>
-          <p className="font-medium">{BUSINESS.disclaimer}</p>
         </div>
       </div>
     </footer>

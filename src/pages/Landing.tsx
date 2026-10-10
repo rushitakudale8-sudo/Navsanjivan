@@ -598,18 +598,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ============ DISCLAIMER STRIP ============ */}
-      <motion.section
-        className="border-t border-border/60 bg-secondary/30 py-6"
-        initial={reduce ? false : { opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <p className="mx-auto max-w-7xl px-4 text-center text-sm font-medium text-foreground/70 sm:px-6">
-          {BUSINESS.disclaimer}
-        </p>
-      </motion.section>
       </main>
       <SiteFooter />
 
