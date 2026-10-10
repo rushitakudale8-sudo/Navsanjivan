@@ -545,19 +545,6 @@ export default function Landing() {
                 ))}
               </div>
             </Reveal>
-
-            <Reveal delay={0.18}>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  className="bg-[#174A63] text-white shadow-md hover:bg-[#5BAED6]"
-                >
-                  <a href="/#contact">
-                    Contact us <ArrowRight className="size-4" />
-                  </a>
-                </Button>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>
