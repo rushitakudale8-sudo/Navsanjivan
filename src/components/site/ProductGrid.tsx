@@ -121,7 +121,7 @@ function ProductCard({
         </div>
         <div className="p-2.5 pt-2 sm:p-4">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="flex min-h-9 flex-1 items-center justify-center text-center text-sm leading-snug font-bold break-words text-[#1B84D8] sm:block sm:min-h-0 sm:text-left sm:text-base sm:font-semibold sm:text-foreground">
+            <h3 className="flex min-h-9 flex-1 items-start justify-center text-center text-sm leading-snug font-bold break-words text-[#1B84D8] sm:block sm:min-h-0 sm:text-left sm:text-base sm:font-semibold sm:text-foreground">
               {product.name}
             </h3>
           </div>
