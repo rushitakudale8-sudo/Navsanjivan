@@ -8,7 +8,6 @@ import {
   HandHeart,
   HeartHandshake,
   Hospital,
-  Mail,
   MapPin,
   Moon,
   Plus,
@@ -614,64 +613,10 @@ export default function Landing() {
             </Reveal>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {/* brand + contact details */}
-            <Reveal className="h-full" delay={0.05}>
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#D7EAF3] bg-white p-6 shadow-[0_18px_46px_-28px_rgba(23,74,99,0.45)] sm:p-8">
-                <div className="flex items-center gap-4">
-                  <img
-                    src={logo}
-                    alt={`${BUSINESS.name} logo`}
-                    className="size-20 shrink-0 object-contain"
-                  />
-                  <div>
-                    <p className="text-2xl font-extrabold tracking-tight text-[#174A63]">
-                      Navsanjivani
-                    </p>
-                    <p className="mt-0.5 text-lg font-medium text-foreground/85">
-                      Surgical and Nursing Beuro
-                    </p>
-                    <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-foreground/60">
-                      Quality | Care | Trust
-                    </p>
-                  </div>
-                </div>
-
-                <ul className="mt-8 space-y-6">
-                  <li className="flex items-start gap-4">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
-                      <MapPin aria-hidden="true" className="size-6" />
-                    </span>
-                    <div>
-                      <p className="text-base font-bold text-[#174A63]">Address</p>
-                      <p className="mt-1 text-base leading-relaxed text-[#4B6472]">
-                        {BUSINESS.address}
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-[#EAF6FC] text-[#174A63]">
-                      <Mail aria-hidden="true" className="size-6" />
-                    </span>
-                    <div>
-                      <p className="text-base font-bold text-[#174A63]">Email</p>
-                      <a
-                        href={`mailto:${BUSINESS.email}`}
-                        className="mt-1 block break-all text-base text-[#4B6472] underline-offset-2 hover:text-[#174A63] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5BAED6] focus-visible:ring-offset-2"
-                      >
-                        {BUSINESS.email}
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-
-                <EcgTrace className="mt-auto hidden h-8 w-40 self-end pt-6 text-[#5BAED6]/60 sm:block" />
-              </div>
-            </Reveal>
-
-            {/* form */}
-            <Reveal className="h-full" delay={0.1}>
-              <div className="h-full rounded-[24px] border border-[#D7EAF3] bg-white p-6 shadow-[0_18px_46px_-28px_rgba(23,74,99,0.45)] sm:p-8">
+          {/* enquiry form — single centred card */}
+          <div className="mx-auto mt-12 max-w-3xl">
+            <Reveal delay={0.05}>
+              <div className="rounded-[24px] border border-[#D7EAF3] bg-white p-6 shadow-[0_18px_46px_-28px_rgba(23,74,99,0.45)] sm:p-8">
                 <EnquiryForm />
               </div>
             </Reveal>
