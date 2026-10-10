@@ -105,7 +105,7 @@ function ProductCard({
         {/* Image: centred and never cropped on mobile. */}
         <div
           className={cn(
-            "relative flex aspect-[7/6] items-center justify-center overflow-hidden bg-white p-2 sm:aspect-[4/3] sm:block sm:p-0",
+            "relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-white p-2 sm:block sm:p-0",
             product.fit === "contain" ? "sm:bg-white" : "bg-secondary sm:bg-secondary",
           )}
         >
